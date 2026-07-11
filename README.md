@@ -32,13 +32,26 @@ Everything visual is a placeholder meant to be replaced with real assets.
 
 | What | Where | How |
 |------|-------|-----|
-| **Hero video** | `index.html` → `<video id="heroVideo">` | Replace the `<source src="…">` with the real showreel MP4, or swap the block for a YouTube/Vimeo `<iframe>`. |
-| **Showreel (modal)** | `index.html` → `<video id="modalVideo">` | Same — point at the full reel, or an embed. |
-| **Photography** | `index.html` — `picsum.photos` URLs (hero poster, work rows `data-img`, about portrait, big-type fill, reel poster) | Drop real images into an `img/` folder and update the URLs. Images are rendered grayscale for the monochrome look; recolor in CSS if desired. |
+| **Hero video** | `index.html` → hero `<img class="hero__img">` | Hero currently shows `img/hero.jpg` with a slow Ken-Burns zoom. To make it a video, replace the `<img>` with a muted autoplay `<video poster="img/hero.jpg">`. |
+| **Showreel (modal)** | `index.html` → `<video id="modalVideo">` | Placeholder sample MP4. Point `<source src>` at the real reel, or swap for a YouTube/Vimeo `<iframe>`. Poster is `img/spotlight.jpg`. |
+| **Photography** | `img/` folder (real photos already wired in) | See the image map below. Only the hero is shown in full color; everything else is rendered B&W for the monochrome system (adjust the `grayscale()` filters in `css/styles.css` to taste). |
 | **Work / credits** | `index.html` → `<ul class="work__list">` | Edit titles, categories, years, and each row's `data-img`. |
 | **Copy, stats, press, socials** | `index.html` | Plain text — edit in place. Social links are `#` placeholders. |
 | **Contact form** | `js/main.js` → `initForm()` | Currently simulates submission. Wire the `setTimeout` block to a real endpoint (Formspree, Netlify Forms, your API). |
 | **Brand colors / spacing / fonts** | `css/styles.css` → `:root` | All tokens live here (`--gold`, `--ink`, `--paper`, type scale, spacing). |
+
+## Image map (`img/`)
+
+| File | Photo | Used for |
+|------|-------|----------|
+| `hero.jpg` | Warm gold close-up | Hero background (full color, Ken-Burns) + a work tile |
+| `portrait.jpg` | Leather jacket / purple | About portrait (B&W) + a work tile |
+| `editorial-bw.jpg` | B&W palm frond | "Based in Las Vegas" image-filled type + a work tile |
+| `studio-red.jpg` | Red backdrop | Work tiles 01 & 06 |
+| `spotlight.jpg` | Spotlight / floral dress | Showreel poster + video-modal poster + a work tile |
+
+Swap any file (keep the same name) to change where it appears, or edit the
+`data-img` / `src` references in `index.html` to re-map them.
 
 ## Design & accessibility notes
 

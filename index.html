@@ -83,12 +83,10 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
       <div class="hero__media">
-        <!-- Placeholder video: swap the <source> src for the real showreel MP4, or replace the whole
-             block with a YouTube/Vimeo <iframe>. Poster shows until video loads / on reduced-motion. -->
-        <video class="hero__video" id="heroVideo" autoplay muted loop playsinline
-               poster="https://picsum.photos/id/1027/1600/2000?grayscale">
-          <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
-        </video>
+        <!-- Hero background: Ashley's photo with a slow Ken-Burns zoom. To use a real
+             showreel video instead, replace this <img> with a muted autoplay <video>
+             (keep poster="img/hero.jpg"). "Watch the reel" already opens the video modal. -->
+        <img class="hero__img" src="img/hero.jpg" alt="" aria-hidden="true" />
         <div class="hero__grain" aria-hidden="true"></div>
         <div class="hero__scrim" aria-hidden="true"></div>
       </div>
@@ -167,37 +165,37 @@
       </div>
 
       <ul class="work__list" id="workList">
-        <li class="work__row" data-img="https://picsum.photos/id/1062/900/1100?grayscale">
+        <li class="work__row" data-img="img/studio-red.jpg">
           <span class="work__idx">01</span>
           <a href="#" class="work__title" data-cursor="view">Neon Nights Live</a>
           <span class="work__cat">Broadcast · Host</span>
           <span class="work__year">2025</span>
         </li>
-        <li class="work__row" data-img="https://picsum.photos/id/1074/900/1100?grayscale">
+        <li class="work__row" data-img="img/spotlight.jpg">
           <span class="work__idx">02</span>
           <a href="#" class="work__title" data-cursor="view">The Strip Report</a>
           <span class="work__cat">Digital Series</span>
           <span class="work__year">2025</span>
         </li>
-        <li class="work__row" data-img="https://picsum.photos/id/1025/900/1100?grayscale">
+        <li class="work__row" data-img="img/portrait.jpg">
           <span class="work__idx">03</span>
           <a href="#" class="work__title" data-cursor="view">MGM Grand Premiere</a>
           <span class="work__cat">Red Carpet · Emcee</span>
           <span class="work__year">2024</span>
         </li>
-        <li class="work__row" data-img="https://picsum.photos/id/1005/900/1100?grayscale">
+        <li class="work__row" data-img="img/editorial-bw.jpg">
           <span class="work__idx">04</span>
           <a href="#" class="work__title" data-cursor="view">Founders &amp; Fortunes</a>
           <span class="work__cat">Branded · Interview</span>
           <span class="work__year">2024</span>
         </li>
-        <li class="work__row" data-img="https://picsum.photos/id/338/900/1100?grayscale">
+        <li class="work__row" data-img="img/hero.jpg">
           <span class="work__idx">05</span>
           <a href="#" class="work__title" data-cursor="view">Vegas After Dark</a>
           <span class="work__cat">Lifestyle · Host</span>
           <span class="work__year">2023</span>
         </li>
-        <li class="work__row" data-img="https://picsum.photos/id/823/900/1100?grayscale">
+        <li class="work__row" data-img="img/studio-red.jpg">
           <span class="work__idx">06</span>
           <a href="#" class="work__title" data-cursor="view">Bright Lights Benefit</a>
           <span class="work__cat">Live Event · Emcee</span>
@@ -226,7 +224,7 @@
       </div>
 
       <button class="reel__frame" id="reelOpen" data-cursor="play" aria-label="Play showreel">
-        <div class="reel__poster" style="background-image:url('https://picsum.photos/id/1043/1800/1012?grayscale')"></div>
+        <div class="reel__poster" style="background-image:url('img/spotlight.jpg')"></div>
         <div class="reel__grain" aria-hidden="true"></div>
         <span class="reel__play">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
@@ -240,7 +238,7 @@
     <section class="about" id="about">
       <div class="about__grid">
         <div class="about__portrait" data-reveal>
-          <img src="https://picsum.photos/id/64/900/1200?grayscale" alt="Portrait of Ashley Nicole Singleton" loading="lazy" width="900" height="1200" />
+          <img src="img/portrait.jpg" alt="Portrait of Ashley Nicole Singleton" loading="lazy" width="890" height="1335" />
           <span class="about__portraitTag">Ashley Nicole Singleton</span>
         </div>
 
@@ -363,7 +361,7 @@
     <button class="modal__close" id="modalClose" aria-label="Close video">Close ✕</button>
     <div class="modal__stage">
       <!-- Replace src with the real showreel (MP4) or swap for a YouTube/Vimeo iframe. -->
-      <video id="modalVideo" controls playsinline poster="https://picsum.photos/id/1043/1600/900?grayscale">
+      <video id="modalVideo" controls playsinline poster="img/spotlight.jpg">
         <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4" />
       </video>
     </div>
