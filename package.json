@@ -1,0 +1,25 @@
+{
+  "name": "ashleynicolesingleton-com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official site for Ashley Nicole Singleton — media personality, host & editorial model, Las Vegas.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.1",
+    "gsap": "^3.12.5",
+    "lenis": "^1.1.13",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.35",
+    "playwright-core": "^1.61.1"
+  }
+}
