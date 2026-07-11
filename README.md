@@ -32,8 +32,8 @@ Everything visual is a placeholder meant to be replaced with real assets.
 
 | What | Where | How |
 |------|-------|-----|
-| **Hero video** | `index.html` → hero `<img class="hero__img">` | Hero currently shows `img/hero.jpg` with a slow Ken-Burns zoom. To make it a video, replace the `<img>` with a muted autoplay `<video poster="img/hero.jpg">`. |
-| **Showreel (modal)** | `index.html` → `<video id="modalVideo">` | Placeholder sample MP4. Point `<source src>` at the real reel, or swap for a YouTube/Vimeo `<iframe>`. Poster is `img/spotlight.jpg`. |
+| **Hero** | `index.html` → hero `<img class="hero__img">` | Shows `img/hero.jpg` with a slow Ken-Burns zoom. "Watch the reel" scrolls to the showreel and starts it. To make the hero itself a video, replace the `<img>` with a muted autoplay `<video poster="img/hero.jpg">`. |
+| **Showreel** | `video/showreel.mp4` (real reel, self-hosted) | Vertical 9:16 inline player in the `#showreel` section, poster `img/spotlight.jpg`. Swap `video/showreel.mp4` to update the reel. |
 | **Photography** | `img/` folder (real photos already wired in) | See the image map below. Only the hero is shown in full color; everything else is rendered B&W for the monochrome system (adjust the `grayscale()` filters in `css/styles.css` to taste). |
 | **Work / credits** | `index.html` → `<ul class="work__list">` | Edit titles, categories, years, and each row's `data-img`. |
 | **Copy, stats, press, socials** | `index.html` | Plain text — edit in place. Social links are `#` placeholders. |

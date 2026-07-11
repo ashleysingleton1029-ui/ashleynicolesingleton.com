@@ -285,36 +285,38 @@
   }
 
   /* =====================================================================
-     VIDEO MODAL
+     SHOWREEL — inline vertical player
      ===================================================================== */
-  function initModal() {
-    const modal = $("#videoModal");
-    const video = $("#modalVideo");
-    const openers = [$("#heroPlay"), $("#reelOpen")].filter(Boolean);
-    const closeBtn = $("#modalClose");
-    if (!modal) return;
+  function initReel() {
+    const player = $("#reelPlayer");
+    const video = $("#reelVideo");
+    const playBtn = $("#reelPlay");
+    const heroBtn = $("#heroPlay");
+    if (!player || !video) return;
 
-    let lastFocus = null;
-    const open = (e) => {
-      lastFocus = e.currentTarget;
-      modal.classList.add("is-open");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-      closeBtn.focus();
-      const p = video.play(); if (p && p.catch) p.catch(() => {});
+    const start = () => {
+      player.classList.add("is-playing");
+      video.controls = true;
+      const p = video.play();
+      if (p && p.catch) p.catch(() => { /* autoplay/gesture guard */ });
     };
-    const close = () => {
-      modal.classList.remove("is-open");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      video.pause();
-      if (lastFocus) lastFocus.focus();
+    const showOverlay = () => {
+      player.classList.remove("is-playing");
+      video.controls = false;
     };
 
-    openers.forEach(b => b.addEventListener("click", open));
-    closeBtn.addEventListener("click", close);
-    modal.addEventListener("click", e => { if (e.target === modal) close(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("is-open")) close(); });
+    if (playBtn) playBtn.addEventListener("click", start);
+
+    // Hero "Watch the reel" → smooth-scroll to the player, then start it.
+    if (heroBtn) heroBtn.addEventListener("click", () => {
+      const target = document.getElementById("showreel");
+      if (target) target.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" });
+      // wait for scroll to settle before playing
+      window.setTimeout(start, REDUCED ? 0 : 650);
+    });
+
+    // Restore poster/overlay when the reel finishes.
+    video.addEventListener("ended", showOverlay);
   }
 
   /* =====================================================================
@@ -387,7 +389,7 @@
     initCounters();
     initWork();
     initBigtype();
-    initModal();
+    initReel();
     initForm();
     initYear();
   });

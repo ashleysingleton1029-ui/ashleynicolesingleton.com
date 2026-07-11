@@ -83,9 +83,9 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
       <div class="hero__media">
-        <!-- Hero background: Ashley's photo with a slow Ken-Burns zoom. To use a real
-             showreel video instead, replace this <img> with a muted autoplay <video>
-             (keep poster="img/hero.jpg"). "Watch the reel" already opens the video modal. -->
+        <!-- Hero background: Ashley's photo with a slow Ken-Burns zoom. "Watch the reel"
+             scrolls to the showreel player and starts it. To make the hero itself a video,
+             replace this <img> with a muted autoplay <video poster="img/hero.jpg">. -->
         <img class="hero__img" src="img/hero.jpg" alt="" aria-hidden="true" />
         <div class="hero__grain" aria-hidden="true"></div>
         <div class="hero__scrim" aria-hidden="true"></div>
@@ -220,18 +220,22 @@
     <section class="reel" id="showreel">
       <div class="section-head section-head--light">
         <p class="overline"><span>( 03 )</span><span>The Showreel</span></p>
-        <h2 class="section-head__title" data-reveal>Ninety seconds<br />on air.</h2>
+        <h2 class="section-head__title" data-reveal>Roll<br />tape.</h2>
       </div>
 
-      <button class="reel__frame" id="reelOpen" data-cursor="play" aria-label="Play showreel">
-        <div class="reel__poster" style="background-image:url('img/spotlight.jpg')"></div>
-        <div class="reel__grain" aria-hidden="true"></div>
-        <span class="reel__play">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-        </span>
-        <span class="reel__tag reel__tag--l">Showreel 2026</span>
-        <span class="reel__tag reel__tag--r">Runtime 1:32</span>
-      </button>
+      <div class="reel__stage">
+        <div class="reel__player" id="reelPlayer">
+          <!-- Self-hosted vertical showreel. Swap video/showreel.mp4 to update. -->
+          <video id="reelVideo" class="reel__video" playsinline preload="metadata"
+                 poster="img/spotlight.jpg" src="video/showreel.mp4"></video>
+          <div class="reel__grain" aria-hidden="true"></div>
+          <button class="reel__play" id="reelPlay" data-cursor="play" aria-label="Play showreel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          </button>
+          <span class="reel__tag reel__tag--l">Showreel 2026</span>
+          <span class="reel__tag reel__tag--r">Runtime 0:28</span>
+        </div>
+      </div>
     </section>
 
     <!-- ============ ABOUT ============ -->
@@ -355,17 +359,6 @@
       </div>
     </footer>
   </main>
-
-  <!-- ============ VIDEO MODAL ============ -->
-  <div class="modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Showreel player">
-    <button class="modal__close" id="modalClose" aria-label="Close video">Close ✕</button>
-    <div class="modal__stage">
-      <!-- Replace src with the real showreel (MP4) or swap for a YouTube/Vimeo iframe. -->
-      <video id="modalVideo" controls playsinline poster="img/spotlight.jpg">
-        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
 
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

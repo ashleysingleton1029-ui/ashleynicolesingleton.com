@@ -379,16 +379,29 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    SHOWREEL
    ========================================================================= */
 .reel { background: var(--ink); color: var(--paper); padding-bottom: var(--space-xl); }
-.reel__frame { position: relative; display: block; width: calc(100% - 2 * var(--gutter)); margin: 0 var(--gutter); aspect-ratio: 16 / 9; overflow: hidden; background: var(--ink-2); }
-.reel__poster { position: absolute; inset: 0; background-size: cover; background-position: center; filter: grayscale(1) contrast(1.05); transform: scale(1.05); transition: transform 0.8s var(--ease); }
-.reel__frame:hover .reel__poster { transform: scale(1.12); }
-.reel__grain { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,11,0.15), rgba(11,11,11,0.5)); }
-.reel__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: clamp(70px, 11vw, 120px); height: clamp(70px, 11vw, 120px); border-radius: 50%; background: var(--gold); display: grid; place-items: center; transition: transform 0.4s var(--ease); }
-.reel__frame:hover .reel__play { transform: translate(-50%, -50%) scale(1.08); }
+.reel__stage { display: flex; justify-content: center; padding: 0 var(--gutter); }
+.reel__player {
+  position: relative; overflow: hidden; background: var(--ink-2);
+  aspect-ratio: 9 / 16; height: min(78vh, 720px); width: auto; max-width: 92vw;
+  border: 1px solid var(--line-dark);
+}
+.reel__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+.reel__grain { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(11,11,11,0.28), rgba(11,11,11,0) 30%, rgba(11,11,11,0) 62%, rgba(11,11,11,0.55)); transition: opacity 0.4s var(--ease); }
+.reel__play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: clamp(72px, 12vw, 108px); height: clamp(72px, 12vw, 108px); border-radius: 50%;
+  background: var(--gold); display: grid; place-items: center; transition: transform 0.4s var(--ease), background 0.3s var(--ease);
+  min-width: 44px; min-height: 44px;
+}
+.reel__play:hover { transform: translate(-50%, -50%) scale(1.08); background: var(--gold-bright); }
 .reel__play svg { width: 40%; height: 40%; fill: var(--ink); margin-left: 6%; }
-.reel__tag { position: absolute; bottom: 18px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); }
+.reel__tag { position: absolute; bottom: 18px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); transition: opacity 0.4s var(--ease); text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
 .reel__tag--l { left: 18px; }
 .reel__tag--r { right: 18px; }
+/* When playing: hide the overlay chrome, let native controls take over */
+.reel__player.is-playing .reel__play,
+.reel__player.is-playing .reel__tag,
+.reel__player.is-playing .reel__grain { opacity: 0; pointer-events: none; }
 
 /* =========================================================================
    ABOUT
@@ -473,17 +486,6 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .footer__big { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(3rem, 20vw, 16rem); line-height: 0.8; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1px var(--line-dark); text-align: center; margin-bottom: var(--space-md); }
 .footer__row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-sm); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-dark); }
 .footer__row a:hover { color: var(--gold); }
-
-/* =========================================================================
-   MODAL
-   ========================================================================= */
-.modal { position: fixed; inset: 0; z-index: var(--z-modal); background: rgba(6,6,6,0.94); display: flex; align-items: center; justify-content: center; padding: var(--gutter); opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease); }
-.modal.is-open { opacity: 1; pointer-events: auto; }
-.modal__stage { width: min(100%, 1200px); aspect-ratio: 16 / 9; transform: scale(0.94); transition: transform 0.5s var(--ease); }
-.modal.is-open .modal__stage { transform: scale(1); }
-.modal__stage video { width: 100%; height: 100%; background: #000; }
-.modal__close { position: absolute; top: 22px; right: 24px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper); padding: 10px 14px; min-height: 44px; }
-.modal__close:hover { color: var(--gold); }
 
 /* =========================================================================
    REVEAL DEFAULTS (JS toggles .is-in)
