@@ -318,6 +318,11 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .statement__foot p { font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.55; max-width: 54ch; color: rgba(244, 242, 236, 0.92); }
 .statement__foot mark { color: var(--gold); background: none; }
 @media (max-width: 760px) { .statement__foot { grid-template-columns: 1fr; gap: var(--space-md); } }
+/* Mobile: pin the eyebrow up near the forehead and drop the copy to the bottom
+   so it clears the mouth (portrait crop of the close-up) */
+@media (max-width: 600px) {
+  .statement { align-items: stretch; min-height: 94vh; padding-top: 8vh; padding-bottom: 3.5vh; }
+}
 
 .link-btn { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; justify-self: start; }
 .link-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform 0.35s var(--ease); }
