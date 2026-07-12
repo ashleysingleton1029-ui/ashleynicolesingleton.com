@@ -374,6 +374,36 @@
   }
 
   /* =====================================================================
+     INTRO CTA — align the "Read the story" arrow to the paragraph's real
+     right text edge (desktop). Measures actual rendered lines so it's exact
+     for the loaded font and re-aligns on resize / font load.
+     ===================================================================== */
+  function initIntroCta() {
+    const copy = $(".statement__copy");
+    const cta = $(".statement__cta");
+    if (!copy || !cta) return;
+    const desktop = window.matchMedia("(min-width: 900px)");
+
+    function align() {
+      cta.style.paddingRight = "";
+      if (!desktop.matches) return;
+      const range = document.createRange();
+      range.selectNodeContents(copy);
+      let maxRight = 0;
+      for (const r of range.getClientRects()) maxRight = Math.max(maxRight, r.right);
+      if (!maxRight) return;
+      const arrow = cta.querySelector("svg") || cta;
+      const delta = arrow.getBoundingClientRect().right - maxRight;
+      if (delta > 0.5) cta.style.paddingRight = Math.round(delta) + "px";
+    }
+
+    align();
+    window.addEventListener("resize", align, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(align);
+    window.addEventListener("load", align);
+  }
+
+  /* =====================================================================
      BOOT
      ===================================================================== */
   const heroPlay = initHero();
@@ -387,6 +417,7 @@
     initReel();
     initForm();
     initYear();
+    initIntroCta();
   });
 
   window.addEventListener("load", () => {

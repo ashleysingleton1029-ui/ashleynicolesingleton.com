@@ -314,25 +314,31 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   position: relative; z-index: 1; width: 100%;
   display: flex; flex-direction: column;
 }
+/* Mobile: the block is transparent so eyebrow/copy/cta flow as before */
+.statement__block { display: contents; }
 .statement__eyebrow { color: var(--muted-dark); }
 .statement__copy { margin-top: auto; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.55; max-width: 54ch; color: rgba(244, 242, 236, 0.94); }
 .statement__copy mark { color: var(--gold); background: none; }
 .statement__cta { margin-top: var(--space-md); }
 
-/* Desktop split: eyebrow + copy in the RIGHT blank area, Read the story
-   centered in the LEFT blank area — the face stays clear in the middle */
+/* Desktop split: text block centred in the RIGHT blank area, face clear.
+   The block hugs its longest line (fit-content) so Read the story's arrow lines
+   up exactly with the text's right edge regardless of width/font. */
 @media (min-width: 900px) {
   .statement { align-items: center; }
   .statement__inner {
     display: grid;
     grid-template-columns: 1fr 1.3fr 1.7fr; /* left | face | right blank area */
-    align-items: center; column-gap: var(--space-lg); row-gap: var(--space-md);
-    --intro-w: clamp(320px, 26vw, 440px);
+    align-items: center; column-gap: var(--space-lg);
   }
-  /* A fixed-width text block, centred within the right blank area */
-  .statement__eyebrow { grid-column: 3; grid-row: 1; align-self: end; justify-self: center; width: var(--intro-w); max-width: 100%; }
-  .statement__copy { grid-column: 3; grid-row: 2; align-self: start; justify-self: center; width: var(--intro-w); max-width: 100%; margin: 0; }
-  .statement__inner .statement__cta { grid-column: 3; grid-row: 3; align-self: start; justify-self: center; width: var(--intro-w); max-width: 100%; display: flex; justify-content: flex-end; margin: var(--space-md) 0 0; }
+  .statement__block {
+    display: flex; flex-direction: column; align-items: flex-start;
+    grid-column: 3; justify-self: center;
+    width: clamp(320px, 26vw, 440px);
+  }
+  .statement__eyebrow { margin: 0 0 var(--space-md); }
+  .statement__copy { margin: 0; max-width: 100%; }
+  .statement__inner .statement__cta { align-self: flex-end; margin: var(--space-md) 0 0; }
   /* Darken both edges (text zones), keep the centre (face) clear */
   .statement__scrim {
     background:
