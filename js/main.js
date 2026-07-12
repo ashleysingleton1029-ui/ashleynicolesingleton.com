@@ -279,9 +279,9 @@
     if (!el) return;
     // Subtle parallax that stays framed on the face (40% -> 52%).
     gsap.fromTo(el,
-      { backgroundPositionY: "40%" },
+      { backgroundPositionY: "60%" },
       {
-        backgroundPositionY: "54%",
+        backgroundPositionY: "72%",
         ease: "none",
         scrollTrigger: { trigger: ".bigtype", start: "top bottom", end: "bottom top", scrub: true }
       });
