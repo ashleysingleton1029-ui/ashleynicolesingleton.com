@@ -325,12 +325,14 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   .statement { align-items: center; }
   .statement__inner {
     display: grid;
-    grid-template-columns: 1fr 1.7fr 1.35fr;
+    grid-template-columns: 1fr 1.3fr 1.7fr; /* left | face | right blank area */
     align-items: center; column-gap: var(--space-lg); row-gap: var(--space-md);
+    --intro-w: clamp(320px, 26vw, 440px);
   }
-  .statement__eyebrow { grid-column: 3; grid-row: 1; align-self: end; }
-  .statement__copy { grid-column: 3; grid-row: 2; align-self: start; margin: 0; max-width: none; }
-  .statement__inner .statement__cta { grid-column: 3; grid-row: 3; align-self: start; justify-self: end; margin: var(--space-md) 0 0; }
+  /* A fixed-width text block, centred within the right blank area */
+  .statement__eyebrow { grid-column: 3; grid-row: 1; align-self: end; justify-self: center; width: var(--intro-w); max-width: 100%; }
+  .statement__copy { grid-column: 3; grid-row: 2; align-self: start; justify-self: center; width: var(--intro-w); max-width: 100%; margin: 0; }
+  .statement__inner .statement__cta { grid-column: 3; grid-row: 3; align-self: start; justify-self: center; width: var(--intro-w); max-width: 100%; display: flex; justify-content: flex-end; margin: var(--space-md) 0 0; }
   /* Darken both edges (text zones), keep the centre (face) clear */
   .statement__scrim {
     background:
