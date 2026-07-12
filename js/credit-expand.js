@@ -7,14 +7,36 @@
   if (!root) return;
 
   var media   = root.querySelector('.expand__media');
+  var mscrim  = root.querySelector('.expand__mscrim');
   var wordL   = root.querySelector('.expand__word--l');
   var wordR   = root.querySelector('.expand__word--r');
   var bg      = root.querySelector('.expand__bg');
   var chrome  = root.querySelector('.expand__chrome');
   var content = document.querySelector('.expand-content');
   var video   = root.querySelector('.expand__media video');
+  var soundBtn = root.querySelector('.expand__sound');
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var srcReady = false;
+
+  // Attach the streaming source lazily — native HLS (Safari), hls.js, or DASH.
+  function ensureSource() {
+    if (srcReady || !video) return;
+    srcReady = true;
+    var hlsUrl = video.getAttribute('data-hls');
+    var dashUrl = video.getAttribute('data-dash');
+    if (video.canPlayType('application/vnd.apple.mpegurl') && hlsUrl) {
+      video.src = hlsUrl;
+    } else if (window.Hls && window.Hls.isSupported() && hlsUrl) {
+      var hls = new window.Hls({ enableWorker: true });
+      hls.loadSource(hlsUrl);
+      hls.attachMedia(video);
+    } else if (dashUrl) {
+      // Last-ditch fallback; most browsers won't decode DASH natively but
+      // some Android/Chromecast contexts will.
+      video.src = dashUrl;
+    }
+  }
 
   var progress = 0;      // 0 = card, 1 = full-bleed
   var expanded = false;  // once true, page scrolls normally
@@ -35,6 +57,7 @@
     if (wordR) wordR.style.transform = 'translateX(' + tx + 'vw)';
     if (bg) bg.style.opacity = String(1 - progress);
     if (chrome) chrome.style.opacity = String(1 - Math.min(1, progress * 1.4));
+    if (mscrim) mscrim.style.opacity = String(1 - Math.min(1, progress * 1.6));
   }
 
   function schedule() {
@@ -47,7 +70,13 @@
     expanded = state;
     document.body.style.overflow = expanded ? '' : 'hidden';
     if (content) content.classList.toggle('is-shown', expanded);
-    if (expanded && video && video.paused) { video.play().catch(function () {}); }
+    if (expanded && video) {
+      ensureSource();
+      video.muted = true;
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+      if (soundBtn) soundBtn.hidden = false;
+    }
   }
 
   function drive(delta) {
@@ -89,6 +118,18 @@
     e.preventDefault();
     drive(dy * (dy < 0 ? 0.005 : 0.008));
     if (!expanded) window.scrollTo(0, 0);
+  }
+
+  // Unmute on demand, then hand off to native controls for scrub/volume.
+  if (soundBtn && video) {
+    soundBtn.addEventListener('click', function () {
+      video.muted = false;
+      video.volume = 1;
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+      video.setAttribute('controls', '');
+      soundBtn.hidden = true;
+    });
   }
 
   if (reduce) {

@@ -31,13 +31,20 @@
 
     <!-- Scroll-to-expand hero -->
     <section class="expand" data-expand aria-label="Global Gaming League">
-      <div class="expand__bg" style="background-image:url('../img/work/global-gaming-league.jpg')" aria-hidden="true"></div>
+      <div class="expand__bg" style="background-image:url('../img/work/global-gaming-league-hero.jpg')" aria-hidden="true"></div>
 
       <div class="expand__stage">
         <figure class="expand__media">
-          <img src="../img/work/global-gaming-league.jpg" width="1500" height="2000"
-               alt="Ashley Nicole Singleton on the Global Gaming League red carpet" />
+          <video class="expand__video" playsinline muted preload="none"
+                 poster="../img/work/global-gaming-league-hero.jpg"
+                 data-hls="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/e23324837e932648646e9f242cc8e663/manifest/video.m3u8"
+                 data-dash="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/e23324837e932648646e9f242cc8e663/manifest/video.mpd">
+          </video>
           <span class="expand__mscrim" aria-hidden="true"></span>
+          <button type="button" class="expand__sound" hidden aria-label="Turn sound on">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15 9a3 3 0 0 1 0 6"/><path d="M18 6a7 7 0 0 1 0 12"/></svg>
+            <span>Sound</span>
+          </button>
         </figure>
 
         <h1 class="expand__title">
@@ -102,6 +109,7 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5/dist/hls.min.js" defer></script>
   <script src="../js/credit-expand.js" defer></script>
 </body>
 </html>
