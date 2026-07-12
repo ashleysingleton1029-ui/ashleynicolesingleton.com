@@ -351,6 +351,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    so it clears the mouth (portrait crop of the close-up) */
 @media (max-width: 600px) {
   .statement { min-height: 94vh; padding-top: 8vh; padding-bottom: 3.5vh; }
+  /* Center the face in the mobile (portrait) crop of the landscape close-up */
+  .statement__img { object-position: 38% center; }
 }
 
 .link-btn { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; justify-self: start; }
