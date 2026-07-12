@@ -356,11 +356,11 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .bigtype { position: relative; background: var(--paper); padding: var(--space-xl) var(--gutter); overflow: hidden; }
 .bigtype__text {
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(3rem, 17vw, 15rem); line-height: 0.86; letter-spacing: -0.03em;
+  font-size: clamp(2.2rem, 13vw, 10.5rem); line-height: 0.88; letter-spacing: -0.03em;
   position: relative;
   /* image-filled text */
-  background-image: url("../img/editorial-bw.jpg");
-  background-size: cover; background-position: center 22%;
+  background-image: url("../img/bigtype.jpg");
+  background-size: cover; background-position: center 32%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-fill-color: transparent;
 }
