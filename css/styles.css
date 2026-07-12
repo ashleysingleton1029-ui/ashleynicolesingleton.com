@@ -330,7 +330,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   }
   .statement__eyebrow { grid-column: 3; grid-row: 1; align-self: end; }
   .statement__copy { grid-column: 3; grid-row: 2; align-self: start; margin: 0; max-width: none; }
-  .statement__cta { grid-column: 1; grid-row: 2; align-self: end; justify-self: center; margin: 0; }
+  .statement__inner .statement__cta { grid-column: 3; grid-row: 3; align-self: start; justify-self: end; margin: var(--space-md) 0 0; }
   /* Darken both edges (text zones), keep the centre (face) clear */
   .statement__scrim {
     background:
