@@ -274,17 +274,9 @@
      BIGTYPE parallax (image inside clipped text)
      ===================================================================== */
   function initBigtype() {
-    if (REDUCED || !hasGSAP || !window.ScrollTrigger) return;
-    const el = $(".bigtype__text");
-    if (!el) return;
-    // Subtle parallax that stays framed on the face (40% -> 52%).
-    gsap.fromTo(el,
-      { backgroundPositionY: "60%" },
-      {
-        backgroundPositionY: "72%",
-        ease: "none",
-        scrollTrigger: { trigger: ".bigtype", start: "top bottom", end: "bottom top", scrub: true }
-      });
+    // Big-type uses background-size:contain to show the whole image intact,
+    // so no background-position parallax (it would slide the image and leave gaps).
+    return;
   }
 
   /* =====================================================================
