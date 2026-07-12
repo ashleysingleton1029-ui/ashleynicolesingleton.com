@@ -360,7 +360,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   position: relative;
   /* image-filled text */
   background-image: url("../img/bigtype.jpg");
-  background-size: cover; background-position: center 32%;
+  background-size: cover; background-position: center 46%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   -webkit-text-fill-color: transparent;
 }

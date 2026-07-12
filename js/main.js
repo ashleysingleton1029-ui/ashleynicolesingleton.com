@@ -277,11 +277,14 @@
     if (REDUCED || !hasGSAP || !window.ScrollTrigger) return;
     const el = $(".bigtype__text");
     if (!el) return;
-    gsap.to(el, {
-      backgroundPositionY: "70%",
-      ease: "none",
-      scrollTrigger: { trigger: ".bigtype", start: "top bottom", end: "bottom top", scrub: true }
-    });
+    // Subtle parallax that stays framed on the face (40% -> 52%).
+    gsap.fromTo(el,
+      { backgroundPositionY: "40%" },
+      {
+        backgroundPositionY: "54%",
+        ease: "none",
+        scrollTrigger: { trigger: ".bigtype", start: "top bottom", end: "bottom top", scrub: true }
+      });
   }
 
   /* =====================================================================
