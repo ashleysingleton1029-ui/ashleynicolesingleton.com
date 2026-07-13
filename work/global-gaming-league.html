@@ -12,6 +12,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" />
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Group-shot background is wide; on phones all six can't fit, so zoom
+       and lift the framing to keep the host's face clear of the card. */
+    @media (max-width: 768px) {
+      .credit--expand .expand__bg {
+        background-size: auto 150% !important;
+        background-position: 46% 74% !important;
+      }
+    }
+  </style>
 </head>
 <body class="credit credit--expand">
 
@@ -31,7 +41,7 @@
 
     <!-- Scroll-to-expand hero -->
     <section class="expand" data-expand aria-label="Global Gaming League">
-      <div class="expand__bg" style="background-image:url('../img/work/global-gaming-league-bg.jpg'); background-position:60% 40%" aria-hidden="true"></div>
+      <div class="expand__bg" style="background-image:url('../img/work/global-gaming-league-bg.jpg'); background-position:50% 50%" aria-hidden="true"></div>
 
       <div class="expand__stage">
         <figure class="expand__media">
