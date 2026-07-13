@@ -91,12 +91,25 @@
         </div>
       </div>
 
-      <!-- Highlight reel — drop the reel in here when ready, e.g.:
-           <section class="credit-reel"><video controls playsinline poster="../img/work/global-gaming-league.jpg">
-             <source src="../video/ggl-reel.mp4" type="video/mp4" /></video></section> -->
-
-      <!-- Gallery — add more photos from this credit here as <figure><img/></figure> -->
-      <section class="credit-gallery" aria-label="Gallery">
+      <!-- Interview reels — add a .reel-card per reel (Instagram /embed on click) -->
+      <section class="reel-gallery" aria-label="Interview reels">
+        <div class="reel-gallery__head">
+          <h2 class="reel-gallery__title">On the Carpet</h2>
+          <span class="reel-gallery__count">Interviews</span>
+        </div>
+        <div class="reel-grid">
+          <button type="button" class="reel-card"
+                  data-embed="https://www.instagram.com/reel/DYmuu3qOUh4/embed/"
+                  data-href="https://www.instagram.com/reels/DYmuu3qOUh4/"
+                  aria-label="Play reel: T-Pain on his game idea, Pink Slip">
+            <img src="../img/work/reels/ggl-01.jpg" width="1085" height="2000" loading="lazy"
+                 alt="Ashley interviewing T-Pain on the Global Gaming League red carpet" />
+            <span class="reel-card__scrim" aria-hidden="true"></span>
+            <span class="reel-card__tag" aria-hidden="true">▶ Reel</span>
+            <span class="reel-card__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="reel-card__cap">T-Pain on his game idea, “Pink Slip”</span>
+          </button>
+        </div>
       </section>
 
       <nav class="credit-foot" aria-label="Work navigation">
@@ -115,6 +128,17 @@
       </footer>
     </div>
   </main>
+
+  <!-- Reel lightbox -->
+  <div class="reel-lb" id="reelLb" role="dialog" aria-modal="true" aria-label="Interview reel" hidden>
+    <div class="reel-lb__frame">
+      <div class="reel-lb__spinner" aria-hidden="true">Loading…</div>
+      <iframe title="Instagram reel" allow="autoplay; encrypted-media; clipboard-write; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      <button type="button" class="reel-lb__close" aria-label="Close reel">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

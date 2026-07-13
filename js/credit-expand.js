@@ -147,3 +147,42 @@
   window.addEventListener('touchmove', onTouchMove, { passive: false });
   window.addEventListener('resize', schedule);
 })();
+
+/* Interview reel lightbox — plays an Instagram reel via its /embed iframe,
+   loaded only on click and cleared on close so playback stops. */
+(function () {
+  var lb = document.getElementById('reelLb');
+  if (!lb) return;
+  var frame = lb.querySelector('iframe');
+  var closeBtn = lb.querySelector('.reel-lb__close');
+  var cards = document.querySelectorAll('.reel-card');
+  var lastFocus = null;
+
+  function open(url, card) {
+    lastFocus = card || null;
+    frame.src = url;
+    lb.hidden = false;
+    // next frame so the display:flex applies before the opacity transition
+    requestAnimationFrame(function () { lb.classList.add('is-open'); });
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close() {
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+    window.setTimeout(function () { lb.hidden = true; frame.src = 'about:blank'; }, 350);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  cards.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var url = c.getAttribute('data-embed');
+      if (url) open(url, c);
+    });
+  });
+  closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.classList.contains('is-open')) close();
+  });
+})();
