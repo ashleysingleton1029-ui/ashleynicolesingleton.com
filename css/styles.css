@@ -661,6 +661,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .credit-overview p { font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.6; max-width: 46ch; color: var(--ink-soft); }
 .credit-overview p + p { margin-top: 1.5em; }
 .credit-overview strong { font-weight: 600; color: var(--ink); }
+.ggl-red { color: #E4231C; }
 
 .credit-hero__media { overflow: hidden; background: var(--paper-2); }
 .credit-hero__media img { width: 100%; height: auto; display: block; }
