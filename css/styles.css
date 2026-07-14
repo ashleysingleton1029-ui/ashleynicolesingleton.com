@@ -494,6 +494,23 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .contact__title .line > span { display: block; }
 .contact__title mark, .contact__title { color: var(--paper); }
 
+/* Hired-by-brands rolodex */
+.brands { display: flex; flex-direction: column; align-items: center; gap: clamp(28px, 6vh, 64px); margin-bottom: var(--space-xl); }
+.brands__label { align-self: flex-start; color: var(--muted-dark); margin: 0; }
+.rolodex { perspective: 1100px; filter: drop-shadow(0 34px 70px rgba(0,0,0,0.45)); }
+.rolodex__card { position: relative; width: 264px; height: 184px; transform: rotateY(-18deg); transform-style: preserve-3d; }
+.rolodex__panel { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: var(--paper); }
+.rolodex__panel--top { top: 0; transform-origin: center bottom; }
+.rolodex__panel--bot { bottom: 0; transform-origin: center top; }
+.rolodex__panel img { position: absolute; left: 0; width: 100%; height: 184px; object-fit: contain; padding: 24px 30px; box-sizing: border-box; }
+.rolodex__panel--top img { top: 0; }
+.rolodex__panel--bot img { bottom: 0; }
+.rolodex__panel[data-role="static-top"], .rolodex__panel[data-role="static-bot"] { z-index: 1; }
+.rolodex__flip { z-index: 2; backface-visibility: hidden; }
+.rolodex__panel[data-role="flip-bot"] { transform: rotateX(180deg); }
+.rolodex__seam { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(11,11,11,0.16); transform: translateY(-50%) translateZ(1px); z-index: 3; }
+@media (max-width: 520px) { .rolodex__card { width: 232px; height: 162px; } .rolodex__panel img, .rolodex__panel--top img, .rolodex__panel--bot img { height: 162px; } }
+
 .contact__grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(32px, 6vw, 96px); }
 @media (max-width: 860px) { .contact__grid { grid-template-columns: 1fr; } }
 

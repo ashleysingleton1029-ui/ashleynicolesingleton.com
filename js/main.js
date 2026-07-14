@@ -404,6 +404,73 @@
   }
 
   /* =====================================================================
+     ROLODEX — "hired by major brands" split-flap logo cycler.
+     Reimplements the framer-motion rolodex in vanilla: two static halves
+     (revealed) + two flipping halves (rotateX, backface-hidden).
+     ===================================================================== */
+  function initRolodex() {
+    const card = $("#rolodexCard");
+    if (!card) return;
+
+    const BRANDS = [
+      { src: "img/brands/apple-tv.png", alt: "Apple TV" },
+      { src: "img/brands/prime-video.png", alt: "Prime Video" },
+      { src: "img/brands/ggl.png", alt: "Global Gaming League" },
+      { src: "img/brands/optix.png", alt: "Optix Studios" },
+      { src: "img/brands/al-bravo.png", alt: "Al Bravo Studios" },
+    ];
+    const DELAY = 2600;
+    const DUR = 1400;
+
+    const p = (role) => card.querySelector('[data-role="' + role + '"]');
+    const st = p("static-top"), sb = p("static-bot"), ft = p("flip-top"), fb = p("flip-bot");
+    const imgOf = (panel) => panel.querySelector("img");
+    const set = (panel, i) => { imgOf(panel).src = BRANDS[i].src; };
+
+    let cur = 0, busy = false, timer = null;
+    // rest state: everything shows BRANDS[0]
+    [st, sb, ft, fb].forEach((pn) => set(pn, 0));
+
+    function flip() {
+      if (busy) return;
+      busy = true;
+      const nxt = (cur + 1) % BRANDS.length;
+
+      set(st, nxt);   // revealed top = incoming
+      set(ft, cur);   // flipping top = outgoing
+      set(fb, nxt);   // flipping bottom = incoming
+      // sb (revealed bottom) still shows outgoing until the new bottom lands
+
+      ft.style.transition = "none"; ft.style.transform = "rotateX(0deg)";
+      fb.style.transition = "none"; fb.style.transform = "rotateX(180deg)";
+      void card.offsetWidth; // reflow so the reset sticks before animating
+
+      ft.style.transition = "transform " + DUR + "ms cubic-bezier(0.76,0,0.24,1)";
+      fb.style.transition = "transform " + DUR + "ms cubic-bezier(0.76,0,0.24,1)";
+      ft.style.transform = "rotateX(-180deg)";
+      fb.style.transform = "rotateX(0deg)";
+
+      window.setTimeout(() => {
+        cur = nxt;
+        set(sb, cur);   // revealed bottom now shows current
+        ft.style.transition = "none"; ft.style.transform = "rotateX(0deg)"; set(ft, cur);
+        fb.style.transition = "none"; fb.style.transform = "rotateX(180deg)"; set(fb, cur);
+        busy = false;
+      }, DUR + 60);
+    }
+
+    if (REDUCED) {
+      // No 3D flip — just cross-swap the static faces.
+      timer = window.setInterval(() => {
+        cur = (cur + 1) % BRANDS.length;
+        set(st, cur); set(sb, cur);
+      }, DELAY);
+      return;
+    }
+    timer = window.setInterval(flip, DELAY);
+  }
+
+  /* =====================================================================
      BOOT
      ===================================================================== */
   const heroPlay = initHero();
@@ -418,6 +485,7 @@
     initForm();
     initYear();
     initIntroCta();
+    initRolodex();
   });
 
   window.addEventListener("load", () => {
