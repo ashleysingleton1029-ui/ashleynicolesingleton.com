@@ -513,8 +513,18 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .contact__lead .overline { color: var(--muted-dark); margin-bottom: var(--space-md); }
 .brands__title { margin: 0; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.6rem, 6.4vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; color: var(--paper); }
 .brands__gold { color: var(--gold); }
-.rolodex { perspective: 1200px; filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5)); justify-self: center; }
-.rolodex__card { position: relative; width: 320px; height: 224px; transform: rotateY(-18deg); transform-style: preserve-3d; }
+.rolodex-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; justify-self: center; }
+.rolodex { perspective: 1200px; filter: drop-shadow(0 22px 44px rgba(0,0,0,0.32)); }
+.rolodex__card {
+  position: relative; width: 320px; height: 224px; border-radius: 18px;
+  transform: rotateY(-18deg); transform-style: preserve-3d;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 0 54px rgba(228,228,244,0.10);
+}
+.rolodex__tag {
+  margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted-dark); white-space: nowrap;
+}
+.rolodex__tag span { color: var(--gold); }
 @media (max-width: 860px) {
   .contact__layout { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: clamp(28px, 5vh, 48px); margin-bottom: clamp(32px, 5vh, 56px); }
   .contact__lead { display: flex; flex-direction: column; align-items: center; }
