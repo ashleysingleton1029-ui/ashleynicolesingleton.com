@@ -494,20 +494,18 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .contact__title .line > span { display: block; }
 .contact__title mark, .contact__title { color: var(--paper); }
 
-/* Contact — heading + brand rolodex + details */
-.contact__layout { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(40px, 7vw, 120px); }
+/* Contact — brand showcase (heading + rolodex) over booking form + details */
+.contact__layout { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(40px, 7vw, 120px); margin-bottom: clamp(40px, 6vh, 84px); }
 .contact__lead .overline { color: var(--muted-dark); margin-bottom: var(--space-md); }
 .brands__title { margin: 0; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.6rem, 6.4vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; color: var(--paper); }
 .brands__gold { color: var(--gold); }
-.contact__panel { display: flex; flex-direction: column; align-items: center; gap: clamp(32px, 5vh, 60px); }
-.contact__blocks { display: flex; flex-direction: column; gap: var(--space-lg); width: min(400px, 88vw); }
-.rolodex { perspective: 1200px; filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5)); }
+.rolodex { perspective: 1200px; filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5)); justify-self: end; }
 .rolodex__card { position: relative; width: 320px; height: 224px; transform: rotateY(-18deg); transform-style: preserve-3d; }
 @media (max-width: 860px) {
-  .contact__layout { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: clamp(32px, 6vh, 56px); }
+  .contact__layout { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: clamp(28px, 5vh, 48px); margin-bottom: clamp(32px, 5vh, 56px); }
   .contact__lead { display: flex; flex-direction: column; align-items: center; }
   .brands__title { text-align: center; }
-  .contact__blocks { align-items: center; text-align: center; }
+  .rolodex { justify-self: center; }
 }
 .rolodex__panel { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: var(--paper); }
 .rolodex__panel--top { top: 0; transform-origin: center bottom; }

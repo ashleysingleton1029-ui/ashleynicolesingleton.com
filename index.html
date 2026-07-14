@@ -283,36 +283,69 @@
           <h2 class="brands__title">Hired by<br /><span class="brands__gold">Major</span> Brands</h2>
         </div>
 
-        <div class="contact__panel">
-          <!-- Hired by major brands — animated logo rolodex -->
-          <div class="rolodex" role="img"
-               aria-label="Hired by major brands including NFL, Apple TV, Prime Video, AWS, adidas, MLB, T-Mobile, GoPro, Optix Studios, Global Gaming League, SeriesFest, Al Bravo Studios, Nevada Women's Film Fest, Chicano Hollywood, Nevada Arts Council, Vū, and 1761 El Cristiano">
-            <div class="rolodex__card" id="rolodexCard">
-              <div class="rolodex__panel rolodex__panel--top" data-role="static-top"><img alt="" /></div>
-              <div class="rolodex__panel rolodex__panel--bot" data-role="static-bot"><img alt="" /></div>
-              <div class="rolodex__panel rolodex__panel--top rolodex__flip" data-role="flip-top"><img alt="" /></div>
-              <div class="rolodex__panel rolodex__panel--bot rolodex__flip" data-role="flip-bot"><img alt="" /></div>
-              <span class="rolodex__seam" aria-hidden="true"></span>
-            </div>
-          </div>
-
-          <div class="contact__blocks">
-            <div class="contact__block">
-              <span class="overline">Direct</span>
-              <a href="mailto:ashley@ashleynicolesingleton.com" data-cursor="hover">ashley@ashleynicolesingleton.com</a>
-            </div>
-            <div class="contact__block">
-              <span class="overline">Representation</span>
-              <p>Available worldwide<br />Based in Las Vegas, Nevada</p>
-            </div>
-            <div class="contact__block">
-              <span class="overline">Follow</span>
-              <div class="contact__social">
-                <a href="https://www.instagram.com/ashleysingletontv/" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
-              </div>
-            </div>
+        <!-- Hired by major brands — animated logo rolodex -->
+        <div class="rolodex" role="img"
+             aria-label="Hired by major brands including NFL, Apple TV, Prime Video, AWS, adidas, MLB, T-Mobile, GoPro, Optix Studios, Global Gaming League, SeriesFest, Al Bravo Studios, Nevada Women's Film Fest, Chicano Hollywood, Nevada Arts Council, Vū, and 1761 El Cristiano">
+          <div class="rolodex__card" id="rolodexCard">
+            <div class="rolodex__panel rolodex__panel--top" data-role="static-top"><img alt="" /></div>
+            <div class="rolodex__panel rolodex__panel--bot" data-role="static-bot"><img alt="" /></div>
+            <div class="rolodex__panel rolodex__panel--top rolodex__flip" data-role="flip-top"><img alt="" /></div>
+            <div class="rolodex__panel rolodex__panel--bot rolodex__flip" data-role="flip-bot"><img alt="" /></div>
+            <span class="rolodex__seam" aria-hidden="true"></span>
           </div>
         </div>
+      </div>
+
+      <div class="contact__grid">
+        <form class="contact__form" id="contactForm" novalidate>
+          <div class="field">
+            <label for="cName">Name</label>
+            <input id="cName" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            <small class="field__err" data-err></small>
+          </div>
+          <div class="field">
+            <label for="cEmail">Email</label>
+            <input id="cEmail" name="email" type="email" autocomplete="email" required placeholder="you@company.com" />
+            <small class="field__err" data-err></small>
+          </div>
+          <div class="field field--full">
+            <label for="cType">Inquiry</label>
+            <select id="cType" name="type">
+              <option>Hosting / Emcee</option>
+              <option>Broadcast segment</option>
+              <option>Brand / Sponsored</option>
+              <option>Red carpet coverage</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field field--full">
+            <label for="cMsg">Details</label>
+            <textarea id="cMsg" name="message" rows="4" required placeholder="Date, city, audience, vibe…"></textarea>
+            <small class="field__err" data-err></small>
+          </div>
+          <button type="submit" class="btn-primary" id="contactSubmit" data-cursor="hover">
+            <span>Send inquiry</span>
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+          <p class="contact__success" id="contactSuccess" hidden>Thanks — your inquiry is in. Ashley’s team will reply within two business days.</p>
+        </form>
+
+        <aside class="contact__aside">
+          <div class="contact__block">
+            <span class="overline">Direct</span>
+            <a href="mailto:ashley@ashleynicolesingleton.com" data-cursor="hover">ashley@ashleynicolesingleton.com</a>
+          </div>
+          <div class="contact__block">
+            <span class="overline">Representation</span>
+            <p>Available worldwide<br />Based in Las Vegas, Nevada</p>
+          </div>
+          <div class="contact__block">
+            <span class="overline">Follow</span>
+            <div class="contact__social">
+              <a href="https://www.instagram.com/ashleysingletontv/" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
