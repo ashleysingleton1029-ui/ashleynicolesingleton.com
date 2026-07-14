@@ -159,7 +159,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    any section instead of the mix-blend clashing with type and logos. */
 .nav.is-solid {
   mix-blend-mode: normal;
-  background: rgba(11, 11, 11, 0.55);
+  background: rgba(11, 11, 11, 0.4);
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   border-bottom-color: rgba(255, 255, 255, 0.09);
