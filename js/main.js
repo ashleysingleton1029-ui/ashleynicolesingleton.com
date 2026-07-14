@@ -413,16 +413,23 @@
     if (!card) return;
 
     const BRANDS = [
+      { src: "img/brands/nfl.png", alt: "NFL" },
       { src: "img/brands/apple-tv.png", alt: "Apple TV" },
       { src: "img/brands/prime-video.png", alt: "Prime Video" },
-      { src: "img/brands/nfl.png", alt: "NFL" },
-      { src: "img/brands/mlb.png", alt: "Major League Baseball" },
       { src: "img/brands/aws.png", alt: "AWS" },
+      { src: "img/brands/adidas.png", alt: "adidas" },
+      { src: "img/brands/mlb.png", alt: "Major League Baseball" },
+      { src: "img/brands/t-mobile.png", alt: "T-Mobile" },
       { src: "img/brands/gopro.png", alt: "GoPro" },
-      { src: "img/brands/ggl.png", alt: "Global Gaming League" },
       { src: "img/brands/optix.png", alt: "Optix Studios" },
+      { src: "img/brands/ggl.png", alt: "Global Gaming League" },
+      { src: "img/brands/seriesfest.png", alt: "SeriesFest" },
       { src: "img/brands/al-bravo.png", alt: "Al Bravo Studios" },
+      { src: "img/brands/nevada-womens-film-fest.png", alt: "Nevada Women's Film Fest" },
       { src: "img/brands/chicano-hollywood.png", alt: "Chicano Hollywood" },
+      { src: "img/brands/nevada-arts-council.png", alt: "Nevada Arts Council" },
+      { src: "img/brands/vu.png", alt: "Vū" },
+      { src: "img/brands/el-cristiano.png", alt: "1761 El Cristiano" },
     ];
     const DELAY = 2600;
     const DUR = 1400;
