@@ -474,12 +474,12 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* Autograph — gold paint-pen style over the lower portrait */
 .about__portrait .about__sign {
   position: absolute; z-index: 4; pointer-events: none;
-  left: 4%; bottom: 6%; width: min(86%, 480px); height: auto;
+  left: 4%; bottom: -14%; width: min(86%, 480px); height: auto;
   object-fit: initial; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
   transform: rotate(-5deg); transform-origin: left bottom;
 }
 @media (max-width: 760px) {
-  .about__portrait .about__sign { width: 66%; left: 6%; bottom: 7%; }
+  .about__portrait .about__sign { width: 66%; left: 6%; bottom: -7%; }
 }
 /* Portrait stretches to the full height of the (taller) bio column */
 .about__portrait { position: relative; overflow: visible; background: var(--paper-2); min-height: 100%; }
