@@ -125,12 +125,17 @@
     const menu = $("#menu");
     let last = 0;
 
-    window.addEventListener("scroll", () => {
+    const onScroll = () => {
       const y = window.scrollY;
+      // frosted bar whenever we're off the very top
+      nav.classList.toggle("is-solid", y > 24);
+      // hide on scroll-down, reveal on scroll-up
       if (y > last && y > 400 && !nav.classList.contains("menu-open")) nav.classList.add("is-hidden");
       else nav.classList.remove("is-hidden");
       last = y;
-    }, { passive: true });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
     const closeMenu = () => {
       menu.classList.remove("is-open");
