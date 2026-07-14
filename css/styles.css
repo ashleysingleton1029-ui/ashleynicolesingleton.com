@@ -516,15 +516,16 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .rolodex-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; justify-self: center; }
 .rolodex { perspective: 1200px; filter: drop-shadow(0 22px 44px rgba(0,0,0,0.32)); }
 .rolodex__card {
-  position: relative; width: 320px; height: 224px; border-radius: 18px;
+  position: relative; width: 320px; height: 224px;
   transform: rotateY(-18deg); transform-style: preserve-3d;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.10), 0 0 54px rgba(228,228,244,0.10);
 }
 .rolodex__tag {
-  margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--muted-dark); white-space: nowrap;
+  margin: 0; font-family: var(--font-mono); font-weight: 700; font-size: clamp(14px, 1.3vw, 17px);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  white-space: nowrap; display: inline-flex; align-items: center; gap: 10px;
 }
-.rolodex__tag span { color: var(--gold); }
+.rolodex__tag::before, .rolodex__tag::after { content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.55; }
 @media (max-width: 860px) {
   .contact__layout { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: clamp(28px, 5vh, 48px); margin-bottom: clamp(32px, 5vh, 56px); }
   .contact__lead { display: flex; flex-direction: column; align-items: center; }
