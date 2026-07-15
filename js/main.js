@@ -424,6 +424,8 @@
       { src: "img/brands/aws.png", alt: "AWS" },
       { src: "img/brands/adidas.png", alt: "adidas" },
       { src: "img/brands/mlb.png", alt: "Major League Baseball" },
+      { src: "img/brands/las-vegas-raiders.png", alt: "Las Vegas Raiders" },
+      { src: "img/brands/las-vegas-aces.png", alt: "Las Vegas Aces" },
       { src: "img/brands/t-mobile.png", alt: "T-Mobile" },
       { src: "img/brands/gopro.png", alt: "GoPro" },
       { src: "img/brands/optix.png", alt: "Optix Studios" },
