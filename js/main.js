@@ -488,6 +488,37 @@
   }
 
   /* =====================================================================
+     CLAPBOARD — the sign-off letter sits on a film slate; the striped arm
+     claps open/closed on click, keyboard, or when it scrolls into view.
+     ===================================================================== */
+  function initClapboard() {
+    const cb = $("#clapboard");
+    if (!cb) return;
+    let busy = false;
+    function clap() {
+      if (busy || REDUCED) return;
+      busy = true;
+      cb.classList.remove("clap");
+      void cb.offsetWidth;            // restart the animation
+      cb.classList.add("clap");
+      window.setTimeout(() => { cb.classList.remove("clap"); busy = false; }, 640);
+    }
+    cb.addEventListener("click", clap);
+    cb.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); clap(); }
+    });
+    // auto-clap once when first revealed
+    if (!REDUCED && "IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { window.setTimeout(clap, 350); io.disconnect(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(cb);
+    }
+  }
+
+  /* =====================================================================
      BOOT
      ===================================================================== */
   const heroPlay = initHero();
@@ -503,6 +534,7 @@
     initYear();
     initIntroCta();
     initRolodex();
+    initClapboard();
   });
 
   window.addEventListener("load", () => {
