@@ -489,7 +489,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 
 /* Press */
-.press { position: relative; margin-top: var(--space-xl); padding-top: clamp(48px, 8vh, 104px); }
+.press { position: relative; margin-top: var(--space-xl); padding-top: clamp(96px, 14vh, 196px); }
 /* On-theme ornamental divider between About and the letter */
 .press::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 18%, var(--line) 82%, transparent); }
 .press::after { content: "\25C6"; position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); color: var(--gold); font-size: 13px; line-height: 1; background: var(--paper); padding: 0 16px; }
