@@ -606,29 +606,50 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 .clapboard:focus-visible { outline: 2px solid var(--gold); outline-offset: 8px; }
 .clapboard__board {
-  position: relative; background: #fdfdfb; border-radius: 4px 4px 16px 16px;
-  box-shadow: 0 36px 80px rgba(11,11,11,0.16), 0 2px 6px rgba(11,11,11,0.08);
+  position: relative; isolation: isolate;
+  background: linear-gradient(158deg, #ffffff 0%, #f8f7f2 54%, #edece3 100%);
+  border-radius: 3px 3px 14px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    inset 0 0 0 1px rgba(19,19,19,0.18),
+    0 2px 4px rgba(11,11,11,0.10),
+    0 46px 72px -26px rgba(11,11,11,0.45);
+}
+/* acrylic sheen streaked across the writing face */
+.clapboard__board::before {
+  content: ""; position: absolute; left: 0; right: 0; top: var(--arm-h); bottom: 0; z-index: 0;
+  background: linear-gradient(108deg, rgba(255,255,255,0) 40%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 60%);
+  border-radius: 0 0 14px 14px; pointer-events: none;
 }
 .clapboard__topbar {
-  height: var(--arm-h); border-radius: 4px 4px 0 0;
-  background: repeating-linear-gradient(-118deg, #131313 0 var(--stripe), #f4f2ec var(--stripe) calc(var(--stripe) * 2));
-  border-bottom: 2px solid #131313;
+  position: relative; z-index: 2; height: var(--arm-h); border-radius: 3px 3px 0 0;
+  background: repeating-linear-gradient(-118deg, #141414 0 var(--stripe), #f4f2ec var(--stripe) calc(var(--stripe) * 2));
+  border-bottom: 2px solid #141414;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.32), 0 5px 9px rgba(11,11,11,0.22);
 }
 .clapboard__arm {
-  position: absolute; left: 0; width: 100%; height: var(--arm-h); bottom: 100%;
-  border-radius: 4px 4px 0 0; transform-origin: left bottom; transform: rotate(-21deg);
+  position: absolute; left: 0; width: 100%; height: var(--arm-h); bottom: 100%; z-index: 2;
+  border-radius: 3px 3px 0 0; transform-origin: left bottom; transform: rotate(-21deg);
   transition: transform 0.5s var(--ease); will-change: transform;
-  background: repeating-linear-gradient(-118deg, #131313 0 var(--stripe), #f4f2ec var(--stripe) calc(var(--stripe) * 2));
-  box-shadow: 0 -1px 0 #131313 inset;
+  background: repeating-linear-gradient(-118deg, #141414 0 var(--stripe), #f4f2ec var(--stripe) calc(var(--stripe) * 2));
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.42), inset 0 -2px 0 rgba(0,0,0,0.28);
+  filter: drop-shadow(0 9px 11px rgba(11,11,11,0.32));
 }
 .clapboard__hinge {
-  position: absolute; left: -3px; bottom: 100%; z-index: 3;
-  width: clamp(26px, 3.4vw, 40px); height: calc(var(--arm-h) + 6px);
-  background: #131313; border-radius: 6px 2px 0 6px;
+  position: absolute; left: -4px; bottom: 100%; z-index: 4;
+  width: clamp(28px, 3.6vw, 42px); height: calc(var(--arm-h) + 7px);
+  background: linear-gradient(135deg, #4c4c4c 0%, #1c1c1c 46%, #060606 100%);
+  border-radius: 7px 3px 0 7px;
+  box-shadow: 0 3px 7px rgba(11,11,11,0.4), inset 0 1px 0 rgba(255,255,255,0.28);
 }
-.clapboard__hinge i { position: absolute; left: 50%; transform: translateX(-50%); width: 6px; height: 6px; border-radius: 50%; background: #6b6b6b; }
-.clapboard__hinge i:first-child { top: 9px; }
-.clapboard__hinge i:last-child { bottom: 9px; }
+.clapboard__hinge i {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  width: 9px; height: 9px; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #eaeaea 0%, #a6a6a6 44%, #5c5c5c 78%, #2c2c2c 100%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.55), inset 0 0 1px rgba(255,255,255,0.4);
+}
+.clapboard__hinge i:first-child { top: 11px; }
+.clapboard__hinge i:last-child { bottom: 11px; }
 .clapboard.clap .clapboard__arm { animation: clap 0.62s var(--ease-in-out); }
 .clapboard.clap .clapboard__board { animation: clapshake 0.62s var(--ease-in-out); }
 @keyframes clap {
@@ -648,7 +669,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 
 /* Sign-off letter (on the slate) */
-.letter { max-width: none; margin: 0; text-align: center; padding: clamp(44px, 6vw, 92px) clamp(22px, 3vw, 44px) clamp(26px, 3.4vw, 50px); }
+.letter { position: relative; z-index: 1; max-width: none; margin: 0; text-align: center; padding: clamp(44px, 6vw, 92px) clamp(22px, 3vw, 44px) clamp(26px, 3.4vw, 50px); }
 .letter__salutation { font-family: var(--font-body); font-style: italic; color: var(--ink); font-size: clamp(0.98rem, 1.45vw, 1.28rem); line-height: 1.3; margin-bottom: clamp(24px, 3.4vh, 46px); }
 .letter__note { font-family: var(--font-body); color: var(--ink-soft); font-size: clamp(0.84rem, 0.98vw, 1.02rem); line-height: 1.6; margin-bottom: clamp(28px, 4vh, 52px); text-wrap: balance; }
 .letter__closing { font-family: var(--font-body); font-style: italic; color: var(--ink); font-size: clamp(0.92rem, 1.1vw, 1.1rem); margin-bottom: 0; }
