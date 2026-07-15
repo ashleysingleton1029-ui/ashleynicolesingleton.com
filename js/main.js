@@ -419,6 +419,7 @@
 
     const BRANDS = [
       { src: "img/brands/nfl.png", alt: "NFL" },
+      { src: "img/brands/lvmpd.png", alt: "Las Vegas Metropolitan Police Department" },
       { src: "img/brands/apple-tv.png", alt: "Apple TV" },
       { src: "img/brands/prime-video.png", alt: "Prime Video" },
       { src: "img/brands/aws.png", alt: "AWS" },
@@ -428,10 +429,12 @@
       { src: "img/brands/las-vegas-aces.png", alt: "Las Vegas Aces" },
       { src: "img/brands/wwe.png", alt: "WWE" },
       { src: "img/brands/ufc.png", alt: "UFC" },
+      { src: "img/brands/wow.png", alt: "WOW — Women of Wrestling" },
       { src: "img/brands/t-mobile.png", alt: "T-Mobile" },
       { src: "img/brands/gopro.png", alt: "GoPro" },
       { src: "img/brands/optix.png", alt: "Optix Studios" },
       { src: "img/brands/procam.png", alt: "ProCam — Specialty Gear by Chapman/Leonard" },
+      { src: "img/brands/frequency.png", alt: "Frequency Pictures" },
       { src: "img/brands/ggl.png", alt: "Global Gaming League" },
       { src: "img/brands/seriesfest.png", alt: "SeriesFest" },
       { src: "img/brands/al-bravo.png", alt: "Al Bravo Studios" },
