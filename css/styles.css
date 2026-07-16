@@ -645,22 +645,22 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   box-shadow: inset 0 2px 0 rgba(255,255,255,0.34), inset 0 -2px 0 rgba(0,0,0,0.42);
   filter: drop-shadow(0 10px 12px rgba(0,0,0,0.45));
 }
-/* flat black angular bracket with 3 rivets — matches the reference */
+/* triangular black gusset plate with 3 chrome rivets — matches the reference */
 .clapboard__hinge {
-  position: absolute; left: -8px; bottom: 100%; z-index: 4;
-  width: clamp(54px, 6.4vw, 82px); height: calc(var(--arm-h) + 24px);
-  background: linear-gradient(150deg, #1b1b1b 0%, #0a0a0a 55%, #030303 100%);
-  clip-path: polygon(0% 20%, 54% 0%, 100% 40%, 100% 100%, 0% 100%);
+  position: absolute; left: -10px; bottom: 100%; z-index: 4;
+  width: clamp(64px, 7.6vw, 98px); height: calc(var(--arm-h) + 30px);
+  background: linear-gradient(148deg, #232323 0%, #0d0d0d 52%, #030303 100%);
+  clip-path: polygon(0% 14%, 56% 0%, 78% 22%, 100% 60%, 80% 90%, 58% 100%, 0% 100%);
   box-shadow: 0 4px 9px rgba(0,0,0,0.55);
 }
 .clapboard__hinge i {
-  position: absolute; width: clamp(10px, 1.15vw, 14px); height: clamp(10px, 1.15vw, 14px); border-radius: 50%;
-  background: radial-gradient(circle at 36% 30%, #fbfbfb 0%, #cfcfcf 32%, #8f8f8f 64%, #4a4a4a 100%);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.65), inset 0 0 2px rgba(255,255,255,0.6);
+  position: absolute; width: clamp(11px, 1.35vw, 16px); height: clamp(11px, 1.35vw, 16px); border-radius: 50%;
+  background: radial-gradient(circle at 36% 28%, #ffffff 0%, #d8d8d8 30%, #969696 62%, #4c4c4c 88%, #2a2a2a 100%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.7), inset 0 0 2px rgba(255,255,255,0.65);
 }
-.clapboard__hinge i:nth-child(1) { top: 28%; left: 22%; }
-.clapboard__hinge i:nth-child(2) { bottom: 16%; left: 22%; }
-.clapboard__hinge i:nth-child(3) { bottom: 24%; right: 16%; }
+.clapboard__hinge i:nth-child(1) { top: 24%; left: 20%; }
+.clapboard__hinge i:nth-child(2) { bottom: 16%; left: 20%; }
+.clapboard__hinge i:nth-child(3) { bottom: 22%; left: 52%; }
 .clapboard.clap .clapboard__arm { animation: clap 0.62s var(--ease-in-out); }
 .clapboard.clap .clapboard__board { animation: clapshake 0.62s var(--ease-in-out); }
 @keyframes clap {
@@ -683,28 +683,34 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .slate { position: relative; z-index: 1; padding: clamp(18px, 2.2vw, 32px) clamp(30px, 3.6vw, 56px) clamp(12px, 1.4vw, 22px); }
 .slate__label {
   font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em;
-  font-size: clamp(14px, 1.55vw, 20px); color: rgba(242,242,239,0.86); white-space: nowrap; line-height: 1;
+  font-size: clamp(13px, 1.4vw, 18px); color: #f3f3f0; white-space: nowrap; line-height: 1;
 }
 .slate__label::after { content: "."; }
-.slate__row { display: flex; align-items: flex-end; gap: clamp(12px, 1.6vw, 22px); }
-.slate__row--split { margin-top: clamp(8px, 1.2vw, 16px); gap: 0; }
-.slate__row--title > .slate__label,
-.slate__cell > .slate__label { padding-bottom: 9px; }
-/* TITLE reads ~2x larger than the other field labels, like the reference */
-.slate__row--title > .slate__label { font-size: clamp(28px, 3.1vw, 40px); padding-bottom: 6px; }
-.slate__fill {
-  position: relative; flex: 1; min-width: 0; display: flex; align-items: flex-end;
-  border-bottom: 1.5px solid rgba(242,242,239,0.5); min-height: clamp(30px, 3.3vw, 42px);
+/* full-width ruled fields with a connecting vertical divider — matches the reference grid */
+.slate__row--title {
+  display: flex; align-items: flex-end; gap: clamp(12px, 1.6vw, 22px);
+  border-bottom: 2px solid rgba(255,255,255,0.9);
+  padding-bottom: clamp(4px, 0.7vw, 9px);
 }
-.slate__fill img { display: block; width: auto; max-width: 100%; margin: 0 10px -4px; }
-.slate__row--title .slate__fill img { height: clamp(32px, 3.9vw, 50px); }
-.slate__cell { flex: 1; display: flex; align-items: flex-end; gap: clamp(10px, 1.4vw, 18px); }
-.slate__cell--scene { flex: 1.8; }
-.slate__cell--date { flex: 1; border-left: 1.5px solid rgba(242,242,239,0.5); padding-left: clamp(18px, 2.4vw, 38px); }
-.slate__cell--scene .slate__fill img { height: clamp(26px, 3.1vw, 40px); }
-.slate__cell--date .slate__fill img { height: clamp(38px, 4.6vw, 58px); }
-.slate__memo { margin-top: clamp(8px, 1.2vw, 16px); }
-.slate__memo > .slate__label { display: block; margin-bottom: clamp(6px, 0.9vw, 12px); }
+/* TITLE reads ~2x larger than the other field labels */
+.slate__row--title > .slate__label { font-size: clamp(26px, 2.95vw, 38px); }
+.slate__row--split {
+  display: flex; align-items: stretch;
+  border-bottom: 2px solid rgba(255,255,255,0.9);
+}
+.slate__cell {
+  display: flex; align-items: flex-end; gap: clamp(10px, 1.4vw, 18px);
+  padding: clamp(7px, 1vw, 13px) 0 clamp(4px, 0.7vw, 9px);
+}
+.slate__cell--scene { flex: 1.7; padding-right: clamp(16px, 2.2vw, 34px); }
+.slate__cell--date { flex: 1; border-left: 2px solid rgba(255,255,255,0.9); padding-left: clamp(18px, 2.4vw, 38px); }
+.slate__fill { flex: 1; min-width: 0; display: flex; align-items: flex-end; }
+.slate__fill img { display: block; width: auto; max-width: 100%; margin-bottom: -2px; }
+.slate__row--title .slate__fill img { height: clamp(30px, 3.6vw, 46px); }
+.slate__cell--scene .slate__fill img { height: clamp(24px, 2.9vw, 38px); }
+.slate__cell--date .slate__fill img { height: clamp(32px, 4vw, 50px); }
+.slate__memo { margin-top: clamp(10px, 1.4vw, 20px); }
+.slate__memo > .slate__label { display: block; margin-bottom: clamp(10px, 1.4vw, 20px); }
 /* handwritten memo letter + signature, chalk white */
 .letter { position: relative; z-index: 1; width: clamp(300px, 74%, 780px); margin: 0 auto; }
 .letter__hand { display: block; width: 100%; height: auto; }
