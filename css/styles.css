@@ -490,12 +490,6 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 
 /* Press */
 .press { position: relative; margin-top: var(--space-xl); padding-top: clamp(96px, 14vh, 196px); }
-/* Film-set backdrop behind the clapperboard — full-bleed, transparent */
-.press__bg {
-  position: absolute; inset: 0; z-index: 0;
-  background: url("../img/work/raiderettes-calendar-shoot-bg.jpg") center / cover no-repeat;
-  opacity: 0.2; pointer-events: none;
-}
 /* On-theme ornamental divider between About and the letter */
 .press::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--line) 18%, var(--line) 82%, transparent); }
 .press::after { content: "\25C6"; position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); color: var(--gold); font-size: 13px; line-height: 1; background: var(--paper); padding: 0 16px; }
