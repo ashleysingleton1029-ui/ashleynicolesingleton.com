@@ -512,6 +512,7 @@
       window.setTimeout(() => { cb.classList.remove("clap"); busy = false; }, 640);
     }
     cb.addEventListener("click", clap);
+    cb.addEventListener("mouseenter", clap);
     cb.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") { e.preventDefault(); clap(); }
     });
