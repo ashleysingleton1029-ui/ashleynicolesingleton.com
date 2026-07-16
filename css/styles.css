@@ -710,8 +710,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .slate__row--title .slate__fill img { height: clamp(30px, 3.6vw, 46px); }
 .slate__cell--scene .slate__fill img { height: clamp(24px, 2.9vw, 38px); }
 .slate__cell--date .slate__fill img { height: clamp(32px, 4vw, 50px); }
-.slate__memo { margin-top: clamp(10px, 1.4vw, 20px); }
-.slate__memo > .slate__label { display: block; margin-bottom: clamp(10px, 1.4vw, 20px); }
+.slate__memo { margin-top: clamp(6px, 0.9vw, 12px); }
+.slate__memo > .slate__label { display: block; margin-bottom: clamp(2px, 0.4vw, 6px); }
 /* handwritten memo letter + signature, chalk white */
 .letter { position: relative; z-index: 1; width: clamp(300px, 74%, 780px); margin: 0 auto; }
 .letter__hand { display: block; width: 100%; height: auto; }
