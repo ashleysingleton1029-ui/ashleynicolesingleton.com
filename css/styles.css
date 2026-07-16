@@ -647,11 +647,12 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 /* triangular black gusset plate with 3 chrome rivets — matches the reference */
 .clapboard__hinge {
-  position: absolute; left: -10px; bottom: 100%; z-index: 4;
-  width: clamp(64px, 7.6vw, 98px); height: calc(var(--arm-h) + 30px);
+  position: absolute; left: -12px; z-index: 4;
+  bottom: calc(100% - var(--arm-h) * 0.62);
+  width: clamp(82px, 9.6vw, 122px); height: calc(var(--arm-h) * 1.95 + 12px);
   background: linear-gradient(148deg, #232323 0%, #0d0d0d 52%, #030303 100%);
   clip-path: polygon(0% 14%, 56% 0%, 78% 22%, 100% 60%, 80% 90%, 58% 100%, 0% 100%);
-  box-shadow: 0 4px 9px rgba(0,0,0,0.55);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 .clapboard__hinge i {
   position: absolute; width: clamp(11px, 1.35vw, 16px); height: clamp(11px, 1.35vw, 16px); border-radius: 50%;
