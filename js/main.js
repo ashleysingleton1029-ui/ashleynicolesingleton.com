@@ -279,9 +279,24 @@
      BIGTYPE parallax (image inside clipped text)
      ===================================================================== */
   function initBigtype() {
-    // Big-type uses background-size:contain to show the whole image intact,
-    // so no background-position parallax (it would slide the image and leave gaps).
-    return;
+    // Play the showreel inside the letters only while the section is on screen.
+    const vid = $("#bigtypeVideo");
+    if (!vid) return;
+    if (REDUCED) return; // respect reduced-motion: leave the poster frame
+    let loaded = false;
+    const play = () => {
+      if (!loaded) { vid.load(); loaded = true; }
+      const p = vid.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => { if (en.isIntersecting) play(); else vid.pause(); });
+      }, { threshold: 0.15 });
+      io.observe(vid);
+    } else {
+      play();
+    }
   }
 
   /* =====================================================================
