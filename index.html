@@ -19,21 +19,27 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=VT323&display=swap" />
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="is-loading">
 
-  <!-- ============ PRELOADER ============ -->
+  <!-- ============ PRELOADER (retro TV) ============ -->
   <div class="preloader" id="preloader" aria-hidden="true">
-    <div class="preloader__inner">
-      <div class="preloader__label">
-        <span>Loading</span>
-        <span>Las Vegas · Est. On Air</span>
+    <div class="tv">
+      <div class="tv__bars" aria-hidden="true"></div>
+      <div class="tv__glitch" aria-hidden="true"></div>
+      <div class="tv__noise" aria-hidden="true"></div>
+      <div class="tv__scan" aria-hidden="true"></div>
+      <span class="tv__chev tv__chev--l" aria-hidden="true">&#10094;</span>
+      <span class="tv__chev tv__chev--r" aria-hidden="true">&#10095;</span>
+      <div class="tv__card">
+        <p class="tv__title">Stream<br />Starting<br />Soon</p>
+        <div class="tv__bar" aria-hidden="true"><i id="preBar"></i></div>
+        <p class="tv__count"><span id="preCount">00</span>%</p>
+        <p class="tv__skip">Press Space or Esc to Skip</p>
       </div>
-      <div class="preloader__count"><span id="preCount">00</span><em>%</em></div>
-      <div class="preloader__bar"><i id="preBar"></i></div>
     </div>
   </div>
 

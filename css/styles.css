@@ -98,25 +98,108 @@ mark { background: none; color: var(--gold); }
    ========================================================================= */
 .preloader {
   position: fixed; inset: 0; z-index: var(--z-pre);
-  background: var(--ink); color: var(--paper);
-  display: flex; align-items: flex-end;
-  padding: var(--gutter);
+  background: #050505; display: flex; align-items: center; justify-content: center;
+  padding: clamp(6px, 1.4vmin, 18px);
 }
-.preloader__inner { width: 100%; }
-.preloader__label {
-  display: flex; justify-content: space-between;
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--muted-dark); margin-bottom: var(--space-sm);
-}
-.preloader__count {
-  font-family: var(--font-display); font-weight: 900;
-  font-size: clamp(4rem, 22vw, 18rem); line-height: 0.85;
-  letter-spacing: -0.03em; display: flex; align-items: flex-start;
-}
-.preloader__count em { font-size: 0.28em; font-style: normal; color: var(--gold); margin-top: 0.3em; }
-.preloader__bar { height: 2px; background: var(--line-dark); margin-top: var(--space-sm); overflow: hidden; }
-.preloader__bar i { display: block; height: 100%; width: 0%; background: var(--gold); }
 body:not(.is-loading) .preloader { pointer-events: none; }
+/* ---- CRT television ---- */
+.tv {
+  position: relative; width: 100%; height: 100%; overflow: hidden;
+  border-radius: clamp(14px, 2.4vw, 36px);
+  box-shadow: inset 0 0 clamp(60px,10vw,180px) rgba(0,0,0,0.85), 0 0 0 2px #000;
+  background: #101010;
+}
+/* colour bars */
+.tv__bars {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    linear-gradient(90deg,
+      #b23ad0 0 12.5%, #e6df1f 12.5% 25%, #22c6d6 25% 37.5%, #23c81f 37.5% 50%,
+      #c81fd0 50% 62.5%, #e0231c 62.5% 78%, #1f3ad0 78% 88%, #b23ad0 88% 100%);
+  animation: tvHue 6s steps(1) infinite;
+}
+/* black glitch blocks + barcode streaks */
+.tv__glitch {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 46px, rgba(0,0,0,0.92) 46px 54px, transparent 54px 132px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.9) 0 2px, transparent 2px 5px, rgba(0,0,0,0.85) 5px 7px, transparent 7px 12px);
+  background-size: 100% 100%, 220px 40%;
+  background-position: 0 0, 6% 62%;
+  background-repeat: no-repeat, no-repeat;
+  mix-blend-mode: hard-light; opacity: 0.55;
+  animation: tvGlitch 2.4s steps(1) infinite;
+}
+/* TV static */
+.tv__noise {
+  position: absolute; inset: -20%; z-index: 2; pointer-events: none;
+  background: url("../img/film-grain.png") repeat; background-size: 260px 260px;
+  opacity: 0.32; mix-blend-mode: overlay;
+  animation: tvNoise 0.5s steps(6) infinite;
+}
+/* scanlines + rolling bright bar */
+.tv__scan {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, transparent 0, rgba(255,255,255,0.10) 50%, transparent 100%);
+  background-size: 100% 3px, 100% 42%;
+  background-repeat: repeat, no-repeat;
+  animation: tvScan 6.5s linear infinite;
+}
+.tv__chev {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 4;
+  font-size: clamp(28px, 4vw, 60px); color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 6px rgba(0,0,0,0.6); font-family: var(--font-mono);
+}
+.tv__chev--l { left: clamp(14px, 3vw, 54px); }
+.tv__chev--r { right: clamp(14px, 3vw, 54px); }
+/* centre "monitor" card */
+.tv__card {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5;
+  width: clamp(280px, 42vw, 520px); padding: clamp(20px, 3vw, 40px) clamp(20px, 3vw, 44px) clamp(16px, 2.4vw, 30px);
+  background: #060606; box-shadow: 0 10px 40px rgba(0,0,0,0.55), inset 0 0 60px rgba(0,0,0,0.6);
+  text-align: center; font-family: "VT323", var(--font-mono), monospace;
+  background-image: url("../img/film-grain.png"); background-size: 200px 200px; background-blend-mode: overlay;
+}
+.tv__title {
+  margin: 0; color: #f5f5f5; letter-spacing: 0.16em; line-height: 0.98;
+  font-size: clamp(2.1rem, 5.4vw, 4.2rem); text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(255,255,255,0.35);
+}
+.tv__bar {
+  height: clamp(16px, 2.4vw, 26px); margin: clamp(16px, 2.6vw, 30px) 0 clamp(8px, 1.4vw, 14px);
+  padding: 3px; background: rgba(255,255,255,0.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
+}
+.tv__bar i {
+  display: block; height: 100%; width: 0%;
+  background: repeating-linear-gradient(90deg, #f5f5f5 0 9px, transparent 9px 14px);
+}
+.tv__count {
+  margin: 0; color: #f5f5f5; font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: 0.24em;
+}
+.tv__skip {
+  margin: clamp(8px, 1.4vw, 14px) 0 0; color: #f4c531; letter-spacing: 0.16em;
+  font-size: clamp(0.95rem, 1.7vw, 1.3rem); text-transform: uppercase;
+  animation: tvBlink 1.1s steps(1) infinite;
+}
+@keyframes tvNoise {
+  0%{background-position:0 0} 20%{background-position:-60px 40px} 40%{background-position:80px -30px}
+  60%{background-position:-40px -60px} 80%{background-position:50px 70px} 100%{background-position:0 0}
+}
+@keyframes tvGlitch {
+  0%,100%{ transform: translateX(0); opacity: 0.5; }
+  46%{ transform: translateX(0); }
+  50%{ transform: translateX(-14px) translateY(2px); opacity: 0.8; }
+  54%{ transform: translateX(10px); opacity: 0.4; }
+  70%{ transform: translateX(0); }
+}
+@keyframes tvHue { 0%,100%{ filter:hue-rotate(0deg) } 50%{ filter:hue-rotate(8deg) } }
+@keyframes tvScan { 0%{ background-position: 0 0, 0 -60%; } 100%{ background-position: 0 0, 0 160%; } }
+@keyframes tvBlink { 0%,60%{ opacity: 1; } 61%,100%{ opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) {
+  .tv__bars, .tv__glitch, .tv__noise, .tv__scan, .tv__skip { animation: none; }
+}
 
 /* =========================================================================
    CUSTOM CURSOR (desktop / fine pointer only)

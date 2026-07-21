@@ -60,21 +60,38 @@
       return;
     }
 
+    let finished = false;
     const obj = { v: 0 };
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      window.removeEventListener("keydown", onKey);
+      countEl.textContent = "100";
+      bar.style.width = "100%";
+      gsap.to(pre, {
+        yPercent: -100, duration: 0.9, ease: "expo.inOut", delay: 0.12,
+        onStart() { document.body.classList.remove("is-loading"); },
+        onComplete() { pre.style.display = "none"; done(); }
+      });
+    }
+    function onKey(e) {
+      if (e.key === " " || e.code === "Space" || e.key === "Escape" || e.key === "Esc") {
+        e.preventDefault();
+        gsap.killTweensOf(obj);
+        finish();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+
     gsap.to(obj, {
-      v: 100, duration: 1.6, ease: "power2.inOut",
+      v: 100, duration: 2.2, ease: "power1.inOut",
       onUpdate() {
         const n = Math.round(obj.v);
         countEl.textContent = String(n).padStart(2, "0");
         bar.style.width = n + "%";
       },
-      onComplete() {
-        gsap.to(pre, {
-          yPercent: -100, duration: 0.9, ease: "expo.inOut", delay: 0.15,
-          onStart() { document.body.classList.remove("is-loading"); },
-          onComplete() { pre.style.display = "none"; done(); }
-        });
-      }
+      onComplete: finish
     });
   }
 
