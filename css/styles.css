@@ -461,17 +461,39 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .bigtype__text {
   position: relative; z-index: 1; margin: 0;
   padding: var(--space-xl) var(--gutter);
-  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(2.2rem, 13vw, 10.5rem); line-height: 0.88; letter-spacing: -0.03em;
-  /* white block + black letters, screened over the video => video shows only in the letters */
-  background: #ffffff; color: #000; -webkit-text-fill-color: #000;
+  display: grid; place-items: center; text-align: center;
+  /* white block, screened over the video => video shows only through the black letters */
+  background: #ffffff;
   mix-blend-mode: screen;
 }
-.bigtype__text .line { display: block; }
+/* The two phrases stack in the same grid cell and cross-fade */
+.bigtype__phrase {
+  grid-area: 1 / 1;
+  display: block; width: 100%;
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.6rem, 16vw, 13rem); line-height: 0.86; letter-spacing: -0.035em;
+  color: #000; -webkit-text-fill-color: #000;
+}
+.bigtype__phrase .line { display: block; }
+/* Flash / alternate: phrase 1, quick blank flash, phrase 2, quick blank flash */
+.bigtype__phrase--1 { animation: bigtypeFlash 6s steps(1, end) infinite; }
+.bigtype__phrase--2 { animation: bigtypeFlash 6s steps(1, end) infinite; animation-delay: -3s; }
+@keyframes bigtypeFlash {
+  0%    { opacity: 1; }
+  46%   { opacity: 1; }
+  48%   { opacity: 0; } /* brief blank => whole block reads white = a flash */
+  50%   { opacity: 0; }
+  100%  { opacity: 0; }
+}
 /* Fallback for browsers without mix-blend-mode: keep the text legible */
 @supports not (mix-blend-mode: screen) {
   .bigtype__video { display: none; }
-  .bigtype__text { mix-blend-mode: normal; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+  .bigtype__text { mix-blend-mode: normal; background: transparent; }
+  .bigtype__phrase { color: var(--ink); -webkit-text-fill-color: var(--ink); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
+  .bigtype__phrase--2 { display: none; }
 }
 
 /* =========================================================================
@@ -907,9 +929,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    no-JS / no-GSAP visitor never sees permanently hidden text. */
 body.anim .hero__title .line > span,
 body.anim .contact__title .line > span,
-body.anim .statement__text .line > span,
-body.anim .bigtype__text .line > span { transform: translateY(110%); }
-.bigtype__text .line { overflow: hidden; padding-bottom: 0.05em; }
+body.anim .statement__text .line > span { transform: translateY(110%); }
 
 /* =========================================================================
    REDUCED MOTION
@@ -920,8 +940,7 @@ body.anim .bigtype__text .line > span { transform: translateY(110%); }
   [data-reveal] { opacity: 1; transform: none; }
   body.anim .hero__title .line > span,
   body.anim .contact__title .line > span,
-  body.anim .statement__text .line > span,
-  body.anim .bigtype__text .line > span { transform: none !important; }
+  body.anim .statement__text .line > span { transform: none !important; }
   .hero__kicker span { opacity: 1 !important; }
   .cursor { display: none !important; }
   .hero__scroll i::after { animation: none; }
