@@ -128,7 +128,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* centre "monitor" card — sized to sit exactly over the baked-in card */
 .tv__card {
   position: absolute; z-index: 5; left: 34%; right: 34%; top: 34.3%; bottom: 35.4%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3.4cqh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.7cqh;
+  padding-top: 2.4cqh;
   background: #060606; box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
   text-align: center; font-family: "VT323", var(--font-mono), monospace;
 }
