@@ -506,6 +506,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    ABOUT
    ========================================================================= */
 .about { background: var(--paper); padding: var(--space-xl) var(--gutter); }
+/* Full-bleed the giant type when it sits between the bio and the clapperboard */
+.about > .bigtype { margin: var(--space-xl) calc(-1 * var(--gutter)) 0; }
 .about__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 100px); align-items: stretch; position: relative; }
 /* Portrait stretches to the full height of the (taller) bio column */
 .about__portrait { position: relative; overflow: hidden; background: var(--paper-2); min-height: 100%; }
