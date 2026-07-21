@@ -455,16 +455,17 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* =========================================================================
    BIG IMAGE-FILLED TYPE
    ========================================================================= */
-.bigtype { position: relative; isolation: isolate; overflow: hidden; background: #ffffff; padding: 0; }
+.bigtype { position: relative; isolation: isolate; overflow: hidden; background: #000000; padding: 0; }
 /* Showreel plays behind, revealed only through the letters */
 .bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.5); transform-origin: center; z-index: 0; }
 .bigtype__text {
   position: relative; z-index: 1; margin: 0;
   padding: var(--space-xl) var(--gutter);
   display: grid; place-items: center; text-align: center;
-  /* white block, screened over the video => video shows only through the black letters */
-  background: #ffffff;
-  mix-blend-mode: screen;
+  /* black block, multiplied over the video => black surround stays black,
+     the white letters reveal the video through them */
+  background: #000000;
+  mix-blend-mode: multiply;
 }
 /* The two phrases stack in the same grid cell and cross-fade */
 .bigtype__phrase {
@@ -472,7 +473,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   display: block; width: 100%;
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
   font-size: clamp(2.6rem, 16vw, 13rem); line-height: 0.86; letter-spacing: -0.035em;
-  color: #000; -webkit-text-fill-color: #000;
+  color: #fff; -webkit-text-fill-color: #fff;
 }
 .bigtype__phrase .line { display: block; }
 /* Flash / alternate: phrase 1, quick blank flash, phrase 2, quick blank flash */
@@ -481,15 +482,15 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 @keyframes bigtypeFlash {
   0%    { opacity: 1; }
   46%   { opacity: 1; }
-  48%   { opacity: 0; } /* brief blank => whole block reads white = a flash */
+  48%   { opacity: 0; } /* brief blank => whole block reads black = a flash */
   50%   { opacity: 0; }
   100%  { opacity: 0; }
 }
-/* Fallback for browsers without mix-blend-mode: keep the text legible */
-@supports not (mix-blend-mode: screen) {
+/* Fallback for browsers without mix-blend-mode: white text on the black block */
+@supports not (mix-blend-mode: multiply) {
   .bigtype__video { display: none; }
   .bigtype__text { mix-blend-mode: normal; background: transparent; }
-  .bigtype__phrase { color: var(--ink); -webkit-text-fill-color: var(--ink); }
+  .bigtype__phrase { color: var(--paper); -webkit-text-fill-color: var(--paper); }
 }
 @media (prefers-reduced-motion: reduce) {
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
