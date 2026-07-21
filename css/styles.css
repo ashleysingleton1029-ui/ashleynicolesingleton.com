@@ -134,8 +134,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   text-align: center; font-family: "VT323", var(--font-mono), monospace;
 }
 .tv__title {
-  margin: 0; color: #f2f2f2; letter-spacing: 0.1em; line-height: 0.96; text-transform: uppercase;
-  font-size: 3.5cqw; text-shadow: 0 0 6px rgba(255,255,255,0.28);
+  margin: 0; color: #f2f2f2; letter-spacing: 0.04em; line-height: 1.08; text-transform: uppercase;
+  font-size: 2.7cqw; white-space: nowrap; text-shadow: 0 0 6px rgba(255,255,255,0.28);
 }
 .tv__bar {
   width: 72%; height: 3.2cqh; padding: 2px;
