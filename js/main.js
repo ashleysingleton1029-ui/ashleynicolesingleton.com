@@ -45,13 +45,13 @@
   /* =====================================================================
      PRELOADER
      ===================================================================== */
-  function runPreloader(done) {
+  function runPreloader(done, instant) {
     const pre = $("#preloader");
     const countEl = $("#preCount");
     const bar = $("#preBar");
     if (!pre) { done(); return; }
 
-    if (REDUCED || !hasGSAP) {
+    if (REDUCED || !hasGSAP || instant) {
       countEl.textContent = "100";
       bar.style.width = "100%";
       document.body.classList.remove("is-loading");
@@ -578,9 +578,19 @@
   });
 
   window.addEventListener("load", () => {
+    // If we arrived from another page pointing at a section (e.g. "All Work"
+    // -> index.html#work), skip the loader and land right on that section.
+    const hash = location.hash;
+    const hashEl = hash && hash.length > 1 ? document.querySelector(hash) : null;
     runPreloader(() => {
       if (heroPlay) heroPlay();
       if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
-    });
+      if (hashEl) {
+        requestAnimationFrame(() => {
+          hashEl.scrollIntoView({ behavior: "auto", block: "start" });
+          if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
+        });
+      }
+    }, !!hashEl);
   });
 })();
