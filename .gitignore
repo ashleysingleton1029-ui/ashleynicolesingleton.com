@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# session scratch (contains decrypted/plaintext working files)
+scratchpad/
