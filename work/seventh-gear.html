@@ -36,15 +36,15 @@
     .sg-nav__back:hover{color:var(--steel)}
 
     /* ---- hero ---- */
-    .sg-hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px var(--gut) 80px;overflow:hidden;isolation:isolate}
+    .sg-hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:96px var(--gut) 28px;overflow:hidden;isolation:isolate}
     .sg-hero__bg{position:absolute;inset:0;z-index:-2;background:#05070a center/cover no-repeat;transform:scale(1.06);animation:sgZoom 26s var(--ease) infinite alternate}
     @keyframes sgZoom{to{transform:scale(1.14)}}
     .sg-hero::after{content:"";position:absolute;inset:0;z-index:-1;
       background:radial-gradient(120% 90% at 50% 40%,rgba(10,11,13,.15),rgba(10,11,13,.72) 70%,rgba(10,11,13,.94)),
       linear-gradient(180deg,rgba(10,11,13,.55),rgba(10,11,13,0) 30%,rgba(10,11,13,.65))}
-    .sg-hero__inner{max-width:840px;display:flex;flex-direction:column;align-items:center;gap:26px}
+    .sg-hero__inner{margin-top:auto;max-width:840px;display:flex;flex-direction:column;align-items:center;gap:24px}
     .sg-kicker{margin:0;font-family:var(--mono);font-size:clamp(10px,1.3vw,13px);letter-spacing:.42em;text-transform:uppercase;color:var(--steel)}
-    .sg-logo{width:min(560px,82vw);filter:drop-shadow(0 10px 40px rgba(0,0,0,.6))}
+    .sg-logo{width:min(560px,82vw);height:auto;filter:drop-shadow(0 10px 40px rgba(0,0,0,.6))}
     .sg-tag{margin:0;font-family:var(--disp);font-weight:600;font-size:clamp(1.05rem,2.4vw,1.7rem);letter-spacing:.005em;line-height:1.25}
     .sg-by{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
 
@@ -71,7 +71,7 @@
     .sg-open:hover{background:var(--steel);color:var(--bg)}
     .sg-gate--done .sg-open{display:inline-flex}
 
-    .sg-scrollcue{position:absolute;left:0;right:0;bottom:26px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);z-index:1}
+    .sg-scrollcue{margin-top:auto;padding-top:26px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);z-index:1}
     .sg-scrollcue i{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--steel),transparent);animation:sgCue 2s var(--ease) infinite}
     @keyframes sgCue{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
 
