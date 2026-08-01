@@ -75,15 +75,24 @@
     .sg-scrollcue i{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--steel),transparent);animation:sgCue 2s var(--ease) infinite}
     @keyframes sgCue{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
 
-    /* ---- teaser strips ---- */
-    .sg-strip{position:relative;min-height:88svh;display:grid;place-items:center;text-align:center;padding:100px var(--gut);overflow:hidden;isolation:isolate}
-    .sg-strip__bg{position:absolute;inset:0;z-index:-2;background:#05070a center/cover no-repeat}
-    .sg-strip::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,11,13,.86),rgba(10,11,13,.6) 45%,rgba(10,11,13,.9))}
-    .sg-strip__inner{max-width:900px;display:flex;flex-direction:column;align-items:center;gap:22px}
-    .sg-over{margin:0;font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--steel)}
-    .sg-quote{margin:0;font-family:var(--disp);font-weight:700;font-size:clamp(1.7rem,4.6vw,3.4rem);line-height:1.08;letter-spacing:-.01em}
-    .sg-quote em{font-style:italic;color:var(--steel)}
-    .sg-lede{margin:0;max-width:60ch;font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.7;color:#d6d9dc}
+    /* ---- cinematic film (philosophy + series copy over video) ---- */
+    .sg-film{position:relative;min-height:100svh;overflow:hidden;background:#05070a;isolation:isolate}
+    .sg-film__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;background:#05070a}
+    .sg-film__scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,11,13,.6),rgba(10,11,13,.2) 38%,rgba(10,11,13,.2) 62%,rgba(10,11,13,.8))}
+    .sg-film__cues{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:110px var(--gut)}
+    .sg-cue{grid-area:1/1;margin:0 auto;opacity:0;transform:translateY(20px);transition:opacity 1s var(--ease),transform 1.3s var(--ease);will-change:opacity,transform;pointer-events:none}
+    .sg-cue.is-on{opacity:1;transform:none}
+    .sg-cue--big{max-width:20ch;font-family:var(--disp);font-weight:800;text-transform:uppercase;font-size:clamp(2rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;text-shadow:0 6px 44px rgba(0,0,0,.55)}
+    .sg-cue--accent{color:var(--steel)}
+    .sg-cue--lede{max-width:46ch;font-family:var(--body);font-size:clamp(1.05rem,2.1vw,1.55rem);line-height:1.6;color:#eceeef;text-shadow:0 3px 26px rgba(0,0,0,.7)}
+    .sg-film__sound{position:absolute;right:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,34px);z-index:3;display:inline-flex;align-items:center;gap:9px;
+      border:1px solid var(--line);background:rgba(8,10,13,.45);backdrop-filter:blur(6px);color:var(--fg);cursor:pointer;
+      font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:10px 14px;transition:background .3s,border-color .3s}
+    .sg-film__sound:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+    .sg-film__ic{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .sg-film__ic[hidden]{display:none}
+    .sg-film__ic--muted path:first-child,.sg-film__ic--on path:first-child{fill:currentColor;stroke:none}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .sg-red{color:var(--red)}
 
     .sg-question{background:var(--bg);padding:clamp(90px,16vh,180px) var(--gut);text-align:center}
@@ -174,30 +183,38 @@
     <div class="sg-scrollcue">Scroll<i></i></div>
   </section>
 
-  <!-- ===================== PHILOSOPHY ===================== -->
-  <section class="sg-strip">
-    <div class="sg-strip__bg" style="background-image:url('../img/work/seventh-gear-motion.jpg')"></div>
-    <div class="sg-strip__inner">
-      <p class="sg-over">The Philosophy</p>
-      <h2 class="sg-quote">The first six gears move the motorcycle.<br /><em>The Seventh Gear moves the rider.</em></h2>
-      <p class="sg-lede">It’s the mindset that appears when fear, failure, heartbreak, or adversity forces you to grow into someone stronger than you were before.</p>
-    </div>
-  </section>
+  <!-- ===================== FILM (philosophy + series over video) ===================== -->
+  <section class="sg-film" id="sgFilm" aria-label="Seventh Gear film">
+    <video class="sg-film__video" id="sgFilmVideo" muted loop playsinline preload="none"
+           poster="../img/work/seventh-gear-hero.jpg" aria-hidden="true"></video>
+    <div class="sg-film__scrim" aria-hidden="true"></div>
 
-  <!-- ===================== THE SERIES ===================== -->
-  <section class="sg-strip">
-    <div class="sg-strip__bg" style="background-image:url('../img/work/seventh-gear-riders.jpg')"></div>
-    <div class="sg-strip__inner">
-      <p class="sg-over">The Series</p>
-      <h2 class="sg-quote">A remarkable guest. An open road.<br />Filmed like a feature.</h2>
-      <p class="sg-lede">Part interview, part road movie. Each ride strips away the noise until the
-        conversation becomes something real, and every episode finishes somewhere new.</p>
+    <div class="sg-film__cues" aria-hidden="true">
+      <p class="sg-cue sg-cue--big" data-start="4" data-end="10.5">The first six gears move the motorcycle.</p>
+      <p class="sg-cue sg-cue--big sg-cue--accent" data-start="11" data-end="18.5">The Seventh Gear moves the rider.</p>
+      <p class="sg-cue sg-cue--lede" data-start="20.5" data-end="31.5">It’s the mindset that appears when fear, failure, heartbreak, or adversity forces you to grow into someone stronger than you were before.</p>
+      <p class="sg-cue sg-cue--big" data-start="34.5" data-end="41">A remarkable guest.<br />An open road.</p>
+      <p class="sg-cue sg-cue--big sg-cue--accent" data-start="41.5" data-end="48.5">Filmed like a feature.</p>
+      <p class="sg-cue sg-cue--lede" data-start="50.5" data-end="61.5">Part interview, part road movie. Each ride strips away the noise until the conversation becomes something real, and every episode finishes somewhere new.</p>
+    </div>
+
+    <button class="sg-film__sound" id="sgSound" type="button" aria-label="Unmute film">
+      <svg class="sg-film__ic sg-film__ic--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      <svg class="sg-film__ic sg-film__ic--on" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
+      <span>Sound</span>
+    </button>
+
+    <!-- Static copy for search + screen readers -->
+    <div class="sr-only">
+      <p>The first six gears move the motorcycle. The Seventh Gear moves the rider.</p>
+      <p>It’s the mindset that appears when fear, failure, heartbreak, or adversity forces you to grow into someone stronger than you were before.</p>
+      <p>A remarkable guest. An open road. Filmed like a feature. Part interview, part road movie. Each ride strips away the noise until the conversation becomes something real, and every episode finishes somewhere new.</p>
     </div>
   </section>
 
   <!-- ===================== THE QUESTION ===================== -->
   <section class="sg-question">
-    <h2 class="sg-question__q">What was the moment that required your <span class="sg-red">seventh gear?</span></h2>
+    <h2 class="sg-question__q">What was the moment in your life that required your<br /><span class="sg-red">Seventh Gear?</span></h2>
     <p class="sg-question__s">Every episode ends with the same question.</p>
   </section>
 
@@ -230,8 +247,55 @@
     <div class="sgv__bar"><i id="sgvBar"></i></div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5/dist/hls.min.js" defer></script>
   <script>
     document.getElementById('sgYear').textContent = new Date().getFullYear();
+
+    /* ---- cinematic film: HLS playback + timed copy cues ---- */
+    (function () {
+      var sec = document.getElementById('sgFilm');
+      if (!sec) return;
+      var v = document.getElementById('sgFilmVideo');
+      var cues = [].slice.call(sec.querySelectorAll('.sg-cue'));
+      var soundBtn = document.getElementById('sgSound');
+      var SRC = 'https://customer-awi3sybvxx4bbl65.cloudflarestream.com/6d3c715b8b7189143b121073db4fd652/manifest/video.m3u8';
+      var loaded = false, hls = null, raf = null;
+
+      function load() {
+        if (loaded) return; loaded = true;
+        if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = SRC; }
+        else if (window.Hls && window.Hls.isSupported()) { hls = new window.Hls({ enableWorker: true }); hls.loadSource(SRC); hls.attachMedia(v); }
+        else { v.src = SRC; }
+      }
+      function tick() {
+        var t = v.currentTime || 0;
+        for (var i = 0; i < cues.length; i++) {
+          var c = cues[i];
+          var on = (t >= +c.dataset.start && t < +c.dataset.end);
+          if (on !== c.classList.contains('is-on')) c.classList.toggle('is-on', on);
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      function start() { load(); var p = v.play(); if (p && p.catch) p.catch(function () {}); if (!raf) raf = requestAnimationFrame(tick); }
+      function stop() { v.pause(); }
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.25 });
+        io.observe(sec);
+      } else { start(); }
+
+      if (soundBtn) {
+        var icM = soundBtn.querySelector('.sg-film__ic--muted');
+        var icOn = soundBtn.querySelector('.sg-film__ic--on');
+        soundBtn.addEventListener('click', function () {
+          v.muted = !v.muted;
+          if (!v.muted) { v.volume = 1; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          if (icM) icM.hidden = !v.muted;
+          if (icOn) icOn.hidden = v.muted;
+          soundBtn.setAttribute('aria-label', v.muted ? 'Unmute film' : 'Mute film');
+        });
+      }
+    })();
 
     (function () {
       var ITER = 200000;
