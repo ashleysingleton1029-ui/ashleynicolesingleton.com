@@ -19,13 +19,17 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var srcReady = false;
 
-  // Attach the streaming source lazily — native HLS (Safari), hls.js, or DASH.
+  // Attach the source lazily — progressive MP4 first (most reliable), then
+  // native HLS (Safari), hls.js, or DASH as fallbacks.
   function ensureSource() {
     if (srcReady || !video) return;
     srcReady = true;
+    var mp4Url = video.getAttribute('data-mp4');
     var hlsUrl = video.getAttribute('data-hls');
     var dashUrl = video.getAttribute('data-dash');
-    if (video.canPlayType('application/vnd.apple.mpegurl') && hlsUrl) {
+    if (mp4Url) {
+      video.src = mp4Url;
+    } else if (video.canPlayType('application/vnd.apple.mpegurl') && hlsUrl) {
       video.src = hlsUrl;
     } else if (window.Hls && window.Hls.isSupported() && hlsUrl) {
       var hls = new window.Hls({ enableWorker: true });
