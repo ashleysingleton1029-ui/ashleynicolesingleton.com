@@ -63,14 +63,19 @@
     let finished = false;
     const obj = { v: 0 };
 
+    // Slow cinematic push-in on the loader video for the duration of the load.
+    const preVid = $("#preVideo");
+    if (preVid) gsap.fromTo(preVid, { scale: 1 }, { scale: 1.14, duration: 4.6, ease: "power1.inOut" });
+
     function finish() {
       if (finished) return;
       finished = true;
       window.removeEventListener("keydown", onKey);
       countEl.textContent = "100";
       bar.style.width = "100%";
+      // Crossfade the loader into the site rather than sliding it away.
       gsap.to(pre, {
-        yPercent: -100, duration: 0.9, ease: "expo.inOut", delay: 0.12,
+        opacity: 0, duration: 1, ease: "power2.inOut", delay: 0.15,
         onStart() { document.body.classList.remove("is-loading"); },
         onComplete() { pre.style.display = "none"; done(); }
       });
@@ -85,7 +90,7 @@
     window.addEventListener("keydown", onKey);
 
     gsap.to(obj, {
-      v: 100, duration: 5, ease: "power1.inOut",
+      v: 100, duration: 4, ease: "power1.inOut",
       onUpdate() {
         const n = Math.round(obj.v);
         countEl.textContent = String(n).padStart(2, "0");
