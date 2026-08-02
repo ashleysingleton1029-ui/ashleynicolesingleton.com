@@ -194,7 +194,7 @@
 
   <!-- ===================== FILM (philosophy + series over video) ===================== -->
   <section class="sg-film" id="sgFilm" aria-label="Seventh Gear film">
-    <video class="sg-film__video" id="sgFilmVideo" muted loop playsinline preload="none"
+    <video class="sg-film__video" id="sgFilmVideo" muted playsinline preload="none"
            poster="../img/work/seventh-gear-film.jpg" aria-hidden="true"></video>
     <div class="sg-film__scrim" aria-hidden="true"></div>
 
@@ -317,15 +317,13 @@
       // Continuous seamless loop (hls.js ignores the loop attribute): jump back
       // just before the end so playback never hits the frozen end frame.
       v.addEventListener('timeupdate', function () {
-        if (v.duration && isFinite(v.duration) && v.currentTime >= v.duration - 0.3) {
+        if (v.duration && isFinite(v.duration) && v.currentTime >= v.duration - 0.4) {
           try { v.currentTime = 0; } catch (e) {}
           var p = v.play(); if (p && p.catch) p.catch(function () {});
         }
       });
-      v.addEventListener('ended', function () {
-        try { v.currentTime = 0; } catch (e) {}
-        var p = v.play(); if (p && p.catch) p.catch(function () {});
-      });
+      // if it still reaches the end, rebuild the pipeline (seek can't recover EOS)
+      v.addEventListener('ended', function () { restart(); });
 
       if (replayBtn) { replayBtn.addEventListener('click', restart); }
     })();
