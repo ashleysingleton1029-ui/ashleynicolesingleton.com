@@ -299,10 +299,11 @@
 
       // preload BOTH videos so the standby can take over instantly at the seam
       attach(vA); attach(vB);
+      function noteDuration(vv) { if (isFinite(vv.duration) && vv.duration > 1) clipEnd = vv.duration; }
       [vA, vB].forEach(function (vv) {
-        vv.addEventListener('loadedmetadata', function () {
-          if (isFinite(vv.duration) && vv.duration > 1) clipEnd = vv.duration;
-        });
+        // hls.js sets duration via durationchange AFTER loadedmetadata, so listen to both
+        vv.addEventListener('loadedmetadata', function () { noteDuration(vv); });
+        vv.addEventListener('durationchange', function () { noteDuration(vv); });
         // fires at the true end regardless of whether we know the duration
         vv.addEventListener('ended', function () { if (vv === active) swap(); });
       });
@@ -327,6 +328,7 @@
 
       function tick() {
         var t = active.currentTime || 0;
+        if (!clipEnd && isFinite(active.duration) && active.duration > 1) clipEnd = active.duration;
         if (!swapping && clipEnd > 1 && t >= clipEnd - 0.6) swap();
         for (var i = 0; i < cues.length; i++) {
           var c = cues[i];
