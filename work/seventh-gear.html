@@ -273,8 +273,28 @@
       function load() {
         if (loaded) return; loaded = true;
         if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = SRC; }
-        else if (window.Hls && window.Hls.isSupported()) { hls = new window.Hls({ enableWorker: true }); hls.loadSource(SRC); hls.attachMedia(v); }
+        else if (window.Hls && window.Hls.isSupported()) {
+          hls = new window.Hls({ enableWorker: true });
+          hls.loadSource(SRC); hls.attachMedia(v);
+          hls.on(window.Hls.Events.MANIFEST_PARSED, function () {
+            var p = v.play(); if (p && p.catch) p.catch(function () {});
+          });
+        }
         else { v.src = SRC; }
+      }
+      function restart() {
+        cues.forEach(function (c) { c.classList.remove('is-on'); });
+        if (window.Hls && window.Hls.isSupported() && !v.canPlayType('application/vnd.apple.mpegurl')) {
+          // hls.js ignores loop and can't reseek once ended: rebuild for a clean start at 0
+          if (hls) { try { hls.destroy(); } catch (e) {} }
+          hls = null; loaded = false;
+          load();
+        } else {
+          if (!loaded) load();
+          try { v.currentTime = 0; } catch (e) {}
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        }
+        if (!raf) raf = requestAnimationFrame(tick);
       }
       function tick() {
         var t = v.currentTime || 0;
@@ -293,25 +313,7 @@
         io.observe(sec);
       } else { start(); }
 
-      if (replayBtn) {
-        replayBtn.addEventListener('click', function () {
-          load();
-          cues.forEach(function (c) { c.classList.remove('is-on'); });
-          // hls.js keeps its own load position, so seeking alone won't restart:
-          // reposition the loader to the very start, then move the playhead.
-          if (hls && typeof hls.startLoad === 'function') {
-            try { hls.stopLoad(); hls.startLoad(0); } catch (e) {}
-          }
-          var seekStart = function () {
-            try { v.currentTime = 0; } catch (e) {}
-            var p = v.play(); if (p && p.catch) p.catch(function () {});
-          };
-          seekStart();
-          // some browsers ignore currentTime=0 until the seek is ready — retry once
-          setTimeout(function () { if (v.currentTime > 0.6) seekStart(); }, 150);
-          if (!raf) raf = requestAnimationFrame(tick);
-        });
-      }
+      if (replayBtn) { replayBtn.addEventListener('click', restart); }
     })();
 
     (function () {
