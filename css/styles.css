@@ -97,67 +97,48 @@ mark { background: none; color: var(--gold); }
    PRELOADER
    ========================================================================= */
 .preloader {
-  position: fixed; inset: 0; z-index: var(--z-pre);
+  position: fixed; inset: 0; z-index: var(--z-pre); overflow: hidden;
   background: #050505; display: flex; align-items: center; justify-content: center;
 }
 body:not(.is-loading) .preloader { pointer-events: none; }
-/* ---- CRT television: the reference test-pattern is the screen itself ---- */
-.tv {
-  position: relative; aspect-ratio: 4 / 3;
-  width: min(100vw, 133.333vh); height: auto; max-height: 100vh;
-  container-type: size; overflow: hidden;
-  background: #000 url("../img/tv-pattern.jpg") center / 100% 100% no-repeat;
+/* ---- cinematic video loader ---- */
+.pre__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; background: #050505;
 }
-/* animated static layered over the baked pattern */
-.tv__noise {
-  position: absolute; inset: -20%; z-index: 2; pointer-events: none;
-  background: url("../img/film-grain.png") repeat; background-size: 240px 240px;
-  opacity: 0.15; mix-blend-mode: overlay;
-  animation: tvNoise 0.5s steps(6) infinite;
+.preloader::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(130% 100% at 50% 52%, rgba(5,6,8,0.28), rgba(5,6,8,0.86));
 }
-/* scanlines + rolling bright bar */
-.tv__scan {
-  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+/* broadcast scanlines + slow rolling highlight */
+.pre__scan {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.5;
   background:
     repeating-linear-gradient(0deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 3px),
-    linear-gradient(180deg, transparent 0, rgba(255,255,255,0.07) 50%, transparent 100%);
+    linear-gradient(180deg, transparent 0, rgba(255,255,255,0.05) 50%, transparent 100%);
   background-size: 100% 3px, 100% 44%;
   background-repeat: repeat, no-repeat;
   animation: tvScan 7s linear infinite;
 }
-/* centre "monitor" card — sized to sit exactly over the baked-in card */
-.tv__card {
-  position: absolute; z-index: 5; left: 34%; right: 34%; top: 34.3%; bottom: 35.4%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.7cqh;
-  padding-top: 2.4cqh;
-  background: #060606; box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
-  text-align: center; font-family: "VT323", var(--font-mono), monospace;
+.pre__content {
+  position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center;
+  gap: clamp(18px, 3.2vh, 32px); text-align: center; padding: 0 var(--gutter);
 }
-.tv__title {
-  margin: 0; color: #f2f2f2; letter-spacing: 0.04em; line-height: 1.08; text-transform: uppercase;
-  font-size: 2.7cqw; white-space: nowrap; text-shadow: 0 0 6px rgba(255,255,255,0.28);
+.pre__msg {
+  margin: 0; font-family: var(--font-body); font-weight: 300; text-transform: uppercase;
+  letter-spacing: 0.36em; font-size: clamp(0.85rem, 2.1vw, 1.4rem); color: #f2f3f4;
+  text-shadow: 0 2px 34px rgba(0,0,0,0.85);
 }
-.tv__bar {
-  width: 72%; height: 3.2cqh; padding: 2px;
-  background: rgba(255,255,255,0.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
-}
-.tv__bar i {
-  display: block; height: 100%; width: 0%;
-  background: repeating-linear-gradient(90deg, #f2f2f2 0 0.85cqw, transparent 0.85cqw 1.45cqw);
-}
-.tv__count { margin: 0; color: #f2f2f2; font-size: 1.9cqw; letter-spacing: 0.22em; }
-.tv__skip {
-  margin: 0; color: #f4c531; letter-spacing: 0.1em; font-size: 1.75cqw; text-transform: uppercase;
-  animation: tvBlink 1.1s steps(1) infinite;
-}
-@keyframes tvNoise {
-  0%{background-position:0 0} 20%{background-position:-60px 40px} 40%{background-position:80px -30px}
-  60%{background-position:-40px -60px} 80%{background-position:50px 70px} 100%{background-position:0 0}
+.pre__bar { width: min(280px, 58vw); height: 3px; background: rgba(255,255,255,0.16); }
+.pre__bar i { display: block; height: 100%; width: 0%; background: #f4f4f5; }
+.pre__count { margin: 0; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.32em; color: #dfe1e2; }
+.pre__skip {
+  margin: 0; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: #94989b; animation: tvBlink 1.1s steps(1) infinite;
 }
 @keyframes tvScan { 0%{ background-position: 0 0, 0 -60%; } 100%{ background-position: 0 0, 0 160%; } }
 @keyframes tvBlink { 0%,60%{ opacity: 1; } 61%,100%{ opacity: 0.25; } }
 @media (prefers-reduced-motion: reduce) {
-  .tv__noise, .tv__scan, .tv__skip { animation: none; }
+  .pre__scan, .pre__skip { animation: none; }
 }
 
 /* =========================================================================

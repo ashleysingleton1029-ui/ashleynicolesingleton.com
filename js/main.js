@@ -559,8 +559,32 @@
   }
 
   /* =====================================================================
+     PRELOADER VIDEO (Cloudflare Stream via hls.js / native HLS)
+     ===================================================================== */
+  function initPreVideo() {
+    const v = $("#preVideo");
+    if (!v) return;
+    const SRC = "https://customer-awi3sybvxx4bbl65.cloudflarestream.com/c0fcdf723f480595370570881fc5c95b/manifest/video.m3u8";
+    try {
+      if (v.canPlayType("application/vnd.apple.mpegurl")) {
+        v.src = SRC;
+      } else if (window.Hls && window.Hls.isSupported()) {
+        const hls = new window.Hls({ enableWorker: true });
+        hls.loadSource(SRC);
+        hls.attachMedia(v);
+      } else {
+        v.src = SRC;
+      }
+    } catch (e) { /* poster remains as fallback */ }
+    v.muted = true;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});
+  }
+
+  /* =====================================================================
      BOOT
      ===================================================================== */
+  initPreVideo();
   const heroPlay = initHero();
   document.addEventListener("DOMContentLoaded", () => {
     initNav();
