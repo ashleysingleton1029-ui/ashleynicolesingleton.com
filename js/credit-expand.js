@@ -204,10 +204,13 @@
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
+  // Instagram does not reliably allow reels to play inside a third-party
+  // iframe (it blocks embedding), so open the reel on Instagram in a new tab
+  // where it always plays.
   cards.forEach(function (c) {
     c.addEventListener('click', function () {
-      var url = c.getAttribute('data-embed');
-      if (url) open(url, c);
+      var href = c.getAttribute('data-href') || c.getAttribute('data-embed');
+      if (href) window.open(href, '_blank', 'noopener');
     });
   });
   closeBtn.addEventListener('click', close);

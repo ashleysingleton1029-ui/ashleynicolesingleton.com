@@ -601,10 +601,17 @@
       if (heroPlay) heroPlay();
       if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
       if (hashEl) {
-        requestAnimationFrame(() => {
-          hashEl.scrollIntoView({ behavior: "auto", block: "start" });
+        // Re-align a few times: as images/fonts finish loading they shift the
+        // layout, so a single early jump can land short (e.g. on the Intro
+        // section instead of Credits). Refresh triggers first, then scroll.
+        const jumpToHash = () => {
           if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
-        });
+          hashEl.scrollIntoView({ behavior: "auto", block: "start" });
+        };
+        requestAnimationFrame(jumpToHash);
+        window.setTimeout(jumpToHash, 250);
+        window.setTimeout(jumpToHash, 800);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(jumpToHash);
       }
     }, !!hashEl);
   });
