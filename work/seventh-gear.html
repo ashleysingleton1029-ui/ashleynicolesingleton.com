@@ -79,7 +79,8 @@
 
     /* ---- cinematic film (philosophy + series copy over video) ---- */
     .sg-film{position:relative;min-height:100svh;overflow:hidden;background:#05070a;isolation:isolate}
-    .sg-film__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;background:#05070a}
+    .sg-film__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;background:#05070a;opacity:0;transition:opacity .5s linear}
+    .sg-film__video.is-active{opacity:1}
     .sg-film__scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,11,13,.6),rgba(10,11,13,.2) 38%,rgba(10,11,13,.2) 62%,rgba(10,11,13,.8))}
     .sg-film__cues{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:110px var(--gut)}
     /* elegant focus-pull reveal: fade + rise + blur clearing */
@@ -194,8 +195,9 @@
 
   <!-- ===================== FILM (philosophy + series over video) ===================== -->
   <section class="sg-film" id="sgFilm" aria-label="Seventh Gear film">
-    <video class="sg-film__video" id="sgFilmVideo" muted playsinline preload="none"
+    <video class="sg-film__video is-active" id="sgFilmVideo" muted playsinline preload="auto"
            poster="../img/work/seventh-gear-film.jpg" aria-hidden="true"></video>
+    <video class="sg-film__video" id="sgFilmVideoB" muted playsinline preload="auto" aria-hidden="true"></video>
     <div class="sg-film__scrim" aria-hidden="true"></div>
 
     <div class="sg-film__cues" aria-hidden="true">
@@ -260,57 +262,60 @@
   <script>
     document.getElementById('sgYear').textContent = new Date().getFullYear();
 
-    /* ---- cinematic film: HLS playback + timed copy cues ---- */
+    /* ---- cinematic film: dual-video seamless loop + timed copy cues ---- */
     (function () {
       var sec = document.getElementById('sgFilm');
       if (!sec) return;
-      var v = document.getElementById('sgFilmVideo');
       var cues = [].slice.call(sec.querySelectorAll('.sg-cue'));
       var replayBtn = document.getElementById('sgReplay');
       var SRC = 'https://customer-awi3sybvxx4bbl65.cloudflarestream.com/6d3c715b8b7189143b121073db4fd652/manifest/video.m3u8';
-      var loaded = false, hls = null, raf = null, relooping = false;
 
-      function load() {
-        if (loaded) return; loaded = true;
-        if (v.canPlayType('application/vnd.apple.mpegurl')) { v.src = SRC; }
-        else if (window.Hls && window.Hls.isSupported()) {
-          // keep the whole clip buffered so the loop rewind is seamless
-          hls = new window.Hls({ enableWorker: true, backBufferLength: Infinity });
-          hls.loadSource(SRC); hls.attachMedia(v);
-          hls.on(window.Hls.Events.MANIFEST_PARSED, function () {
-            var p = v.play(); if (p && p.catch) p.catch(function () {});
+      var vA = document.getElementById('sgFilmVideo');
+      var vB = document.getElementById('sgFilmVideoB');
+      var active = vA, standby = vB;
+      var raf = null, clipEnd = 0, swapping = false, started = false;
+
+      function attach(video) {
+        if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = SRC; return; }
+        if (window.Hls && window.Hls.isSupported()) {
+          var h = new window.Hls({ enableWorker: true, backBufferLength: Infinity });
+          h.loadSource(SRC); h.attachMedia(video);
+          h.on(window.Hls.Events.LEVEL_LOADED, function (_e, data) {
+            if (data && data.details && data.details.totalduration) clipEnd = data.details.totalduration;
           });
+          return;
         }
-        else { v.src = SRC; }
+        video.src = SRC;
       }
-      function restart() {
-        cues.forEach(function (c) { c.classList.remove('is-on'); });
-        if (window.Hls && window.Hls.isSupported() && !v.canPlayType('application/vnd.apple.mpegurl')) {
-          // hls.js ignores loop and can't reseek once ended: rebuild for a clean start at 0
-          if (hls) { try { hls.destroy(); } catch (e) {} }
-          hls = null; loaded = false;
-          load();
-        } else {
-          if (!loaded) load();
-          try { v.currentTime = 0; } catch (e) {}
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
-        }
-        if (!raf) raf = requestAnimationFrame(tick);
+      function play(video) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+
+      // preload BOTH videos so the standby can take over instantly at the seam
+      attach(vA); attach(vB);
+      [vA, vB].forEach(function (vv) {
+        vv.addEventListener('loadedmetadata', function () {
+          if (isFinite(vv.duration) && vv.duration > 1) clipEnd = vv.duration;
+        });
+      });
+
+      // hand the frame off to the standby video just before the active one ends
+      function swap() {
+        if (swapping) return;
+        swapping = true;
+        var incoming = standby, outgoing = active;
+        try { incoming.currentTime = 0; } catch (e) {}
+        play(incoming);
+        incoming.classList.add('is-active');
+        outgoing.classList.remove('is-active');
+        active = incoming; standby = outgoing;
+        setTimeout(function () {
+          try { outgoing.pause(); outgoing.currentTime = 0; } catch (e) {}
+          swapping = false;
+        }, 700);
       }
-      // Guaranteed loop: as soon as playback reaches (or passes) the end,
-      // rebuild the pipeline so it starts over. Guarded so it fires once.
-      function loopRestart() {
-        if (relooping) return;
-        relooping = true;
-        restart();
-        setTimeout(function () { relooping = false; }, 1500);
-      }
+
       function tick() {
-        var t = v.currentTime || 0;
-        var d = v.duration;
-        if (!relooping && (v.ended || (isFinite(d) && d > 1 && t >= d - 0.2))) {
-          loopRestart();
-        }
+        var t = active.currentTime || 0;
+        if (!swapping && clipEnd > 1 && t >= clipEnd - 0.6) swap();
         for (var i = 0; i < cues.length; i++) {
           var c = cues[i];
           var on = (t >= +c.dataset.start && t < +c.dataset.end);
@@ -318,19 +323,27 @@
         }
         raf = requestAnimationFrame(tick);
       }
-      function start() { load(); var p = v.play(); if (p && p.catch) p.catch(function () {}); if (!raf) raf = requestAnimationFrame(tick); }
-      function stop() { v.pause(); }
+
+      function start() { started = true; play(active); if (!raf) raf = requestAnimationFrame(tick); }
+      function stop() { vA.pause(); vB.pause(); }
 
       if ('IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.25 });
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { e.isIntersecting ? (started ? play(active) : start()) : stop(); });
+        }, { threshold: 0.25 });
         io.observe(sec);
       } else { start(); }
 
-      // Continuous loop, driven entirely in JS (hls.js ignores the loop attr).
-      // The rAF tick already detects the end; this is a belt-and-suspenders catch.
-      v.addEventListener('ended', loopRestart);
-
-      if (replayBtn) { replayBtn.addEventListener('click', restart); }
+      if (replayBtn) {
+        replayBtn.addEventListener('click', function () {
+          cues.forEach(function (c) { c.classList.remove('is-on'); });
+          try { standby.pause(); standby.currentTime = 0; standby.classList.remove('is-active'); } catch (e) {}
+          try { active.currentTime = 0; } catch (e) {}
+          active.classList.add('is-active');
+          play(active);
+          if (!raf) raf = requestAnimationFrame(tick);
+        });
+      }
     })();
 
     (function () {
