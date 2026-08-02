@@ -296,6 +296,12 @@
         attach(video);
       }
       function play(video) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+      function playWhenReady(video) {
+        if (video.readyState >= 2) { play(video); return; }
+        var h = function () { video.removeEventListener('canplay', h); play(video); };
+        video.addEventListener('canplay', h);
+        play(video);
+      }
 
       // preload BOTH videos so the standby can take over instantly at the seam
       attach(vA); attach(vB);
@@ -313,14 +319,16 @@
         swapping = true;
         var incoming = standby, outgoing = active;
         try { incoming.currentTime = 0; } catch (e) {}
-        play(incoming);
+        playWhenReady(incoming);
         incoming.classList.add('is-active');
         outgoing.classList.remove('is-active');
         active = incoming; standby = outgoing;
         try { outgoing.pause(); } catch (e) {}
+        // Always rebuild the outgoing stream (while hidden) so the next hand-off
+        // gets a brand-new, guaranteed-playable pipeline. hls.js can leave a
+        // used stream unresumable, which froze playback after one loop.
         setTimeout(function () {
-          // if it ran to the end on hls.js, only a rebuild makes it reusable
-          if (usingHls && outgoing.ended) rebuild(outgoing);
+          if (usingHls) rebuild(outgoing);
           else { try { outgoing.currentTime = 0; } catch (e) {} }
           swapping = false;
         }, 650);
