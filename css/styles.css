@@ -563,6 +563,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   opacity: 0; transform: translateY(6px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
 }
 .pg-fig__btn:hover img, .pg-fig__btn:focus-visible img { filter: grayscale(0); transform: scale(1.04); }
+/* True-color galleries (e.g. photo shoots): keep native color, no grayscale. */
+.photo-gallery--truecolor .pg-fig__btn img { filter: none; }
 .pg-fig__btn:hover .pg-fig__name, .pg-fig__btn:focus-visible .pg-fig__name { opacity: 1; transform: none; }
 
 /* fullscreen photo lightbox */
