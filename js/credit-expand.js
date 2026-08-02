@@ -15,6 +15,7 @@
   var content = document.querySelector('.expand-content');
   var video   = root.querySelector('.expand__media video');
   var soundBtn = root.querySelector('.expand__sound');
+  var replayBtn = root.querySelector('.expand__replay');
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var srcReady = false;
@@ -76,7 +77,9 @@
     if (content) content.classList.toggle('is-shown', expanded);
     if (expanded && video) {
       ensureSource();
+      if (replayBtn) replayBtn.hidden = true;
       video.muted = true;
+      try { video.currentTime = 0; } catch (err) {}
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
       if (soundBtn) soundBtn.hidden = false;
@@ -124,15 +127,38 @@
     if (!expanded) window.scrollTo(0, 0);
   }
 
-  // Unmute on demand, then hand off to native controls for scrub/volume.
+  // "Sound" restarts the short clip from the top with audio, so you always
+  // hear the whole thing — the muted autoplay may already be part-way (or
+  // fully) through by the time the hero finishes expanding.
   if (soundBtn && video) {
     soundBtn.addEventListener('click', function () {
+      if (replayBtn) replayBtn.hidden = true;
       video.muted = false;
       video.volume = 1;
+      try { video.currentTime = 0; } catch (err) {}
       var p = video.play();
       if (p && p.catch) p.catch(function () {});
-      video.setAttribute('controls', '');
       soundBtn.hidden = true;
+    });
+  }
+
+  // "Replay" restarts from the top, keeping whatever sound state is set. If
+  // it's still muted, re-offer the Sound button so audio can be turned on.
+  if (replayBtn && video) {
+    replayBtn.addEventListener('click', function () {
+      replayBtn.hidden = true;
+      try { video.currentTime = 0; } catch (err) {}
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+      if (soundBtn && video.muted) soundBtn.hidden = false;
+    });
+  }
+
+  // When the clip finishes, swap the Sound prompt for a Replay button.
+  if (video) {
+    video.addEventListener('ended', function () {
+      if (soundBtn) soundBtn.hidden = true;
+      if (replayBtn) replayBtn.hidden = false;
     });
   }
 
