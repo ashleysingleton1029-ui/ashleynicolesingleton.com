@@ -63,10 +63,6 @@
     let finished = false;
     const obj = { v: 0 };
 
-    // Slow cinematic push-in on the loader video for the duration of the load.
-    const preVid = $("#preVideo");
-    if (preVid) gsap.fromTo(preVid, { scale: 1 }, { scale: 1.14, duration: 4.6, ease: "power1.inOut" });
-
     function finish() {
       if (finished) return;
       finished = true;
