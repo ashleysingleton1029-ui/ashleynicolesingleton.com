@@ -8,7 +8,8 @@ unless the user explicitly says to unlock or change that specific file first.
 If a requested change would touch a locked file, stop and ask before proceeding.
 
 **Seventh Gear page (locked in full — page + all assets):**
-- `work/seventh-gear.html`
+- `work/seventh-gear.html` (approved film source: Cloudflare Stream
+  `1fa20304914fc8b1539f167355b66500`; cue timings are final — do not retime)
 - `work/seventh-gear/deck.enc` (AES-encrypted pitch deck — never regenerate/commit plaintext)
 - `work/seventh-gear/deck-pdf.enc`
 - `img/work/seventh-gear-hero.jpg`
