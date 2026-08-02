@@ -104,10 +104,23 @@
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .sg-red{color:var(--red)}
 
-    .sg-question{background:var(--bg);padding:clamp(90px,16vh,180px) var(--gut);text-align:center}
-    .sg-question__q{max-width:16ch;margin:0 auto;font-family:var(--disp);font-weight:800;text-transform:uppercase;
-      font-size:clamp(2rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em}
+    .sg-question{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:flex-start;
+      padding:clamp(80px,12vh,160px) var(--gut);overflow:hidden;background:#06080a;text-align:left;isolation:isolate}
+    .sg-question__bg{position:absolute;inset:0;z-index:-2;background:#06080a center/cover no-repeat;
+      background-image:url('../img/work/seventh-gear-question.jpg');background-position:64% 50%}
+    /* darken the left (behind the copy), leave the bike + dust on the right clear */
+    .sg-question::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+      background:linear-gradient(90deg, rgba(6,8,10,.9) 0%, rgba(6,8,10,.72) 28%, rgba(6,8,10,.3) 52%, rgba(6,8,10,0) 72%),
+      linear-gradient(180deg, rgba(6,8,10,.5), rgba(6,8,10,0) 30%, rgba(6,8,10,0) 70%, rgba(6,8,10,.55))}
+    .sg-question__q{position:relative;z-index:1;max-width:15ch;margin:0;font-family:var(--disp);font-weight:800;text-transform:uppercase;
+      font-size:clamp(2rem,5.6vw,4.4rem);line-height:1.04;letter-spacing:-.02em;text-shadow:0 6px 40px rgba(0,0,0,.6)}
     .sg-question__s{margin:26px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+    /* mobile: stack the copy up top so the bike + dust sit clear in the lower frame */
+    @media (max-width:720px){
+      .sg-question{align-items:flex-start;padding-top:clamp(96px,16vh,160px)}
+      .sg-question__bg{background-position:58% 26%}
+      .sg-question::after{background:linear-gradient(180deg, rgba(6,8,10,.86) 0%, rgba(6,8,10,.62) 26%, rgba(6,8,10,.12) 46%, rgba(6,8,10,0) 62%),linear-gradient(180deg, rgba(6,8,10,0) 68%, rgba(6,8,10,.55) 100%)}
+    }
 
     /* ---- footer ---- */
     .sg-foot{border-top:1px solid var(--line);padding:26px var(--gut);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;
@@ -195,7 +208,6 @@
   <!-- ===================== FILM (philosophy + series over video) ===================== -->
   <section class="sg-film" id="sgFilm" aria-label="Seventh Gear film">
     <video class="sg-film__video" id="sgFilmVideo" muted loop playsinline preload="auto"
-           poster="../img/work/seventh-gear-film.jpg"
            src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/6d3c715b8b7189143b121073db4fd652/downloads/default.mp4"
            aria-hidden="true"></video>
     <div class="sg-film__scrim" aria-hidden="true"></div>
@@ -226,6 +238,7 @@
 
   <!-- ===================== THE QUESTION ===================== -->
   <section class="sg-question">
+    <div class="sg-question__bg" aria-hidden="true"></div>
     <h2 class="sg-question__q">What was the moment in your life that required your<br /><span class="sg-red">Seventh Gear?</span></h2>
   </section>
 
