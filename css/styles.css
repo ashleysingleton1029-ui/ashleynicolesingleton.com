@@ -589,7 +589,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .reel__stage { display: flex; justify-content: center; padding: 0 var(--gutter); }
 .reel__player {
   position: relative; overflow: hidden; background: var(--ink-2);
-  aspect-ratio: 9 / 16; height: min(78vh, 720px); width: auto; max-width: 92vw;
+  aspect-ratio: 16 / 9; width: min(92vw, 1120px); height: auto;
   border: 1px solid var(--line-dark);
 }
 .reel__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
