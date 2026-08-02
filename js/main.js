@@ -86,7 +86,7 @@
     window.addEventListener("keydown", onKey);
 
     gsap.to(obj, {
-      v: 100, duration: 4, ease: "power1.inOut",
+      v: 100, duration: 3, ease: "power1.inOut",
       onUpdate() {
         const n = Math.round(obj.v);
         countEl.textContent = String(n).padStart(2, "0");
