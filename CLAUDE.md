@@ -25,6 +25,11 @@ If a requested change would touch a locked file, stop and ask before proceeding.
 **Bio image (locked):**
 - `img/chair.jpg` (bio portrait)
 
+**Gallery pages (locked — pages + their photo sets):**
+- `gallery/with-the-stars.html` (celebrity photos; names verified, order approved)
+- `gallery/in-front-of-the-lens.html` (photo-shoot images; order approved)
+- `img/gallery/stars/` and `img/gallery/lens/` (all gallery photos)
+
 ## Conventions
 - Static site: hand-written HTML + vanilla CSS + vanilla JS + GSAP (CDN).
 - No em dashes in copy — use a middot (·) or rephrase.

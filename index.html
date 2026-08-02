@@ -259,9 +259,9 @@
 
       <div class="reel__stage">
         <div class="reel__player" id="reelPlayer">
-          <!-- Self-hosted vertical showreel. Swap video/showreel.mp4 to update. -->
-          <video id="reelVideo" class="reel__video" playsinline preload="metadata"
-                 poster="img/spotlight.jpg" src="video/showreel.mp4"></video>
+          <!-- Showreel (Cloudflare Stream progressive MP4). -->
+          <video id="reelVideo" class="reel__video" playsinline preload="metadata" loop
+                 poster="img/spotlight.jpg" src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/cea7610091706c2adacbe7f0ef6769a0/downloads/default.mp4"></video>
           <div class="reel__grain" aria-hidden="true"></div>
           <button class="reel__play" id="reelPlay" data-cursor="play" aria-label="Play showreel">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
@@ -297,7 +297,7 @@
       <!-- ============ IMAGE-FILLED GIANT TYPE ============ -->
       <section class="bigtype" id="bigtype" aria-label="Based in Las Vegas, working worldwide">
         <video class="bigtype__video" id="bigtypeVideo" muted loop playsinline preload="none" poster="img/spotlight.jpg" aria-hidden="true">
-          <source src="video/showreel.mp4" type="video/mp4" />
+          <source src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/8cd10c868ecd82f8b4e2c13923caacd9/downloads/default.mp4" type="video/mp4" />
         </video>
         <h2 class="bigtype__text">
           <span class="bigtype__phrase bigtype__phrase--1">
