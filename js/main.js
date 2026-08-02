@@ -339,6 +339,7 @@
     const showOverlay = () => {
       player.classList.remove("is-playing");
       video.controls = false;
+      video.load(); // reset back to the poster frame
     };
 
     if (playBtn) playBtn.addEventListener("click", start);

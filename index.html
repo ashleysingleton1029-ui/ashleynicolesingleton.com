@@ -259,8 +259,9 @@
 
       <div class="reel__stage">
         <div class="reel__player" id="reelPlayer">
-          <!-- Showreel (Cloudflare Stream progressive MP4). -->
-          <video id="reelVideo" class="reel__video" playsinline preload="metadata" loop
+          <!-- Showreel (Cloudflare Stream progressive MP4). Plays once, then
+               returns to the poster. -->
+          <video id="reelVideo" class="reel__video" playsinline preload="metadata"
                  poster="img/spotlight.jpg" src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/cea7610091706c2adacbe7f0ef6769a0/downloads/default.mp4"></video>
           <div class="reel__grain" aria-hidden="true"></div>
           <button class="reel__play" id="reelPlay" data-cursor="play" aria-label="Play showreel">
