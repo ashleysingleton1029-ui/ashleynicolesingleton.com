@@ -268,7 +268,7 @@
       var cues = [].slice.call(sec.querySelectorAll('.sg-cue'));
       var replayBtn = document.getElementById('sgReplay');
       var SRC = 'https://customer-awi3sybvxx4bbl65.cloudflarestream.com/6d3c715b8b7189143b121073db4fd652/manifest/video.m3u8';
-      var loaded = false, hls = null, raf = null;
+      var loaded = false, hls = null, raf = null, relooping = false;
 
       function load() {
         if (loaded) return; loaded = true;
@@ -297,8 +297,20 @@
         }
         if (!raf) raf = requestAnimationFrame(tick);
       }
+      // Guaranteed loop: as soon as playback reaches (or passes) the end,
+      // rebuild the pipeline so it starts over. Guarded so it fires once.
+      function loopRestart() {
+        if (relooping) return;
+        relooping = true;
+        restart();
+        setTimeout(function () { relooping = false; }, 1500);
+      }
       function tick() {
         var t = v.currentTime || 0;
+        var d = v.duration;
+        if (!relooping && (v.ended || (isFinite(d) && d > 1 && t >= d - 0.2))) {
+          loopRestart();
+        }
         for (var i = 0; i < cues.length; i++) {
           var c = cues[i];
           var on = (t >= +c.dataset.start && t < +c.dataset.end);
@@ -314,16 +326,9 @@
         io.observe(sec);
       } else { start(); }
 
-      // Continuous seamless loop (hls.js ignores the loop attribute): jump back
-      // just before the end so playback never hits the frozen end frame.
-      v.addEventListener('timeupdate', function () {
-        if (v.duration && isFinite(v.duration) && v.currentTime >= v.duration - 0.4) {
-          try { v.currentTime = 0; } catch (e) {}
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
-        }
-      });
-      // if it still reaches the end, rebuild the pipeline (seek can't recover EOS)
-      v.addEventListener('ended', function () { restart(); });
+      // Continuous loop, driven entirely in JS (hls.js ignores the loop attr).
+      // The rAF tick already detects the end; this is a belt-and-suspenders catch.
+      v.addEventListener('ended', loopRestart);
 
       if (replayBtn) { replayBtn.addEventListener('click', restart); }
     })();
