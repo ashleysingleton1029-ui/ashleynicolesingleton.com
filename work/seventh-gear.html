@@ -307,8 +307,11 @@
         incoming.classList.add('is-active');
         outgoing.classList.remove('is-active');
         active = incoming; standby = outgoing;
+        // pause the outgoing clip NOW so it never runs off its end (EOS would
+        // make it unusable for the next hand-off); reset it after the fade.
+        try { outgoing.pause(); } catch (e) {}
         setTimeout(function () {
-          try { outgoing.pause(); outgoing.currentTime = 0; } catch (e) {}
+          try { outgoing.currentTime = 0; } catch (e) {}
           swapping = false;
         }, 700);
       }
