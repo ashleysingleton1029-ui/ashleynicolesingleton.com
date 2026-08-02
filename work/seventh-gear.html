@@ -296,9 +296,19 @@
       if (replayBtn) {
         replayBtn.addEventListener('click', function () {
           load();
-          try { v.currentTime = 0; } catch (e) {}
           cues.forEach(function (c) { c.classList.remove('is-on'); });
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
+          // hls.js keeps its own load position, so seeking alone won't restart:
+          // reposition the loader to the very start, then move the playhead.
+          if (hls && typeof hls.startLoad === 'function') {
+            try { hls.stopLoad(); hls.startLoad(0); } catch (e) {}
+          }
+          var seekStart = function () {
+            try { v.currentTime = 0; } catch (e) {}
+            var p = v.play(); if (p && p.catch) p.catch(function () {});
+          };
+          seekStart();
+          // some browsers ignore currentTime=0 until the seek is ready — retry once
+          setTimeout(function () { if (v.currentTime > 0.6) seekStart(); }, 150);
           if (!raf) raf = requestAnimationFrame(tick);
         });
       }
