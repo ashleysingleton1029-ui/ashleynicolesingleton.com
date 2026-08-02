@@ -105,7 +105,6 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* ---- cinematic video loader ---- */
 .pre__video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; background: #050505;
-  transform-origin: center; will-change: transform;
 }
 .preloader::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -490,6 +489,62 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
   .bigtype__phrase--2 { display: none; }
 }
+
+/* =========================================================================
+   GALLERY — portal strip (home) + photo grid (gallery pages)
+   ========================================================================= */
+.gallery { position: relative; background: var(--ink); color: var(--paper); padding-bottom: var(--space-xl); }
+.gallery__strip {
+  max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter);
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2.2vw, 26px);
+}
+@media (max-width: 720px) { .gallery__strip { grid-template-columns: 1fr; } }
+
+.gallery-card {
+  position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 5;
+  background: var(--ink-2); color: var(--paper); text-decoration: none;
+  border: 1px solid rgba(244,242,236,0.10);
+}
+.gallery-card__img, .gallery-card__ph {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.02); transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+}
+.gallery-card__img { filter: grayscale(1); }
+.gallery-card__ph { background: radial-gradient(120% 90% at 50% 22%, #2a2417 0%, #0B0B0B 74%); }
+.gallery-card::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11,11,11,0.10) 0%, rgba(11,11,11,0.35) 46%, rgba(11,11,11,0.78) 100%);
+}
+.gallery-card__body {
+  position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column;
+  justify-content: flex-end; gap: 12px; padding: clamp(22px, 3vw, 44px);
+}
+.gallery-card__cap { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted-dark); }
+.gallery-card__label {
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem); line-height: 0.94; letter-spacing: -0.02em;
+}
+.gallery-card__cta {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 4px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+}
+.gallery-card__cta svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; transition: transform 0.35s var(--ease); }
+.gallery-card:hover .gallery-card__img { transform: scale(1.07); filter: grayscale(0); }
+.gallery-card:hover .gallery-card__ph { transform: scale(1.07); }
+.gallery-card:hover .gallery-card__cta svg { transform: translateX(6px); }
+
+/* ---- Gallery page: masonry photo grid ---- */
+.photo-gallery { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter) clamp(56px, 9vh, 120px); }
+.photo-gallery__grid { columns: 3 300px; column-gap: clamp(10px, 1.2vw, 16px); }
+.photo-gallery figure {
+  margin: 0 0 clamp(10px, 1.2vw, 16px); break-inside: avoid; overflow: hidden;
+  background: var(--ink-2); position: relative;
+}
+.photo-gallery img { width: 100%; height: auto; display: block; filter: grayscale(1); transition: filter 0.5s var(--ease), transform 0.7s var(--ease); }
+.photo-gallery figure:hover img { filter: grayscale(0); transform: scale(1.04); }
+.photo-gallery__ph { aspect-ratio: var(--ph, 3 / 4); background: radial-gradient(120% 90% at 50% 25%, #232019 0%, #0B0B0B 76%); }
+.photo-gallery__note { max-width: var(--maxw); margin: 0 auto var(--space-md); padding: 0 var(--gutter); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 
 /* =========================================================================
    SHOWREEL

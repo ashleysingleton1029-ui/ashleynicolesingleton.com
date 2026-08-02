@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>In Front of the Lens — Ashley Nicole Singleton</title>
+  <meta name="description" content="Professional photo shoots and portraits of Ashley Nicole Singleton." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0B0B0B" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0B0B'/%3E%3Ctext x='50%25' y='54%25' fill='%23C6A15B' font-family='Archivo,Arial,sans-serif' font-weight='900' font-size='34' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="credit">
+
+  <!-- Top bar -->
+  <header class="credit-nav">
+    <a href="../index.html" class="credit-nav__brand" aria-label="Ashley Nicole Singleton — home">
+      <span class="nav__brandMark">ANS</span>
+      <span class="credit-nav__name">Ashley Nicole Singleton</span>
+    </a>
+    <a href="../index.html#gallery" class="credit-nav__back">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      <span>The Gallery</span>
+    </a>
+  </header>
+
+  <main class="credit-main">
+    <div class="section-head">
+      <p class="overline"><span>( 03 )</span><span>The Gallery</span></p>
+      <h2 class="section-head__title" data-reveal>In Front of<br />the Lens</h2>
+      <p class="credit-overview" style="max-width:46ch; margin-top:var(--space-md)">
+        A selection of professional photo shoots and portraits — the editorial, branded, and
+        on-camera looks from Ashley’s work in front of the lens.
+      </p>
+    </div>
+
+    <!-- PHOTO GALLERY.
+         Replace each placeholder figure with a real photo, e.g.:
+           <figure><img src="../img/gallery/lens/lens-01.jpg" width="1200" height="1500" loading="lazy" alt="Portrait of Ashley …" /></figure>
+         The grid is masonry (CSS columns) and handles any count / aspect ratio. -->
+    <p class="photo-gallery__note">Photos coming soon · sample layout</p>
+    <section class="photo-gallery" aria-label="Professional photo shoots">
+      <div class="photo-gallery__grid">
+        <figure><div class="photo-gallery__ph" style="--ph:4/5"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:3/4"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:4/5"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:1/1"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:3/4"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:4/5"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:3/4"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:1/1"></div></figure>
+        <figure><div class="photo-gallery__ph" style="--ph:4/5"></div></figure>
+      </div>
+    </section>
+
+    <nav class="credit-foot" aria-label="Gallery navigation">
+      <a href="../index.html#gallery" class="credit-foot__all">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span>The Gallery</span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <span>© <span id="year">2026</span> Ashley Nicole Singleton</span>
+        <span>Las Vegas · On Air</span>
+        <a href="../index.html">Home ↑</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
