@@ -273,19 +273,27 @@
       var vA = document.getElementById('sgFilmVideo');
       var vB = document.getElementById('sgFilmVideoB');
       var active = vA, standby = vB;
-      var raf = null, clipEnd = 0, swapping = false, started = false;
+      var raf = null, clipEnd = 0, swapping = false, started = false, usingHls = false;
 
       function attach(video) {
         if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = SRC; return; }
         if (window.Hls && window.Hls.isSupported()) {
+          usingHls = true;
           var h = new window.Hls({ enableWorker: true, backBufferLength: Infinity });
           h.loadSource(SRC); h.attachMedia(video);
           h.on(window.Hls.Events.LEVEL_LOADED, function (_e, data) {
             if (data && data.details && data.details.totalduration) clipEnd = data.details.totalduration;
           });
+          video.__hls = h;
           return;
         }
         video.src = SRC;
+      }
+      // fresh pipeline for a video that has hit end-of-stream (hls.js can't reseek past EOS)
+      function rebuild(video) {
+        if (video.__hls) { try { video.__hls.destroy(); } catch (e) {} video.__hls = null; }
+        if (video.canPlayType('application/vnd.apple.mpegurl')) { try { video.currentTime = 0; } catch (e) {} return; }
+        attach(video);
       }
       function play(video) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
 
@@ -295,9 +303,10 @@
         vv.addEventListener('loadedmetadata', function () {
           if (isFinite(vv.duration) && vv.duration > 1) clipEnd = vv.duration;
         });
+        // fires at the true end regardless of whether we know the duration
+        vv.addEventListener('ended', function () { if (vv === active) swap(); });
       });
 
-      // hand the frame off to the standby video just before the active one ends
       function swap() {
         if (swapping) return;
         swapping = true;
@@ -307,13 +316,13 @@
         incoming.classList.add('is-active');
         outgoing.classList.remove('is-active');
         active = incoming; standby = outgoing;
-        // pause the outgoing clip NOW so it never runs off its end (EOS would
-        // make it unusable for the next hand-off); reset it after the fade.
         try { outgoing.pause(); } catch (e) {}
         setTimeout(function () {
-          try { outgoing.currentTime = 0; } catch (e) {}
+          // if it ran to the end on hls.js, only a rebuild makes it reusable
+          if (usingHls && outgoing.ended) rebuild(outgoing);
+          else { try { outgoing.currentTime = 0; } catch (e) {} }
           swapping = false;
-        }, 700);
+        }, 650);
       }
 
       function tick() {
@@ -341,7 +350,8 @@
         replayBtn.addEventListener('click', function () {
           cues.forEach(function (c) { c.classList.remove('is-on'); });
           try { standby.pause(); standby.currentTime = 0; standby.classList.remove('is-active'); } catch (e) {}
-          try { active.currentTime = 0; } catch (e) {}
+          if (usingHls && active.ended) rebuild(active);
+          else { try { active.currentTime = 0; } catch (e) {} }
           active.classList.add('is-active');
           play(active);
           if (!raf) raf = requestAnimationFrame(tick);
