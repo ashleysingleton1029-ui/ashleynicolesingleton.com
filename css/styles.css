@@ -546,6 +546,35 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .photo-gallery__ph { aspect-ratio: var(--ph, 3 / 4); background: radial-gradient(120% 90% at 50% 25%, #232019 0%, #0B0B0B 76%); }
 .photo-gallery__note { max-width: var(--maxw); margin: 0 auto var(--space-md); padding: 0 var(--gutter); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 
+/* tagged, clickable photo figures */
+.pg-fig { margin: 0 0 clamp(10px, 1.2vw, 16px); break-inside: avoid; }
+.pg-fig__btn { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; position: relative; overflow: hidden; }
+.pg-fig__btn img { width: 100%; height: auto; display: block; filter: grayscale(1); transition: filter 0.5s var(--ease), transform 0.7s var(--ease); }
+.pg-fig__name {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; text-align: left;
+  padding: 34px 14px 12px; pointer-events: none;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(transparent, rgba(11,11,11,0.85));
+  opacity: 0; transform: translateY(6px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.pg-fig__btn:hover img, .pg-fig__btn:focus-visible img { filter: grayscale(0); transform: scale(1.04); }
+.pg-fig__btn:hover .pg-fig__name, .pg-fig__btn:focus-visible .pg-fig__name { opacity: 1; transform: none; }
+
+/* fullscreen photo lightbox */
+.pg-lb { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(6,6,6,0.94); backdrop-filter: blur(6px); opacity: 0; transition: opacity 0.3s var(--ease); }
+.pg-lb.is-open { display: flex; opacity: 1; }
+.pg-lb__frame { position: relative; margin: 0; max-width: min(92vw, 760px); text-align: center; }
+.pg-lb__frame img { max-width: 100%; max-height: 82vh; width: auto; height: auto; display: block; margin: 0 auto; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+.pg-lb__cap { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); }
+.pg-lb__close { position: fixed; top: 16px; right: 16px; width: 46px; height: 46px; display: grid; place-items: center; border: 0; cursor: pointer; background: var(--gold); color: var(--ink); }
+.pg-lb__close svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.4; fill: none; }
+.pg-lb__nav { position: fixed; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; display: grid; place-items: center; border: 0; cursor: pointer; background: rgba(244,242,236,0.12); color: var(--paper); }
+.pg-lb__nav svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+.pg-lb__nav:hover { background: var(--gold); color: var(--ink); }
+.pg-lb__nav--prev { left: 14px; }
+.pg-lb__nav--next { right: 14px; }
+@media (max-width: 560px) { .pg-lb__nav { width: 42px; height: 42px; } }
+
 /* =========================================================================
    SHOWREEL
    ========================================================================= */
