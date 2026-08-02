@@ -296,6 +296,11 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 .hero__title .line { display: block; overflow: hidden; }
 .hero__title .line > span { display: block; will-change: transform; }
+/* When JS is active, keep the title hidden until the script has split + revealed
+   it, so the raw un-animated title can't flash over the hero. JS sets opacity
+   back to 1 in initHero (both GSAP and no-GSAP paths). Fallback: if the script
+   never runs, this rule is moot because .js is only added by that same script. */
+.js .hero__title { opacity: 0; }
 
 .hero__play {
   margin-top: var(--space-lg); display: inline-flex; align-items: center; gap: 14px;

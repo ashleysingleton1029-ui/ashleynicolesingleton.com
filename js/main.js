@@ -185,6 +185,9 @@
   function initHero() {
     const title = $(".hero__title");
     const spans = title ? wrapLines(title) : [];
+    // Title is split into hidden lines now — safe to reveal the container
+    // (the .line > span pieces stay offset until the reveal animation plays).
+    if (title) title.style.opacity = "1";
     const kickers = $$(".hero__kicker span");
 
     if (REDUCED || !hasGSAP) {
