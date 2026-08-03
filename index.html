@@ -289,8 +289,13 @@
           </span>
         </h2>
         <div class="bigtype__portrait">
-          <img src="img/gallery/lens/lens-11.jpg" width="1066" height="1600" loading="lazy"
-               alt="Ashley Nicole Singleton photographed under a single spotlight" />
+          <picture>
+            <!-- Transparent background so the dark surround melts into the page
+                 black; JPEG fallback (opaque) for browsers without WebP alpha. -->
+            <source srcset="img/spotlight-portrait.webp" type="image/webp" />
+            <img src="img/gallery/lens/lens-11.jpg" width="1066" height="1600" loading="lazy"
+                 alt="Ashley Nicole Singleton photographed under a single spotlight" />
+          </picture>
         </div>
       </section>
 
