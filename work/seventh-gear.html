@@ -180,6 +180,9 @@
       .sgv__label{display:none}
       .sgv__btn--pdf span{display:none}
     }
+    /* Mobile: show the whole film frame instead of a zoomed cover-crop
+       (letterbox blends into the section's near-black background). */
+    @media (max-width:767px){ .sg-film__video{object-fit:contain} }
     @media (prefers-reduced-motion:reduce){
       .sg-hero__bg{animation:none}
       .sg-scrollcue i{animation:none}
