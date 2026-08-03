@@ -761,7 +761,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    FOOTER
    ========================================================================= */
 .footer { background: var(--ink); color: var(--paper); padding: var(--space-md) var(--gutter) calc(var(--space-md) + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-dark); }
-.footer__big { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(3rem, 20vw, 16rem); line-height: 0.8; letter-spacing: -0.03em; color: transparent; -webkit-text-stroke: 1px var(--line-dark); text-align: center; margin-bottom: var(--space-md); }
+.footer__strip { margin: calc(var(--space-md) * -1) calc(var(--gutter) * -1) var(--space-md); }
+.footer__strip img { display: block; width: 100%; height: auto; }
 
 /* Interactive film clapboard holding the sign-off letter */
 .clapboard {
