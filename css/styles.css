@@ -992,6 +992,10 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .credit-meta { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); margin-top: var(--space-lg); border-top: 1px solid var(--line); padding-top: var(--space-md); max-width: 30rem; }
 .credit-meta__item .overline { margin-bottom: 6px; }
 .credit-meta__item p { font-size: 1.05rem; font-weight: 500; }
+/* Inline feature photo in a credit page's left column */
+.credit-photo { margin: var(--space-lg) 0 0; max-width: 32rem; }
+.credit-photo img { width: 100%; height: auto; display: block; }
+.credit-photo figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
 .credit-overview { margin-top: var(--space-lg); }
 .credit-overview p { font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.6; max-width: 46ch; color: var(--ink-soft); }
