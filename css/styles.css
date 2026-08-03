@@ -501,6 +501,20 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
   .bigtype__phrase--2 { display: none; }
 }
+/* Portrait sits beneath the type on the same black field; shown whole (never
+   cropped) so the spotlight reads. Opaque black wrapper masks the showreel
+   behind it. */
+.bigtype__portrait {
+  position: relative; z-index: 1;
+  background: #000000;
+  display: flex; justify-content: center;
+  padding: 0 var(--gutter) var(--space-xl);
+}
+.bigtype__portrait img {
+  display: block;
+  width: auto; height: auto;
+  max-width: 100%; max-height: 88vh;
+}
 
 /* =========================================================================
    GALLERY — portal strip (home) + photo grid (gallery pages)
