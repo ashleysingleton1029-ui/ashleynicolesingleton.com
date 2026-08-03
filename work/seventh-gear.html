@@ -122,6 +122,26 @@
       .sg-question::after{background:linear-gradient(180deg, rgba(6,8,10,.86) 0%, rgba(6,8,10,.62) 26%, rgba(6,8,10,.12) 46%, rgba(6,8,10,0) 62%),linear-gradient(180deg, rgba(6,8,10,0) 68%, rgba(6,8,10,.55) 100%)}
     }
 
+    /* ---- interested CTA (bottom-right of question) ---- */
+    .sg-cta{position:absolute;right:var(--gut);bottom:clamp(28px,7vh,72px);z-index:5}
+    .sg-cta__btn{display:inline-flex;align-items:center;gap:12px;cursor:pointer;border:1px solid var(--line);
+      background:rgba(8,10,13,.55);backdrop-filter:blur(6px);color:var(--fg);font-family:var(--mono);font-size:12px;
+      letter-spacing:.2em;text-transform:uppercase;padding:14px 20px;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+    .sg-cta__btn:hover{background:var(--red);border-color:var(--red);color:#fff}
+    .sg-cta__btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;transition:transform .3s var(--ease)}
+    .sg-cta.is-open .sg-cta__btn svg{transform:rotate(180deg)}
+    .sg-cta__menu{position:absolute;right:0;bottom:calc(100% + 10px);min-width:min(340px,82vw);display:flex;flex-direction:column;
+      background:rgba(8,10,13,.94);backdrop-filter:blur(12px);border:1px solid var(--line);
+      opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .28s var(--ease),transform .28s var(--ease),visibility .28s}
+    .sg-cta.is-open .sg-cta__menu{opacity:1;visibility:visible;transform:none}
+    .sg-cta__opt{display:block;padding:16px 18px;border-bottom:1px solid var(--line);transition:background .2s var(--ease)}
+    .sg-cta__opt:last-child{border-bottom:0}
+    .sg-cta__opt b{display:block;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.01em}
+    .sg-cta__opt span{display:block;margin-top:5px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .sg-cta__opt:hover{background:var(--red)}
+    .sg-cta__opt:hover span{color:rgba(255,255,255,.85)}
+    @media (max-width:640px){.sg-cta{left:var(--gut);right:var(--gut);bottom:24px}.sg-cta__menu{min-width:0;left:0;right:0}}
+
     /* ---- footer ---- */
     .sg-foot{border-top:1px solid var(--line);padding:26px var(--gut);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;
       font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
@@ -240,6 +260,21 @@
   <section class="sg-question">
     <div class="sg-question__bg" aria-hidden="true"></div>
     <h2 class="sg-question__q">What was the moment in your life that required your<br /><span class="sg-red">Seventh Gear?</span></h2>
+
+    <div class="sg-cta" id="sgCta">
+      <div class="sg-cta__menu" id="sgCtaMenu" role="menu" aria-hidden="true">
+        <a class="sg-cta__opt" href="seventh-gear-request-the-pitch.html" role="menuitem">
+          <b>Request the Pitch</b><span>Networks · Streamers · Studios · Development</span>
+        </a>
+        <a class="sg-cta__opt" href="seventh-gear-explore-a-partnership.html" role="menuitem">
+          <b>Explore a Partnership</b><span>Investors · Sponsors · Brand partners</span>
+        </a>
+      </div>
+      <button class="sg-cta__btn" id="sgCtaBtn" type="button" aria-haspopup="true" aria-expanded="false">
+        Interested in Seventh Gear
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
   </section>
 
   <footer class="sg-foot">
@@ -273,6 +308,22 @@
 
   <script>
     document.getElementById('sgYear').textContent = new Date().getFullYear();
+
+    /* ---- "Interested in Seventh Gear" dropdown ---- */
+    (function(){
+      var cta = document.getElementById('sgCta');
+      if (!cta) return;
+      var btn = document.getElementById('sgCtaBtn');
+      var menu = document.getElementById('sgCtaMenu');
+      function setOpen(open){
+        cta.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        menu.setAttribute('aria-hidden', String(!open));
+      }
+      btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!cta.classList.contains('is-open')); });
+      document.addEventListener('click', function(e){ if(!cta.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setOpen(false); });
+    })();
 
     /* ---- cinematic film: native looping MP4 + timed copy cues ---- */
     (function () {

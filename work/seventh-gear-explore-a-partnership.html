@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Explore a Partnership — Seventh Gear</title>
+  <meta name="description" content="Explore a Seventh Gear partnership — for investors, sponsors, brand partners, and strategic collaborators." />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0b0d" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0b0d'/%3E%3Ctext x='50%25' y='56%25' fill='%23f4f5f6' font-family='Archivo,Arial,sans-serif' font-weight='800' font-size='30' text-anchor='middle' dominant-baseline='middle'%3E7G%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="../css/sg-form.css" />
+</head>
+<body>
+
+  <header class="sgf-nav">
+    <a class="sgf-nav__brand" href="seventh-gear.html"><b>Seventh Gear</b><span>Confidential</span></a>
+    <a class="sgf-nav__back" href="seventh-gear.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      <span>Back</span>
+    </a>
+  </header>
+
+  <main class="sgf-wrap">
+    <div class="sgf-bg" style="background-image:url('../img/work/seventh-gear-partnership-bg.jpg')" aria-hidden="true"></div>
+    <div class="sgf-inner">
+      <div class="sgf-intro">
+        <p class="sgf-eyebrow">Seventh Gear</p>
+        <h1 class="sgf-title">Explore a<br />Partnership</h1>
+        <p class="sgf-desc">For investors, sponsors, brand partners, and strategic collaborators interested in helping bring the project to life.</p>
+      </div>
+
+      <!-- FORM: submissions email + log via Formspree. Replace YOUR_FORM_ID with the
+           form ID from a Formspree form pointed at ashley@ashleynicolesingleton.com. -->
+      <form class="sgf-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="hidden" name="_subject" value="Seventh Gear — Partnership Inquiry" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="sgf-row">
+          <div class="sgf-field"><label for="pt-name">Name</label><input id="pt-name" name="name" required /></div>
+          <div class="sgf-field"><label for="pt-email">Email</label><input id="pt-email" type="email" name="email" required /></div>
+        </div>
+        <div class="sgf-row">
+          <div class="sgf-field"><label for="pt-org">Company / Organization</label><input id="pt-org" name="company" /></div>
+          <div class="sgf-field">
+            <label for="pt-type">Area of Interest</label>
+            <select id="pt-type" name="area_of_interest">
+              <option value="">Select…</option>
+              <option>Investor</option>
+              <option>Sponsor</option>
+              <option>Brand Partner</option>
+              <option>Strategic Collaborator</option>
+            </select>
+          </div>
+        </div>
+        <div class="sgf-field"><label for="pt-msg">Message</label><textarea id="pt-msg" name="message" placeholder="Tell us how you'd like to be involved…"></textarea></div>
+        <button class="sgf-submit" type="submit">Explore a Partnership</button>
+        <p class="sgf-fine">Confidential · Authorized review only</p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="sgf-foot">
+    <span>© <span id="sgYear">2026</span> Ashley Singleton</span>
+    <span>Seventh Gear · Confidential</span>
+    <a href="../index.html#work">All Work ↑</a>
+  </footer>
+
+  <script>document.getElementById('sgYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>
