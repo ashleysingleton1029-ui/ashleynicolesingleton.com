@@ -309,6 +309,9 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 .hero__play svg { width: 46px; height: 46px; padding: 13px; border: 1px solid var(--paper); border-radius: 50%; fill: var(--paper); transition: background 0.35s var(--ease), fill 0.35s var(--ease), transform 0.35s var(--ease); }
 .hero__play:hover svg { background: var(--gold); border-color: var(--gold); fill: var(--ink); transform: scale(1.06); }
+.hero__play:hover svg path[stroke] { stroke: var(--ink); }
+.hero__controls { margin-top: var(--space-lg); align-self: flex-start; display: flex; align-items: center; gap: clamp(14px, 2.4vw, 30px); flex-wrap: wrap; }
+.hero__controls .hero__play { margin-top: 0; }
 
 .hero__meta {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;

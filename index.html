@@ -52,6 +52,7 @@
     </a>
 
     <nav class="nav__links" aria-label="Primary">
+      <a href="#hero" data-cursor="hover"><span>Showreel</span></a>
       <a href="#work" data-cursor="hover"><span>Work</span></a>
       <a href="#gallery" data-cursor="hover"><span>Gallery</span></a>
       <a href="#about" data-cursor="hover"><span>About</span></a>
@@ -66,10 +67,11 @@
   <!-- ============ FULLSCREEN MOBILE MENU ============ -->
   <div class="menu" id="menu" aria-hidden="true">
     <nav class="menu__links" aria-label="Mobile">
-      <a href="#work"><em>01</em><span>Work</span></a>
-      <a href="#gallery"><em>02</em><span>Gallery</span></a>
-      <a href="#about"><em>03</em><span>About</span></a>
-      <a href="#contact"><em>04</em><span>Contact</span></a>
+      <a href="#hero"><em>01</em><span>Showreel</span></a>
+      <a href="#work"><em>02</em><span>Work</span></a>
+      <a href="#gallery"><em>03</em><span>Gallery</span></a>
+      <a href="#about"><em>04</em><span>About</span></a>
+      <a href="#contact"><em>05</em><span>Contact</span></a>
     </nav>
     <div class="menu__foot">
       <a href="mailto:ashley@ashleynicolesingleton.com">ashley@ashleynicolesingleton.com</a>
@@ -109,10 +111,16 @@
           Singleton
         </h1>
 
-        <button class="hero__play" id="heroPlay" data-cursor="hover" aria-label="Turn on sound" aria-pressed="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-5 6M18 9l5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-          <span>Turn on sound</span>
-        </button>
+        <div class="hero__controls">
+          <button class="hero__play" id="heroPlay" data-cursor="hover" aria-label="Turn on sound" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-5 6M18 9l5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>Turn on sound</span>
+          </button>
+          <button class="hero__play hero__replay" id="heroReplay" data-cursor="hover" aria-label="Replay showreel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 4v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Replay</span>
+          </button>
+        </div>
       </div>
 
       <div class="hero__meta">
@@ -194,6 +202,7 @@
           <a href="work/wwe-hall-of-fame.html" class="work__title" data-cursor="view">WWE Hall of Fame</a>
           <span class="work__cat">Live Event · Red Carpet</span>
         </li>
+        <!-- HIDDEN for now — restore (and renumber 06/07) once assets are ready:
         <li class="work__row" data-img="img/work/pro-cam-systems-hero.jpg">
           <span class="work__idx">06</span>
           <a href="work/pro-cam-systems.html" class="work__title" data-cursor="view">Pro-Cam Systems</a>
@@ -204,6 +213,7 @@
           <a href="work/chicano-hollywood.html" class="work__title" data-cursor="view">Chicano Hollywood</a>
           <span class="work__cat">Film Festival · Red Carpet</span>
         </li>
+        -->
       </ul>
 
       <div class="work__hoverImg" id="workHoverImg" aria-hidden="true"></div>

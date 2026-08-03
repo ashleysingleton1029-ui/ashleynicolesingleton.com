@@ -367,6 +367,14 @@
       if (label) label.textContent = v.muted ? "Turn on sound" : "Sound on";
       if (svg) svg.innerHTML = v.muted ? ICON_OFF : ICON_ON;
     });
+
+    // Replay: restart the showreel from the top.
+    const replay = $("#heroReplay");
+    if (replay) replay.addEventListener("click", () => {
+      try { v.currentTime = 0; } catch (e) {}
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
   }
 
   /* =====================================================================
