@@ -121,6 +121,22 @@
         </div>
       </section>
 
+      <!-- Red-carpet photo gallery (name on hover, click to enlarge) -->
+      <section class="reel-gallery" aria-label="Red carpet photos">
+        <div class="reel-gallery__head">
+          <h2 class="reel-gallery__title">Red Carpet</h2>
+          <span class="reel-gallery__count">Photos</span>
+        </div>
+        <div class="photo-gallery__grid">
+          <figure class="pg-fig">
+            <button type="button" class="pg-fig__btn" data-full="../img/work/waltzing/weston-coppola-cage.jpg" data-name="Weston Coppola Cage" aria-label="Enlarge photo: Weston Coppola Cage">
+              <img src="../img/work/waltzing/weston-coppola-cage.jpg" loading="lazy" alt="Ashley Nicole Singleton with Weston Coppola Cage" />
+              <span class="pg-fig__name">Weston Coppola Cage</span>
+            </button>
+          </figure>
+        </div>
+      </section>
+
       <nav class="credit-foot" aria-label="Work navigation">
         <a href="../index.html#work" class="credit-foot__all">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
@@ -149,9 +165,27 @@
     </div>
   </div>
 
+  <!-- Photo lightbox -->
+  <div class="pg-lb" id="pgLb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button type="button" class="pg-lb__close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button type="button" class="pg-lb__nav pg-lb__nav--prev" aria-label="Previous photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <figure class="pg-lb__frame">
+      <img id="pgLbImg" src="" alt="" />
+      <figcaption class="pg-lb__cap" id="pgLbCap"></figcaption>
+    </figure>
+    <button type="button" class="pg-lb__nav pg-lb__nav--next" aria-label="Next photo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <script src="../js/credit-expand.js" defer></script>
+  <script src="../js/gallery.js" defer></script>
 </body>
 </html>
