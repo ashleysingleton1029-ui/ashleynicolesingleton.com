@@ -31,6 +31,13 @@ part of the site and may be used freely.
 ## Conventions
 - Static site: hand-written HTML + vanilla CSS + vanilla JS + GSAP (CDN).
 - No em dashes in copy — use a middot (·) or rephrase.
+- **Mobile video framing:** landscape reels must NOT sit at full-height
+  `object-fit:cover` on phones — that over-zooms so you can't see the action.
+  Right-size the section toward the reel's shape, e.g.
+  `@media (max-width:767px){ height:min(100svh,125vw); object-fit:cover }`, so it
+  fills with only a modest crop — no heavy zoom, no big dead letterbox bars.
+  (A video framed inside a card, e.g. GGL `.expand__media`, may use
+  `object-fit:contain` instead.) Apply this to every future website video.
 - Base branch: `claude/celebrity-media-website-qwvxkr`.
 - **Website updates use ONE long-lived branch: `claude/website-updates` → PR #4.**
   Commit + push every change to this branch; it updates the existing PR in place.

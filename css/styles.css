@@ -280,9 +280,14 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--ink); }
 .hero__media { position: absolute; inset: 0; overflow: hidden; }
 .hero__video, .hero__img { width: 100%; height: 100%; object-fit: cover; object-position: center center; background: var(--ink); }
-/* Mobile: a landscape reel cover-cropped into a tall phone frame reads as a
-   heavy zoom, so show the whole frame instead (letterbox blends into --ink). */
-@media (max-width: 767px) { .hero__video { object-fit: contain; } }
+/* Mobile: a landscape reel cover-cropped into a full-height phone frame reads
+   as a heavy zoom, while a fully contained frame leaves big dead bars. Instead
+   right-size the hero toward the reel's shape so it fills (cover) with only a
+   modest crop and little wasted space. */
+@media (max-width: 767px) {
+  .hero { height: min(100svh, 125vw); min-height: 0; }
+  .hero__video { object-fit: cover; }
+}
 .hero__img { transform: scale(1.06); animation: kenburns 24s ease-in-out infinite alternate; }
 @keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1.16) translateY(-1.5%); } }
 @media (prefers-reduced-motion: reduce) { .hero__img, .statement__img { animation: none; transform: scale(1.02); } }
