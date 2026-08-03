@@ -74,7 +74,7 @@
       <a href="#contact"><em>05</em><span>Contact</span></a>
     </nav>
     <div class="menu__foot">
-      <a href="mailto:ashley@ashleynicolesingleton.com">ashley@ashleynicolesingleton.com</a>
+      <a href="#contact">Get in touch</a>
       <div class="menu__social">
         <a href="https://www.instagram.com/ashleysingletontv/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
       </div>
@@ -353,7 +353,9 @@
       </div>
 
       <div class="contact__grid">
-        <form class="contact__form" id="contactForm" novalidate>
+        <form class="contact__form" id="contactForm" action="https://formspree.io/f/mkoddzzp" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Website — General Inquiry" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label for="cName">Name</label>
             <input id="cName" name="name" type="text" autocomplete="name" required placeholder="Your name" />
@@ -384,12 +386,13 @@
             <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
           <p class="contact__success" id="contactSuccess" hidden>Thanks! Your inquiry is in. Ashley’s team will reply within two business days.</p>
+          <p class="contact__error" id="contactError" hidden>Something went wrong. Please try again in a moment.</p>
         </form>
 
         <aside class="contact__aside">
           <div class="contact__block">
-            <span class="overline">Direct</span>
-            <a href="mailto:ashley@ashleynicolesingleton.com" data-cursor="hover">ashley@ashleynicolesingleton.com</a>
+            <span class="overline">Inquiries</span>
+            <p>Use the form · replies within two business days.</p>
           </div>
           <div class="contact__block">
             <span class="overline">Representation</span>

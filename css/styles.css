@@ -748,6 +748,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .btn-primary:hover { background: var(--gold-bright); }
 .btn-primary:hover svg { transform: translateX(6px); }
 .contact__success { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 13px; color: var(--gold); letter-spacing: 0.04em; }
+.contact__error { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 13px; color: #d63f2c; letter-spacing: 0.04em; }
 
 .contact__aside { display: flex; flex-direction: column; gap: var(--space-lg); }
 .contact__block { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--line-dark); padding-top: var(--space-sm); }

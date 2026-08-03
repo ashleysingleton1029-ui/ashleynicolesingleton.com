@@ -408,18 +408,33 @@
       if (!ok) { if (firstBad) firstBad.focus(); return; }
 
       const btn = $("#contactSubmit");
+      const error = $("#contactError");
       btn.disabled = true;
       const span = $("span", btn);
       const orig = span.textContent;
       span.textContent = "Sending…";
-      // Simulated async submit (wire to a real endpoint/Formspree/Netlify here)
-      setTimeout(() => {
-        form.reset();
+      if (error) error.hidden = true;
+
+      const done = (okState) => {
         btn.disabled = false;
         span.textContent = orig;
-        success.hidden = false;
-        success.setAttribute("role", "status");
-      }, 900);
+        if (okState) {
+          form.reset();
+          success.hidden = false;
+          success.setAttribute("role", "status");
+        } else if (error) {
+          error.hidden = false;
+          error.setAttribute("role", "status");
+        }
+      };
+
+      // Real submit to Formspree; native POST fallback if fetch is unavailable.
+      if (!window.fetch) { form.submit(); return; }
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { "Accept": "application/json" }
+      }).then(res => done(res.ok)).catch(() => done(false));
     });
 
     // clear error on input
