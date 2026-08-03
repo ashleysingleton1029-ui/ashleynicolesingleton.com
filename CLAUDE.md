@@ -31,7 +31,10 @@ part of the site and may be used freely.
 ## Conventions
 - Static site: hand-written HTML + vanilla CSS + vanilla JS + GSAP (CDN).
 - No em dashes in copy — use a middot (·) or rephrase.
-- Work branch: `claude/celebrity-media-website-qwvxkr`. Commit + push after changes.
+- Base branch: `claude/celebrity-media-website-qwvxkr`.
+- **Website updates use ONE long-lived branch: `claude/website-updates` → PR #4.**
+  Commit + push every change to this branch; it updates the existing PR in place.
+  Do NOT create a new branch or a new PR per change.
 - Commit trailers:
   ```
   Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
