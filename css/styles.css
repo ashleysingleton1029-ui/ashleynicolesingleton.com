@@ -310,9 +310,14 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .hero__play svg { width: 46px; height: 46px; padding: 13px; border: 1px solid var(--paper); border-radius: 50%; fill: var(--paper); transition: background 0.35s var(--ease), fill 0.35s var(--ease), transform 0.35s var(--ease); }
 .hero__play:hover svg { background: var(--gold); border-color: var(--gold); fill: var(--ink); transform: scale(1.06); }
 .hero__play:hover svg path[stroke] { stroke: var(--ink); }
-/* Replay pinned to the bottom-right of the hero, above the meta bar */
-.hero__replay { position: absolute; right: var(--gutter); bottom: 72px; z-index: 4; margin-top: 0; }
-@media (max-width: 600px) { .hero__replay { bottom: 84px; } }
+/* Sound + Replay grouped and aligned at the bottom-right of the hero */
+.hero__controls {
+  position: absolute; right: var(--gutter); bottom: 72px; z-index: 4;
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: clamp(16px, 2.4vw, 30px); flex-wrap: wrap;
+}
+.hero__controls .hero__play { margin-top: 0; align-self: center; }
+@media (max-width: 600px) { .hero__controls { bottom: 84px; } }
 
 .hero__meta {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
