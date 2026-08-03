@@ -86,14 +86,11 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="hero">
       <div class="hero__media">
-        <!-- HERO HIGHLIGHT REEL: the poster below is a placeholder until the reel is ready.
-             When you have the video, add a <source> inside this <video>, e.g.:
-               <source src="video/highlight-reel.mp4" type="video/mp4" />
-             It will autoplay muted + loop as the full-screen hero background.
-             "Watch the reel" opens the full showreel with sound below. -->
-        <video class="hero__video" id="heroReel" poster="img/reel-poster.jpg"
-               autoplay muted loop playsinline aria-hidden="true">
-          <!-- <source src="video/highlight-reel.mp4" type="video/mp4" /> -->
+        <!-- HERO SHOWREEL: full-bleed background reel. Autoplays muted on a loop,
+             no poster; the sound button lets viewers turn audio on. -->
+        <video class="hero__video" id="heroReel"
+               autoplay muted loop playsinline preload="auto" aria-hidden="true">
+          <source src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/f886815d63aef40e0a78f42690cf0e5d/downloads/default.mp4" type="video/mp4" />
         </video>
         <div class="hero__grain" aria-hidden="true"></div>
         <div class="hero__scrim" aria-hidden="true"></div>
@@ -114,15 +111,15 @@
           Singleton
         </h1>
 
-        <button class="hero__play" id="heroPlay" data-cursor="play" aria-label="Play showreel">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-          <span>Watch the reel</span>
+        <button class="hero__play" id="heroPlay" data-cursor="hover" aria-label="Turn on sound" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-5 6M18 9l5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Turn on sound</span>
         </button>
       </div>
 
       <div class="hero__meta">
         <span class="hero__metaItem">Las Vegas, NV</span>
-        <span class="hero__metaItem hero__metaItem--c">Showreel &nbsp;/&nbsp; 2026</span>
+        <span class="hero__metaItem hero__metaItem--c">Showreel</span>
         <span class="hero__metaItem hero__metaItem--r"><em>01</em> / 06</span>
       </div>
 
@@ -267,7 +264,7 @@
           <button class="reel__play" id="reelPlay" data-cursor="play" aria-label="Play showreel">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
           </button>
-          <span class="reel__tag reel__tag--r">Showreel 2026</span>
+          <span class="reel__tag reel__tag--r">Showreel</span>
         </div>
       </div>
     </section>

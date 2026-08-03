@@ -327,7 +327,6 @@
     const player = $("#reelPlayer");
     const video = $("#reelVideo");
     const playBtn = $("#reelPlay");
-    const heroBtn = $("#heroPlay");
     if (!player || !video) return;
 
     const start = () => {
@@ -344,16 +343,30 @@
 
     if (playBtn) playBtn.addEventListener("click", start);
 
-    // Hero "Watch the reel" → smooth-scroll to the player, then start it.
-    if (heroBtn) heroBtn.addEventListener("click", () => {
-      const target = document.getElementById("showreel");
-      if (target) target.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth", block: "center" });
-      // wait for scroll to settle before playing
-      window.setTimeout(start, REDUCED ? 0 : 650);
-    });
-
     // Restore poster/overlay when the reel finishes.
     video.addEventListener("ended", showOverlay);
+  }
+
+  /* =====================================================================
+     HERO SHOWREEL SOUND — hero video autoplays muted on a loop; this button
+     lets viewers turn the audio on/off.
+     ===================================================================== */
+  function initHeroSound() {
+    const v = $("#heroReel");
+    const btn = $("#heroPlay");
+    if (!v || !btn) return;
+    const label = $("span", btn);
+    const svg = $("svg", btn);
+    const ICON_OFF = '<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M23 9l-5 6M18 9l5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+    const ICON_ON  = '<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15 9a3 3 0 0 1 0 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M18 6a7 7 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>';
+    btn.addEventListener("click", () => {
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 1; const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      btn.setAttribute("aria-pressed", String(!v.muted));
+      btn.setAttribute("aria-label", v.muted ? "Turn on sound" : "Mute sound");
+      if (label) label.textContent = v.muted ? "Turn on sound" : "Sound on";
+      if (svg) svg.innerHTML = v.muted ? ICON_OFF : ICON_ON;
+    });
   }
 
   /* =====================================================================
@@ -589,6 +602,7 @@
     initWork();
     initBigtype();
     initReel();
+    initHeroSound();
     initForm();
     initYear();
     initIntroCta();
