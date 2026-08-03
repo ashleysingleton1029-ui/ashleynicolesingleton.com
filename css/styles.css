@@ -761,8 +761,10 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    FOOTER
    ========================================================================= */
 .footer { background: var(--ink); color: var(--paper); padding: var(--space-md) var(--gutter) calc(var(--space-md) + env(safe-area-inset-bottom)); border-top: 1px solid var(--line-dark); }
-.footer__strip { margin: calc(var(--space-md) * -1) calc(var(--gutter) * -1) var(--space-md); }
+.footer__strip { position: relative; margin: calc(var(--space-md) * -1) calc(var(--gutter) * -1) var(--space-md); }
 .footer__strip img { display: block; width: 100%; height: auto; }
+.footer__strip::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,11,13,0.55) 0%, rgba(10,11,13,0.42) 45%, rgba(10,11,13,0.7) 100%); }
 
 /* Interactive film clapboard holding the sign-off letter */
 .clapboard {
