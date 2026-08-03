@@ -617,6 +617,14 @@
     const hashEl = hash && hash.length > 1 ? document.querySelector(hash) : null;
     runPreloader(() => {
       if (heroPlay) heroPlay();
+      // Start the hero showreel from the top only once the loader is gone, so
+      // the opening seconds aren't hidden behind the preloader.
+      const heroVid = document.getElementById("heroReel");
+      if (heroVid && !REDUCED) {
+        try { heroVid.currentTime = 0; } catch (e) {}
+        const hp = heroVid.play();
+        if (hp && hp.catch) hp.catch(() => {});
+      }
       if (hasGSAP && window.ScrollTrigger) ScrollTrigger.refresh();
       if (hashEl) {
         // Re-align a few times: as images/fonts finish loading they shift the
