@@ -1,34 +1,32 @@
 # Ashley Nicole Singleton — site notes
 
-## 🔒 Locked files — do NOT modify without explicit unlock
+## 🔒 ENTIRE SITE LOCKED — do NOT modify anything without explicit unlock
 
-The files below are finished and approved. Do **not** edit, restyle, recrop,
-rename, move, or delete them, and do not change any asset they reference,
-unless the user explicitly says to unlock or change that specific file first.
-If a requested change would touch a locked file, stop and ask before proceeding.
+As of 2026-08-03 the **whole website is finished and approved**. Treat every
+file in this repository as locked: do **not** edit, restyle, recrop, rename,
+move, or delete any HTML, CSS, JS, image, video, or other asset, and do not
+change any asset a file references.
 
-**Seventh Gear page (locked in full — page + all assets):**
-- `work/seventh-gear.html` (approved film source: Cloudflare Stream
-  `1fa20304914fc8b1539f167355b66500`; cue timings are final — do not retime)
-- `work/seventh-gear/deck.enc` (AES-encrypted pitch deck — never regenerate/commit plaintext)
-- `work/seventh-gear/deck-pdf.enc`
-- `img/work/seventh-gear-hero.jpg`
-- `img/work/seventh-gear-logo.png`
-- `img/work/seventh-gear-thumb.jpg`
-- `img/work/seventh-gear-question.jpg`
+**Before making ANY change**, the user must explicitly unlock the specific
+file(s) first (e.g. "unlock `index.html`" or "change the footer"). If a
+requested change would touch any file, stop and confirm which file(s) to
+unlock before proceeding. When in doubt, ask.
 
-**Loader (locked):**
-- The preloader markup in `index.html` (`.preloader` / `#preVideo` and its children)
-- The loader logic in `js/main.js` (`runPreloader`, `initPreVideo`, and the
-  `window.load` hash-skip handler)
+The only exception is `scratchpad/` (gitignored working files), which is not
+part of the site and may be used freely.
 
-**Bio image (locked):**
-- `img/chair.jpg` (bio portrait)
-
-**Gallery pages (locked — pages + their photo sets):**
-- `gallery/with-the-stars.html` (celebrity photos; names verified, order approved)
-- `gallery/in-front-of-the-lens.html` (photo-shoot images; order approved)
-- `img/gallery/stars/` and `img/gallery/lens/` (all gallery photos)
+### Extra-sensitive items (locked, with special handling even when unlocked)
+- `work/seventh-gear/deck.enc` and `work/seventh-gear/deck-pdf.enc` — AES-encrypted
+  pitch deck. **Never** regenerate, decrypt to a tracked path, or commit plaintext.
+- `work/seventh-gear.html` — approved film source Cloudflare Stream
+  `1fa20304914fc8b1539f167355b66500`; cue timings are final — do not retime.
+- Loader: `.preloader` / `#preVideo` markup in `index.html` and the loader logic
+  in `js/main.js` (`runPreloader`, `initPreVideo`, `window.load` hash-skip handler).
+- Contact forms email via Formspree only (main site `mkoddzzp`; Seventh Gear
+  `mgoggzep`). **Never** print `ashley@ashleynicolesingleton.com` in any page source.
+- `img/chair.jpg` (bio portrait) and both gallery pages
+  (`gallery/with-the-stars.html`, `gallery/in-front-of-the-lens.html`) with their
+  photo sets in `img/gallery/stars/` and `img/gallery/lens/` — names/order approved.
 
 ## Conventions
 - Static site: hand-written HTML + vanilla CSS + vanilla JS + GSAP (CDN).
