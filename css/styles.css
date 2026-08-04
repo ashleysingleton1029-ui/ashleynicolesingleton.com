@@ -535,8 +535,18 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* Desktop/tablet: the full-width portrait is very tall, so cap the height — but
    loosely, so most of the composition shows and only a sliver is cropped off the
    bottom (the photo is ~150vw tall at full width). */
+/* Desktop/tablet: a smaller, right-aligned portrait showing the full body,
+   its bottom flush with the clapperboard's white. */
 @media (min-width: 768px) {
-  .bigtype__portrait img { max-height: 130vw; }
+  .bigtype__portrait {
+    display: flex; justify-content: flex-end; align-items: flex-end;
+    padding-right: var(--gutter);
+  }
+  .bigtype__portrait img {
+    width: auto; height: auto;
+    max-width: 44vw; max-height: 82svh;
+    object-fit: contain;             /* show the whole body, no crop */
+  }
 }
 
 /* =========================================================================
