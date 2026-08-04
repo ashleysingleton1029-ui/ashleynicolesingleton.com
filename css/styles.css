@@ -547,7 +547,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   }
   .bigtype__portrait img {
     width: auto; height: auto;
-    max-width: 52vw; max-height: 96svh;
+    max-width: 58vw; max-height: 112svh;
     object-fit: contain;             /* whole body, no crop */
   }
 }
