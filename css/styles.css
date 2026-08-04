@@ -481,6 +481,9 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    BIG IMAGE-FILLED TYPE
    ========================================================================= */
 .bigtype { position: relative; isolation: isolate; overflow: hidden; background: #000000; padding: 0; }
+/* Left "type" column — its own stacking context so the showreel stays revealed
+   only through the letters here and never bleeds over the portrait. */
+.bigtype__type { position: relative; isolation: isolate; overflow: hidden; }
 /* Showreel plays behind, revealed only through the letters */
 .bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.5); transform-origin: center; z-index: 0; }
 .bigtype__text {
@@ -518,34 +521,34 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
   .bigtype__phrase--2 { display: none; }
 }
-/* Portrait sits beneath the type on the same black field; shown whole (never
-   cropped) so the spotlight reads. Opaque black wrapper masks the showreel
-   behind it. */
+/* Phones: portrait stacks beneath the type, full-width whole body, flush bottom. */
 .bigtype__portrait {
   position: relative; z-index: 1;
   background: #000000;
-  padding: 0;               /* full-bleed; bottom flush with the clapperboard's white */
+  padding: 0;
 }
 .bigtype__portrait picture { display: block; }
 .bigtype__portrait img {
   display: block;
-  width: 100%; height: auto;         /* fill the page width; whole image on phones */
-  object-fit: cover; object-position: center top;  /* crop from the bottom when capped */
+  width: 100%; height: auto;         /* whole image, full width on phones */
 }
-/* Desktop/tablet: the full-width portrait is very tall, so cap the height — but
-   loosely, so most of the composition shows and only a sliver is cropped off the
-   bottom (the photo is ~150vw tall at full width). */
-/* Desktop/tablet: a smaller, right-aligned portrait showing the full body,
-   its bottom flush with the clapperboard's white. */
+/* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
+   portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
+   to the left column so it never covers the photo. */
 @media (min-width: 768px) {
+  .bigtype { display: flex; align-items: stretch; }
+  /* type column stretches full height; the black text block (below) fills it so
+     the video is masked everywhere except through the letters — no raw-video gaps */
+  .bigtype__type { flex: 1 1 0; min-width: 0; display: grid; }
+  .bigtype__text { min-height: 100%; align-content: center; }
+  .bigtype__phrase { font-size: clamp(1.6rem, 7vw, 6rem); }
   .bigtype__portrait {
-    display: flex; justify-content: flex-end; align-items: flex-end;
-    padding-right: var(--gutter);
+    flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: flex-end;
   }
   .bigtype__portrait img {
     width: auto; height: auto;
     max-width: 44vw; max-height: 82svh;
-    object-fit: contain;             /* show the whole body, no crop */
+    object-fit: contain;             /* whole body, no crop */
   }
 }
 
