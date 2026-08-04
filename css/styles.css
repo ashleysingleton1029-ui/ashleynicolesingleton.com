@@ -455,7 +455,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .work__idx { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
 .work__title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.5rem, 4.6vw, 3.4rem); line-height: 1; letter-spacing: -0.02em; }
 .work__cat { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: right; }
-.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.05rem, 2.2vw, 1.9rem); color: var(--muted); }
+.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.35rem, 3vw, 2.5rem); color: var(--gold); }
 @media (max-width: 720px) { .work__more { text-align: left; } }
 @media (hover: hover) {
   .work__row:hover::before { transform: scaleY(1); transform-origin: top; }
@@ -541,7 +541,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
      the video is masked everywhere except through the letters — no raw-video gaps */
   .bigtype__type { flex: 1 1 0; min-width: 0; display: grid; }
   .bigtype__text { min-height: 100%; align-content: center; }
-  .bigtype__phrase { font-size: clamp(1.75rem, 7.7vw, 6.6rem); }
+  .bigtype__phrase { font-size: clamp(1.85rem, 8.2vw, 7rem); }
   .bigtype__portrait {
     flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: flex-end;
   }
