@@ -43,6 +43,12 @@ part of the site and may be used freely.
   fills with only a modest crop — no heavy zoom, no big dead letterbox bars.
   (A video framed inside a card, e.g. GGL `.expand__media`, may use
   `object-fit:contain` instead.) Apply this to every future website video.
+- **Cache-busting:** local CSS/JS are referenced with a `?v=N` query (currently
+  `?v=2`). Whenever you change any file under `css/` or `js/`, bump the version on
+  every `href`/`src` that points to it so browsers/CDN fetch the new file — a
+  global bump is safe (`?v=2`→`?v=3` across all pages):
+  `sed -E -i 's/\?v=[0-9]+"/?v=3"/g' *.html work/*.html gallery/*.html`.
+  Inline `<style>`/`<script>` (e.g. `work/seventh-gear.html`) need no version.
 - Base branch: `claude/celebrity-media-website-qwvxkr`.
 - **Website updates use ONE long-lived branch: `claude/website-updates` → PR #4.**
   Commit + push every change to this branch; it updates the existing PR in place.
