@@ -104,6 +104,20 @@
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .sg-red{color:var(--red)}
 
+    /* End-card logo: wipes in right→left at the 1:06 mark, centered, never cropped */
+    .sg-endlogo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+      width:min(700px,80vw);height:auto;pointer-events:none;
+      -webkit-clip-path:inset(0 0 0 100%);clip-path:inset(0 0 0 100%);
+      filter:drop-shadow(0 10px 34px rgba(0,0,0,.6));will-change:clip-path}
+    .sg-endlogo.is-on{animation:sgWipe 1.15s cubic-bezier(0.22,1,0.36,1) forwards}
+    @keyframes sgWipe{
+      from{-webkit-clip-path:inset(0 0 0 100%);clip-path:inset(0 0 0 100%)}
+      to{-webkit-clip-path:inset(0 0 0 0);clip-path:inset(0 0 0 0)}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .sg-endlogo.is-on{animation:none;-webkit-clip-path:inset(0 0 0 0);clip-path:inset(0 0 0 0)}
+    }
+
     .sg-question{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:flex-start;
       padding:clamp(80px,12vh,160px) var(--gut);overflow:hidden;background:#06080a;text-align:left;isolation:isolate}
     .sg-question__bg{position:absolute;inset:0;z-index:-2;background:#06080a center/cover no-repeat;
@@ -182,7 +196,7 @@
     }
     /* Mobile: right-size the film section toward the reel's shape so it fills
        (cover) with only a modest crop instead of a heavy zoom or big dead bars. */
-    @media (max-width:767px){ .sg-film{min-height:0;height:min(100svh,100vw)} .sg-film__video{object-fit:cover} }
+    @media (max-width:767px){ .sg-film{min-height:0;height:min(100svh,90vw)} .sg-film__video{object-fit:cover} }
     @media (prefers-reduced-motion:reduce){
       .sg-hero__bg{animation:none}
       .sg-scrollcue i{animation:none}
@@ -205,7 +219,7 @@
   <!-- ===================== FILM (philosophy + series over video) ===================== -->
   <section class="sg-film" id="sgFilm" aria-label="Seventh Gear film">
     <video class="sg-film__video" id="sgFilmVideo" muted loop playsinline preload="auto"
-           src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/1fa20304914fc8b1539f167355b66500/downloads/default.mp4"
+           src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/e0ef0b1bfbd63e11016eaff144ab6300/downloads/default.mp4"
            aria-hidden="true"></video>
     <div class="sg-film__scrim" aria-hidden="true"></div>
 
@@ -217,6 +231,9 @@
       <p class="sg-cue sg-cue--big sg-cue--accent" data-start="44" data-end="51"><span class="sg-eyebrow">The Series</span>Filmed like a feature.</p>
       <p class="sg-cue sg-cue--lede" data-start="53" data-end="60"><span class="sg-eyebrow">The Series</span>Part interview, part road movie. Each ride strips away the noise until the conversation becomes something real, and every episode finishes somewhere new.</p>
     </div>
+
+    <img class="sg-endlogo" id="sgEndLogo" src="../img/work/seventh-gear-logo.png"
+         alt="Seventh Gear" width="2064" height="264" aria-hidden="true" />
 
     <div class="sg-film__controls">
       <button class="sg-film__ctrl" id="sgReplay" type="button" aria-label="Replay film">
@@ -335,6 +352,7 @@
       var v = document.getElementById('sgFilmVideo');
       var cues = [].slice.call(sec.querySelectorAll('.sg-cue'));
       var replayBtn = document.getElementById('sgReplay');
+      var endLogo = document.getElementById('sgEndLogo');
       var raf = null;
 
       function play() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
@@ -344,6 +362,10 @@
           var c = cues[i];
           var on = (t >= +c.dataset.start && t < +c.dataset.end);
           if (on !== c.classList.contains('is-on')) c.classList.toggle('is-on', on);
+        }
+        if (endLogo) {
+          var showLogo = t >= 66;   // logo end-card wipes in at the 1:06 mark
+          if (showLogo !== endLogo.classList.contains('is-on')) endLogo.classList.toggle('is-on', showLogo);
         }
         raf = requestAnimationFrame(tick);
       }
