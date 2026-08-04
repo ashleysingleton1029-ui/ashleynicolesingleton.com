@@ -327,6 +327,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .hero__play svg { width: 46px; height: 46px; padding: 13px; border: 1px solid var(--paper); border-radius: 50%; fill: var(--paper); transition: background 0.35s var(--ease), fill 0.35s var(--ease), transform 0.35s var(--ease); }
 .hero__play:hover svg { background: var(--gold); border-color: var(--gold); fill: var(--ink); transform: scale(1.06); }
 .hero__play:hover svg path[stroke] { stroke: var(--ink); }
+/* Phones: slightly smaller sound/replay circles */
+@media (max-width: 600px) { .hero__play svg { width: 40px; height: 40px; padding: 11px; } }
 /* Sound (left) + Replay (right) on one straight line above the meta bar */
 .hero__controls {
   position: absolute; left: var(--gutter); right: var(--gutter); bottom: 72px; z-index: 4;
@@ -531,6 +533,14 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .bigtype__portrait img {
   display: block;
   width: 100%; height: auto;         /* whole image, full width on phones */
+}
+/* Phones: trim the big type padding so there isn't a large black gap around the
+   "Based in Las Vegas" text above the portrait. */
+@media (max-width: 767px) {
+  .bigtype__text { padding-top: clamp(10px, 2.5vh, 22px); padding-bottom: clamp(6px, 1.5vh, 14px); }
+  /* trim the portrait's dark/empty top (crop from the top, keep the full body) so
+     there's less black between the type and the subject */
+  .bigtype__portrait img { height: 128vw; object-fit: cover; object-position: center bottom; }
 }
 /* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
    portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
