@@ -541,13 +541,15 @@ body:not(.is-loading) .preloader { pointer-events: none; }
      the video is masked everywhere except through the letters — no raw-video gaps */
   .bigtype__type { flex: 1 1 0; min-width: 0; display: grid; }
   .bigtype__text { min-height: 100%; align-content: center; }
-  .bigtype__phrase { font-size: clamp(1.6rem, 7vw, 6rem); }
+  .bigtype__phrase { font-size: clamp(1.75rem, 7.7vw, 6.6rem); }
   .bigtype__portrait {
     flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: flex-end;
   }
   .bigtype__portrait img {
     width: auto; height: auto;
-    max-width: 58vw; max-height: 112svh;
+    max-width: 47vw; max-height: 112svh;   /* height-bound on desktop, so this only
+                                              trims the image on narrow/tall screens
+                                              to leave room for the type */
     object-fit: contain;             /* whole body, no crop */
   }
 }
