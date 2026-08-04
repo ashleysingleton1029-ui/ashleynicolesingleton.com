@@ -73,6 +73,33 @@
     .sg-open:hover{background:var(--steel);color:var(--bg)}
     .sg-gate--done .sg-open{display:inline-flex}
 
+    /* ---- access gate (viewer info + confidentiality agreement) ---- */
+    .sg-access{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px;
+      background:rgba(5,6,9,.9);backdrop-filter:blur(10px);opacity:0;transition:opacity .35s var(--ease)}
+    .sg-access.is-open{opacity:1}
+    .sg-access[hidden]{display:none}
+    .sg-access__panel{width:min(520px,94vw);max-height:90svh;overflow:auto;
+      background:var(--bg2);border:1px solid var(--line);padding:clamp(24px,4vw,40px)}
+    .sg-access__step{display:flex;flex-direction:column;gap:15px}
+    .sg-access__step[hidden]{display:none}
+    .sg-access__eyebrow{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--steel)}
+    .sg-access__title{margin:0;font-family:var(--disp);font-weight:800;text-transform:uppercase;
+      font-size:clamp(1.35rem,3.4vw,1.9rem);letter-spacing:-.01em;line-height:1.06}
+    .sg-access__lede{margin:0;font-family:var(--body);font-size:14px;line-height:1.55;color:var(--muted)}
+    .sg-access__field{display:flex;flex-direction:column;gap:6px}
+    .sg-access__field span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg)}
+    .sg-access__field input{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--fg);
+      font-family:var(--mono);font-size:14px;padding:13px 14px;outline:0}
+    .sg-access__field input:focus{border-color:var(--steel)}
+    .sg-access__terms{margin:2px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:10px;
+      font-family:var(--body);font-size:14px;line-height:1.5;color:#d7dbdf}
+    .sg-access__msg{margin:0;min-height:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+    .sg-access__btn{margin-top:6px;align-self:flex-start;border:0;cursor:pointer;background:var(--fg);color:var(--bg);
+      font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:14px 24px;
+      transition:background .3s var(--ease),color .3s var(--ease)}
+    .sg-access__btn:hover{background:var(--red);color:#fff}
+    .sg-access__btn[disabled]{opacity:.6;pointer-events:none}
+
     .sg-scrollcue{margin-top:auto;padding-top:26px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);z-index:1}
     .sg-scrollcue i{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--steel),transparent);animation:sgCue 2s var(--ease) infinite}
     @keyframes sgCue{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
@@ -302,6 +329,47 @@
     <a href="../index.html#work">All Work ↑</a>
   </footer>
 
+  <!-- ============ ACCESS GATE (info + confidentiality, after password) ============ -->
+  <div class="sg-access" id="sgAccess" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Confidential access">
+    <div class="sg-access__panel">
+      <!-- Step 1: who's viewing -->
+      <form class="sg-access__step" id="sgInfoStep" autocomplete="on">
+        <p class="sg-access__eyebrow">Private Pitch Deck · Access</p>
+        <h2 class="sg-access__title">Before you continue</h2>
+        <p class="sg-access__lede">Please share your details to view the Seventh Gear pitch deck.</p>
+        <label class="sg-access__field">
+          <span>Full name</span>
+          <input type="text" id="sgName" name="name" required autocomplete="name" autocapitalize="words" />
+        </label>
+        <label class="sg-access__field">
+          <span>Email</span>
+          <input type="email" id="sgEmail" name="email" required autocomplete="email" autocapitalize="off" spellcheck="false" />
+        </label>
+        <label class="sg-access__field">
+          <span>Company / Organization</span>
+          <input type="text" id="sgCompany" name="company" autocomplete="organization" />
+        </label>
+        <p class="sg-access__msg" id="sgInfoMsg"></p>
+        <button type="submit" class="sg-access__btn">Continue →</button>
+      </form>
+      <!-- Step 2: confidentiality agreement -->
+      <div class="sg-access__step" id="sgAgreeStep" hidden>
+        <p class="sg-access__eyebrow">Confidential Presentation</p>
+        <h2 class="sg-access__title">Confidential Presentation</h2>
+        <p class="sg-access__lede">This presentation is intended only for the individual or organization to whom access has been granted.</p>
+        <p class="sg-access__lede">By continuing, you agree to:</p>
+        <ul class="sg-access__terms">
+          <li>Keep your password confidential.</li>
+          <li>Not copy, distribute, record, or share any portion of this presentation.</li>
+          <li>Use the information solely for evaluating Seventh Gear.</li>
+          <li>Respect that all concepts, creative materials, and intellectual property remain the exclusive property of the creator.</li>
+        </ul>
+        <p class="sg-access__msg" id="sgAgreeMsg"></p>
+        <button type="button" class="sg-access__btn" id="sgAgree">I Agree &amp; Continue</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===================== DECK VIEWER ===================== -->
   <div class="sgv" id="sgViewer" hidden aria-hidden="true" role="dialog" aria-label="Seventh Gear pitch deck">
     <div class="sgv__top">
@@ -404,6 +472,18 @@
       var closeBtn = document.getElementById('sgvClose');
       var pdfBtn = document.getElementById('sgvPdf');
 
+      // access gate (info + confidentiality agreement) elements
+      var access = document.getElementById('sgAccess');
+      var infoStep = document.getElementById('sgInfoStep');
+      var agreeStep = document.getElementById('sgAgreeStep');
+      var nameEl = document.getElementById('sgName');
+      var emailEl = document.getElementById('sgEmail');
+      var companyEl = document.getElementById('sgCompany');
+      var infoMsg = document.getElementById('sgInfoMsg');
+      var agreeBtn = document.getElementById('sgAgree');
+      var agreeMsg = document.getElementById('sgAgreeMsg');
+      var lead = { name:'', email:'', company:'' };
+
       var cryptoKey = null;   // derived AES-GCM key (kept in memory for the session)
       var slides = [];        // object URLs
       var idx = 0;
@@ -477,6 +557,58 @@
         setTimeout(function(){ viewer.hidden = true; viewer.setAttribute('aria-hidden','true'); }, 380);
       }
 
+      // ---- access gate: collect who's viewing, then the confidentiality agreement ----
+      function openAccess(){
+        access.hidden = false;
+        access.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+        agreeStep.hidden = true; infoStep.hidden = false;
+        infoMsg.textContent = ''; agreeMsg.textContent = '';
+        requestAnimationFrame(function(){ access.classList.add('is-open'); });
+        try{ nameEl.focus(); }catch(e){}
+      }
+      function closeAccess(){
+        access.classList.remove('is-open');
+        setTimeout(function(){ access.hidden = true; access.setAttribute('aria-hidden','true'); }, 360);
+      }
+
+      infoStep.addEventListener('submit', function(e){
+        e.preventDefault();
+        var nm = (nameEl.value || '').trim();
+        var em = (emailEl.value || '').trim();
+        var co = (companyEl.value || '').trim();
+        if(!nm || !em){ infoMsg.textContent = 'Name and email are required'; return; }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ infoMsg.textContent = 'Enter a valid email'; return; }
+        lead = { name:nm, email:em, company:co };
+        infoMsg.textContent = '';
+        infoStep.hidden = true; agreeStep.hidden = false;
+        try{ agreeBtn.focus(); }catch(e){}
+      });
+
+      agreeBtn.addEventListener('click', async function(){
+        agreeBtn.disabled = true; agreeMsg.textContent = 'One moment…';
+        try{
+          await fetch('https://formspree.io/f/xrpzzozg', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+            body: JSON.stringify({
+              _subject: 'Pitch Deck Download',
+              name: lead.name,
+              email: lead.email,
+              company: lead.company || '(not provided)',
+              agreement: 'Accepted the confidentiality terms',
+              accessed_at: new Date().toISOString(),
+              page: location.href
+            })
+          });
+        }catch(err){ /* owner notification is best-effort; never block a valid viewer */ }
+        agreeMsg.textContent = '';
+        agreeBtn.disabled = false;
+        gate.classList.add('sg-gate--done');   // reveal the reopen button for later
+        closeAccess();
+        openViewer();
+      });
+
       gate.addEventListener('submit', async function(e){
         e.preventDefault();
         var pw = passEl.value;
@@ -488,9 +620,9 @@
         try{
           await unlock(pw);
           msg.classList.remove('err'); msg.textContent = 'Access granted';
-          gate.classList.add('sg-gate--done');
+          gate.classList.remove('busy');
           passEl.value = '';
-          openViewer();
+          openAccess();
         }catch(err){
           gate.classList.remove('busy');
           msg.textContent = 'Incorrect password';
