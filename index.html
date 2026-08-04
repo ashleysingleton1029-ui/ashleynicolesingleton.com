@@ -97,7 +97,9 @@
       </div>
 
       <div class="hero__overlay">
-        <h1 class="hero__title" data-split>
+        <!-- Name kept as the page's main heading for SEO + screen readers, but
+             hidden from view so it no longer sits over the showreel. -->
+        <h1 class="hero__title sr-only">
           Ashley Nicole
           Singleton
         </h1>
@@ -286,6 +288,15 @@
             <span class="line">Worldwide</span>
           </span>
         </h2>
+        <div class="bigtype__portrait">
+          <picture>
+            <!-- Transparent background so the dark surround melts into the page
+                 black; JPEG fallback (opaque) for browsers without WebP alpha. -->
+            <source srcset="img/spotlight-portrait.webp" type="image/webp" />
+            <img src="img/gallery/lens/lens-11.jpg" width="1066" height="1600" loading="lazy"
+                 alt="Ashley Nicole Singleton photographed under a single spotlight" />
+          </picture>
+        </div>
       </section>
 
       <!-- Press strip -->

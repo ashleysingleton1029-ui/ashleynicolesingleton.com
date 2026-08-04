@@ -19,7 +19,8 @@ part of the site and may be used freely.
 - `work/seventh-gear/deck.enc` and `work/seventh-gear/deck-pdf.enc` — AES-encrypted
   pitch deck. **Never** regenerate, decrypt to a tracked path, or commit plaintext.
 - `work/seventh-gear.html` — approved film source Cloudflare Stream
-  `1fa20304914fc8b1539f167355b66500`; cue timings are final — do not retime.
+  `e0ef0b1bfbd63e11016eaff144ab6300`; cue timings are final — do not retime.
+  A logo end-card wipes in (right→left) at the 1:06 mark (`#sgEndLogo`).
 - Loader: `.preloader` / `#preVideo` markup in `index.html` and the loader logic
   in `js/main.js` (`runPreloader`, `initPreVideo`, `window.load` hash-skip handler).
 - Contact forms email via Formspree only (main site `mkoddzzp`; Seventh Gear
@@ -31,7 +32,17 @@ part of the site and may be used freely.
 ## Conventions
 - Static site: hand-written HTML + vanilla CSS + vanilla JS + GSAP (CDN).
 - No em dashes in copy — use a middot (·) or rephrase.
-- Work branch: `claude/celebrity-media-website-qwvxkr`. Commit + push after changes.
+- **Mobile video framing:** landscape reels must NOT sit at full-height
+  `object-fit:cover` on phones — that over-zooms so you can't see the action.
+  Right-size the section toward the reel's shape, e.g.
+  `@media (max-width:767px){ height:min(100svh,90vw); object-fit:cover }`, so it
+  fills with only a modest crop — no heavy zoom, no big dead letterbox bars.
+  (A video framed inside a card, e.g. GGL `.expand__media`, may use
+  `object-fit:contain` instead.) Apply this to every future website video.
+- Base branch: `claude/celebrity-media-website-qwvxkr`.
+- **Website updates use ONE long-lived branch: `claude/website-updates` → PR #4.**
+  Commit + push every change to this branch; it updates the existing PR in place.
+  Do NOT create a new branch or a new PR per change.
 - Commit trailers:
   ```
   Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
