@@ -285,7 +285,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    right-size the hero toward the reel's shape so it fills (cover) with only a
    modest crop and little wasted space. */
 @media (max-width: 767px) {
-  .hero { height: min(100svh, 125vw); min-height: 0; }
+  .hero { height: min(100svh, 110vw); min-height: 0; }
   .hero__video { object-fit: cover; }
 }
 .hero__img { transform: scale(1.06); animation: kenburns 24s ease-in-out infinite alternate; }
