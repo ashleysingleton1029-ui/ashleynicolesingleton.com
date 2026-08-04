@@ -537,10 +537,9 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* Phones: trim the big type padding so there isn't a large black gap around the
    "Based in Las Vegas" text above the portrait. */
 @media (max-width: 767px) {
+  /* Trim the big type's padding to cut the black gap — but keep the whole portrait
+     (spotlight glow + full body) intact below it. */
   .bigtype__text { padding-top: clamp(10px, 2.5vh, 22px); padding-bottom: clamp(6px, 1.5vh, 14px); }
-  /* trim the portrait's dark/empty top (crop from the top, keep the full body) so
-     there's less black between the type and the subject */
-  .bigtype__portrait img { height: 128vw; object-fit: cover; object-position: center bottom; }
 }
 /* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
    portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
