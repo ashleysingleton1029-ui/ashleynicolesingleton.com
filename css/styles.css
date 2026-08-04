@@ -327,6 +327,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .hero__play svg { width: 46px; height: 46px; padding: 13px; border: 1px solid var(--paper); border-radius: 50%; fill: var(--paper); transition: background 0.35s var(--ease), fill 0.35s var(--ease), transform 0.35s var(--ease); }
 .hero__play:hover svg { background: var(--gold); border-color: var(--gold); fill: var(--ink); transform: scale(1.06); }
 .hero__play:hover svg path[stroke] { stroke: var(--ink); }
+/* Phones: slightly smaller sound/replay circles */
+@media (max-width: 600px) { .hero__play svg { width: 40px; height: 40px; padding: 11px; } }
 /* Sound (left) + Replay (right) on one straight line above the meta bar */
 .hero__controls {
   position: absolute; left: var(--gutter); right: var(--gutter); bottom: 72px; z-index: 4;
@@ -455,7 +457,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .work__idx { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
 .work__title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.5rem, 4.6vw, 3.4rem); line-height: 1; letter-spacing: -0.02em; }
 .work__cat { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: right; }
-.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.05rem, 2.2vw, 1.9rem); color: var(--muted); }
+.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.05rem, 2.2vw, 1.9rem); color: var(--gold); }
 @media (max-width: 720px) { .work__more { text-align: left; } }
 @media (hover: hover) {
   .work__row:hover::before { transform: scaleY(1); transform-origin: top; }
@@ -481,8 +483,11 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    BIG IMAGE-FILLED TYPE
    ========================================================================= */
 .bigtype { position: relative; isolation: isolate; overflow: hidden; background: #000000; padding: 0; }
+/* Left "type" column — its own stacking context so the showreel stays revealed
+   only through the letters here and never bleeds over the portrait. */
+.bigtype__type { position: relative; isolation: isolate; overflow: hidden; background: #000000; }
 /* Showreel plays behind, revealed only through the letters */
-.bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.5); transform-origin: center; z-index: 0; }
+.bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; z-index: 0; }
 .bigtype__text {
   position: relative; z-index: 1; margin: 0;
   padding: var(--space-xl) var(--gutter);
@@ -518,19 +523,44 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
   .bigtype__phrase--2 { display: none; }
 }
-/* Portrait sits beneath the type on the same black field; shown whole (never
-   cropped) so the spotlight reads. Opaque black wrapper masks the showreel
-   behind it. */
+/* Phones: portrait stacks beneath the type, full-width whole body, flush bottom. */
 .bigtype__portrait {
   position: relative; z-index: 1;
   background: #000000;
-  display: flex; justify-content: center;
-  padding: 0 var(--gutter) var(--space-xl);
+  padding: 0;
 }
+.bigtype__portrait picture { display: block; }
 .bigtype__portrait img {
   display: block;
-  width: auto; height: auto;
-  max-width: 100%; max-height: 88vh;
+  width: 100%; height: auto;         /* whole image, full width on phones */
+}
+/* Phones: trim the big type padding so there isn't a large black gap around the
+   "Based in Las Vegas" text above the portrait. */
+@media (max-width: 767px) {
+  /* Trim the big type's padding to cut the black gap — but keep the whole portrait
+     (spotlight glow + full body) intact below it. */
+  .bigtype__text { padding-top: clamp(22px, 5vh, 46px); padding-bottom: clamp(6px, 1.5vh, 14px); }
+}
+/* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
+   portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
+   to the left column so it never covers the photo. */
+@media (min-width: 768px) {
+  .bigtype { display: flex; align-items: stretch; }
+  /* type column stretches full height; the black text block (below) fills it so
+     the video is masked everywhere except through the letters — no raw-video gaps */
+  .bigtype__type { flex: 1 1 0; min-width: 0; display: grid; }
+  .bigtype__text { min-height: 100%; align-content: center; }
+  .bigtype__phrase { font-size: clamp(1.85rem, 8.2vw, 7rem); }
+  .bigtype__portrait {
+    flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: flex-end;
+  }
+  .bigtype__portrait img {
+    width: auto; height: auto;
+    max-width: 47vw; max-height: 112svh;   /* height-bound on desktop, so this only
+                                              trims the image on narrow/tall screens
+                                              to leave room for the type */
+    object-fit: contain;             /* whole body, no crop */
+  }
 }
 
 /* =========================================================================
