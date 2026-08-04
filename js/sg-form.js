@@ -46,3 +46,15 @@
     });
   });
 })();
+
+/* Nav frosted bar: fade it in only while scrolling, out shortly after it stops. */
+(function () {
+  var nav = document.querySelector('.sgf-nav');
+  if (!nav) return;
+  var t;
+  window.addEventListener('scroll', function () {
+    nav.classList.add('is-scrolling');
+    clearTimeout(t);
+    t = setTimeout(function () { nav.classList.remove('is-scrolling'); }, 450);
+  }, { passive: true });
+})();
