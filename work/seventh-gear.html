@@ -110,6 +110,9 @@
     .sg-scrollcue i::after{content:"";position:absolute;left:0;top:0;width:100%;height:14px;
       background:linear-gradient(var(--steel),transparent);animation:sgCue 1.7s var(--ease) infinite}
     @keyframes sgCue{0%{transform:translateY(-16px);opacity:0}35%{opacity:1}100%{transform:translateY(42px);opacity:0}}
+    /* same cue anchored to the bottom of the film, lined up with the teaser cue */
+    .sg-scrollcue--film{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);margin:0;padding-top:0;z-index:2}
+    @media (max-width:767px){ .sg-scrollcue--film{display:none} }
 
     /* ---- cinematic film (philosophy + series copy over video) ---- */
     .sg-film{position:relative;min-height:100svh;overflow:hidden;background:#05070a;isolation:isolate}
@@ -283,6 +286,8 @@
     <img class="sg-endlogo" id="sgEndLogo" src="../img/work/seventh-gear-logo.png"
          alt="Seventh Gear" width="2064" height="264" aria-hidden="true" />
 
+    <a class="sg-scrollcue sg-scrollcue--film" href="#sgTeaser" aria-label="Scroll down to continue">Scroll<i></i></a>
+
     <div class="sg-film__controls">
       <button class="sg-film__ctrl" id="sgReplay" type="button" aria-label="Replay film">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.3"/><path d="M3 3v4.5h4.5"/></svg>
@@ -299,7 +304,7 @@
   </section>
 
   <!-- ===================== TEASER HERO ===================== -->
-  <section class="sg-hero">
+  <section class="sg-hero" id="sgTeaser">
     <div class="sg-hero__bg" style="background-image:url('../img/work/seventh-gear-hero.jpg')"></div>
     <div class="sg-hero__inner">
       <p class="sg-kicker">An Unscripted Original Series</p>
