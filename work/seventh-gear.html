@@ -100,13 +100,16 @@
     .sg-access__btn:hover{background:var(--red);color:#fff}
     .sg-access__btn[disabled]{opacity:.6;pointer-events:none}
 
-    .sg-scrollcue{margin-top:auto;padding-top:26px;align-self:center;display:inline-flex;flex-direction:column;align-items:center;gap:8px;
-      text-align:center;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;
-      color:var(--fg);z-index:1;cursor:pointer;transition:color .3s var(--ease),transform .3s var(--ease)}
-    .sg-scrollcue:hover{color:var(--steel);transform:translateY(3px)}
-    .sg-scrollcue svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
-      filter:drop-shadow(0 2px 10px rgba(0,0,0,.55));animation:sgCue 1.5s var(--ease) infinite}
-    @keyframes sgCue{0%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(6px);opacity:1}100%{transform:translateY(-3px);opacity:.5}}
+    .sg-scrollcue{margin-top:auto;padding-top:26px;align-self:center;text-align:center;
+      font-family:var(--mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;
+      color:var(--fg);text-shadow:0 2px 12px rgba(0,0,0,.55);z-index:1;cursor:pointer;transition:color .3s var(--ease)}
+    .sg-scrollcue:hover{color:var(--steel)}
+    /* thin line with a soft light that keeps running down it — sleek, but harder to miss */
+    .sg-scrollcue i{position:relative;display:block;width:1px;height:42px;margin:12px auto 0;
+      background:rgba(159,176,184,.22);overflow:hidden}
+    .sg-scrollcue i::after{content:"";position:absolute;left:0;top:0;width:100%;height:14px;
+      background:linear-gradient(var(--steel),transparent);animation:sgCue 1.7s var(--ease) infinite}
+    @keyframes sgCue{0%{transform:translateY(-16px);opacity:0}35%{opacity:1}100%{transform:translateY(42px);opacity:0}}
 
     /* ---- cinematic film (philosophy + series copy over video) ---- */
     .sg-film{position:relative;min-height:100svh;overflow:hidden;background:#05070a;isolation:isolate}
@@ -229,7 +232,7 @@
     @media (max-width:767px){ .sg-film{min-height:0;height:min(100svh,90vw)} .sg-film__video{object-fit:cover} }
     @media (prefers-reduced-motion:reduce){
       .sg-hero__bg{animation:none}
-      .sg-scrollcue svg{animation:none}
+      .sg-scrollcue i::after{animation:none}
       html{scroll-behavior:auto}
     }
   </style>
@@ -303,10 +306,7 @@
         <p class="sg-gate__msg" id="sgMsg">Confidential · Authorized review only</p>
       </form>
     </div>
-    <a class="sg-scrollcue" href="#sgQuestion" aria-label="Scroll down to continue">
-      <span>Scroll</span>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13"/><path d="M6 12l6 6 6-6"/></svg>
-    </a>
+    <a class="sg-scrollcue" href="#sgQuestion" aria-label="Scroll down to continue">Scroll<i></i></a>
   </section>
 
   <!-- ===================== THE QUESTION ===================== -->
