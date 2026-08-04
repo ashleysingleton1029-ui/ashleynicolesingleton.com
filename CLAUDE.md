@@ -24,7 +24,11 @@ part of the site and may be used freely.
 - Loader: `.preloader` / `#preVideo` markup in `index.html` and the loader logic
   in `js/main.js` (`runPreloader`, `initPreVideo`, `window.load` hash-skip handler).
 - Contact forms email via Formspree only (main site `mkoddzzp`; Seventh Gear
-  `mgoggzep`). **Never** print `ashley@ashleynicolesingleton.com` in any page source.
+  `mgoggzep`; Seventh Gear pitch-deck access gate `xrpzzozg`, subject "Pitch Deck
+  Download"). **Never** print `ashley@ashleynicolesingleton.com` in any page source.
+- Seventh Gear deck access: after the password unlocks, an overlay (`#sgAccess`)
+  collects name/email/company then shows a confidentiality agreement
+  ("I Agree & Continue"); on agree it pings Formspree `xrpzzozg` and opens the deck.
 - `img/chair.jpg` (bio portrait) and both gallery pages
   (`gallery/with-the-stars.html`, `gallery/in-front-of-the-lens.html`) with their
   photo sets in `img/gallery/stars/` and `img/gallery/lens/` — names/order approved.
