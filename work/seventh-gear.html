@@ -171,9 +171,23 @@
 
     /* ---- interested CTA (bottom-right of question) ---- */
     .sg-cta{position:absolute;right:var(--gut);bottom:clamp(28px,7vh,72px);z-index:5}
-    .sg-cta__btn{display:inline-flex;align-items:center;gap:12px;cursor:pointer;border:1px solid var(--line);
+    @property --sg-orbit{syntax:'<angle>';initial-value:0deg;inherits:false}
+    .sg-cta__btn{position:relative;display:inline-flex;align-items:center;gap:12px;cursor:pointer;border:1px solid var(--line);
       background:rgba(8,10,13,.55);backdrop-filter:blur(6px);color:var(--fg);font-family:var(--mono);font-size:12px;
       letter-spacing:.2em;text-transform:uppercase;padding:14px 20px;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+    /* soft steel light that keeps running around the border — matches the scroll-line light */
+    .sg-cta__btn::before{content:"";position:absolute;inset:0;pointer-events:none;padding:1px;
+      background:conic-gradient(from var(--sg-orbit),
+        transparent 0 300deg,
+        rgba(159,176,184,.5) 338deg,
+        #eaf0f2 353deg,
+        transparent 360deg);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      mask-composite:exclude;
+      animation:sgOrbit 3s linear infinite}
+    @keyframes sgOrbit{to{--sg-orbit:360deg}}
     .sg-cta__btn:hover{background:var(--red);border-color:var(--red);color:#fff}
     .sg-cta__btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2.2;transition:transform .3s var(--ease)}
     .sg-cta.is-open .sg-cta__btn svg{transform:rotate(180deg)}
@@ -233,6 +247,7 @@
     @media (prefers-reduced-motion:reduce){
       .sg-hero__bg{animation:none}
       .sg-scrollcue i::after{animation:none}
+      .sg-cta__btn::before{animation:none}
       html{scroll-behavior:auto}
     }
   </style>
