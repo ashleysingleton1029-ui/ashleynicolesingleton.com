@@ -107,8 +107,7 @@
     /* End-card logo: wipes in right→left at the 1:06 mark, centered, never cropped */
     .sg-endlogo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
       width:min(700px,80vw);height:auto;pointer-events:none;
-      -webkit-clip-path:inset(0 0 0 100%);clip-path:inset(0 0 0 100%);
-      filter:drop-shadow(0 10px 34px rgba(0,0,0,.6));will-change:clip-path}
+      -webkit-clip-path:inset(0 0 0 100%);clip-path:inset(0 0 0 100%);will-change:clip-path}
     .sg-endlogo.is-on{animation:sgWipe 1.15s cubic-bezier(0.22,1,0.36,1) forwards}
     @keyframes sgWipe{
       from{-webkit-clip-path:inset(0 0 0 100%);clip-path:inset(0 0 0 100%)}
