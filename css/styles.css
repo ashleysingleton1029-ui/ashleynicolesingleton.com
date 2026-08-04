@@ -505,21 +505,6 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   font-size: clamp(2.2rem, 12.5vw, 10.5rem); line-height: 0.9; letter-spacing: -0.04em;
   color: #fff; -webkit-text-fill-color: #fff;
 }
-/* Glow overlay: same box + type metrics as .bigtype__text, but NOT multiplied,
-   so its soft light halo survives over dark parts of the reel. Transparent fill
-   lets the video-filled letters underneath show through; only the glow paints. */
-.bigtype__glow {
-  position: absolute; inset: 0; z-index: 2; margin: 0;
-  padding: var(--space-xl) var(--gutter);
-  display: grid; place-items: center; align-content: center; text-align: center;
-  pointer-events: none;
-}
-.bigtype__glow .bigtype__phrase {
-  color: transparent; -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 clamp(5px, 1vw, 12px) rgba(255, 255, 255, 0.65),
-    0 0 clamp(12px, 2.4vw, 30px) rgba(255, 255, 255, 0.4);
-}
 .bigtype__phrase .line { display: block; }
 /* Alternate the two phrases with a clean hard cut — exactly one phrase is
    always visible so the video behind stays revealed and never appears to
@@ -532,8 +517,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 @supports not (mix-blend-mode: multiply) {
   .bigtype__video { display: none; }
   .bigtype__text { mix-blend-mode: normal; background: transparent; }
-  .bigtype__text .bigtype__phrase { color: var(--paper); -webkit-text-fill-color: var(--paper); }
-  .bigtype__glow { display: none; }
+  .bigtype__phrase { color: var(--paper); -webkit-text-fill-color: var(--paper); }
 }
 @media (prefers-reduced-motion: reduce) {
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
@@ -555,8 +539,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 @media (max-width: 767px) {
   /* Trim the big type's padding to cut the black gap — but keep the whole portrait
      (spotlight glow + full body) intact below it. */
-  .bigtype__text,
-  .bigtype__glow { padding-top: clamp(22px, 5vh, 46px); padding-bottom: clamp(6px, 1.5vh, 14px); }
+  .bigtype__text { padding-top: clamp(22px, 5vh, 46px); padding-bottom: clamp(6px, 1.5vh, 14px); }
 }
 /* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
    portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
