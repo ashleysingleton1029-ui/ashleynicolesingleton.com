@@ -34,7 +34,7 @@ part of the site and may be used freely.
 - **Mobile video framing:** landscape reels must NOT sit at full-height
   `object-fit:cover` on phones — that over-zooms so you can't see the action.
   Right-size the section toward the reel's shape, e.g.
-  `@media (max-width:767px){ height:min(100svh,110vw); object-fit:cover }`, so it
+  `@media (max-width:767px){ height:min(100svh,100vw); object-fit:cover }`, so it
   fills with only a modest crop — no heavy zoom, no big dead letterbox bars.
   (A video framed inside a card, e.g. GGL `.expand__media`, may use
   `object-fit:contain` instead.) Apply this to every future website video.
