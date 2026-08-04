@@ -529,9 +529,14 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .bigtype__portrait picture { display: block; }
 .bigtype__portrait img {
   display: block;
-  width: 100%; height: auto;         /* fill the page width */
-  max-height: 100svh;                /* cap tall screens... */
-  object-fit: cover; object-position: center top;  /* ...cropping the bottom, keeping the face */
+  width: 100%; height: auto;         /* fill the page width; whole image on phones */
+  object-fit: cover; object-position: center top;  /* crop from the bottom when capped */
+}
+/* Desktop/tablet: the full-width portrait is very tall, so cap the height — but
+   loosely, so most of the composition shows and only a sliver is cropped off the
+   bottom (the photo is ~150vw tall at full width). */
+@media (min-width: 768px) {
+  .bigtype__portrait img { max-height: 130vw; }
 }
 
 /* =========================================================================
