@@ -100,9 +100,13 @@
     .sg-access__btn:hover{background:var(--red);color:#fff}
     .sg-access__btn[disabled]{opacity:.6;pointer-events:none}
 
-    .sg-scrollcue{margin-top:auto;padding-top:26px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);z-index:1}
-    .sg-scrollcue i{display:block;width:1px;height:34px;margin:12px auto 0;background:linear-gradient(var(--steel),transparent);animation:sgCue 2s var(--ease) infinite}
-    @keyframes sgCue{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{opacity:1}100%{transform:scaleY(1);transform-origin:top;opacity:0}}
+    .sg-scrollcue{margin-top:auto;padding-top:26px;align-self:center;display:inline-flex;flex-direction:column;align-items:center;gap:8px;
+      text-align:center;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;
+      color:var(--fg);z-index:1;cursor:pointer;transition:color .3s var(--ease),transform .3s var(--ease)}
+    .sg-scrollcue:hover{color:var(--steel);transform:translateY(3px)}
+    .sg-scrollcue svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+      filter:drop-shadow(0 2px 10px rgba(0,0,0,.55));animation:sgCue 1.5s var(--ease) infinite}
+    @keyframes sgCue{0%{transform:translateY(-3px);opacity:.5}50%{transform:translateY(6px);opacity:1}100%{transform:translateY(-3px);opacity:.5}}
 
     /* ---- cinematic film (philosophy + series copy over video) ---- */
     .sg-film{position:relative;min-height:100svh;overflow:hidden;background:#05070a;isolation:isolate}
@@ -225,7 +229,7 @@
     @media (max-width:767px){ .sg-film{min-height:0;height:min(100svh,90vw)} .sg-film__video{object-fit:cover} }
     @media (prefers-reduced-motion:reduce){
       .sg-hero__bg{animation:none}
-      .sg-scrollcue i{animation:none}
+      .sg-scrollcue svg{animation:none}
       html{scroll-behavior:auto}
     }
   </style>
@@ -299,11 +303,14 @@
         <p class="sg-gate__msg" id="sgMsg">Confidential · Authorized review only</p>
       </form>
     </div>
-    <div class="sg-scrollcue">Scroll<i></i></div>
+    <a class="sg-scrollcue" href="#sgQuestion" aria-label="Scroll down to continue">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v13"/><path d="M6 12l6 6 6-6"/></svg>
+    </a>
   </section>
 
   <!-- ===================== THE QUESTION ===================== -->
-  <section class="sg-question">
+  <section class="sg-question" id="sgQuestion">
     <div class="sg-question__bg" aria-hidden="true"></div>
     <h2 class="sg-question__q">What was the moment in your life that required your<br /><span class="sg-red">Seventh Gear?</span></h2>
 
