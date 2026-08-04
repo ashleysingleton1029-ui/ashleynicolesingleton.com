@@ -485,7 +485,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .bigtype { position: relative; isolation: isolate; overflow: hidden; background: #000000; padding: 0; }
 /* Left "type" column — its own stacking context so the showreel stays revealed
    only through the letters here and never bleeds over the portrait. */
-.bigtype__type { position: relative; isolation: isolate; overflow: hidden; }
+.bigtype__type { position: relative; isolation: isolate; overflow: hidden; background: #000000; }
 /* Showreel plays behind, revealed only through the letters */
 .bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; z-index: 0; }
 .bigtype__text {
@@ -504,6 +504,10 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   font-family: var(--font-display); font-weight: 900; text-transform: uppercase;
   font-size: clamp(2.2rem, 12.5vw, 10.5rem); line-height: 0.9; letter-spacing: -0.04em;
   color: #fff; -webkit-text-fill-color: #fff;
+  /* Soft glow: multiplied with the block, a light halo reveals a little video
+     around each letter so the type separates from the black surround and reads
+     cleanly even where the reel behind is dark. */
+  text-shadow: 0 0 clamp(9px, 1.8vw, 22px) rgba(255, 255, 255, 0.55);
 }
 .bigtype__phrase .line { display: block; }
 /* Alternate the two phrases with a clean hard cut — exactly one phrase is
@@ -539,7 +543,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 @media (max-width: 767px) {
   /* Trim the big type's padding to cut the black gap — but keep the whole portrait
      (spotlight glow + full body) intact below it. */
-  .bigtype__text { padding-top: clamp(10px, 2.5vh, 22px); padding-bottom: clamp(6px, 1.5vh, 14px); }
+  .bigtype__text { padding-top: clamp(22px, 5vh, 46px); padding-bottom: clamp(6px, 1.5vh, 14px); }
 }
 /* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
    portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
