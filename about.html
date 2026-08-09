@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>About Ashley Nicole Singleton — Las Vegas TV Host, Emcee &amp; Media Personality</title>
-  <meta name="description" content="Ashley Nicole Singleton is a Las Vegas television host, emcee, and on-camera media personality — celebrity red-carpet interviews, live events, and original unscripted programming. Read her full bio." />
+  <title>About Ashley Nicole Singleton — Television Host, Media Personality, Producer &amp; Creator</title>
+  <meta name="description" content="Ashley Singleton is a rising television host, media personality, producer and emcee — celebrity interviews, red carpets and cinematic entertainment. Co-host of Cedric the Entertainer's FanRoom Live and creator of the original series Seventh Gear." />
   <meta name="theme-color" content="#0B0B0B" />
 
   <!-- Canonical -->
@@ -13,8 +13,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="profile" />
   <meta property="og:url" content="https://ashleynicolesingleton.com/about" />
-  <meta property="og:title" content="About Ashley Nicole Singleton — Las Vegas TV Host, Emcee &amp; Media Personality" />
-  <meta property="og:description" content="Las Vegas television host, emcee and on-camera media personality — red-carpet interviews, live events, and original unscripted programming." />
+  <meta property="og:title" content="About Ashley Nicole Singleton — Television Host, Media Personality, Producer &amp; Creator" />
+  <meta property="og:description" content="Rising television host, media personality, producer and emcee — celebrity interviews, red carpets and cinematic entertainment. Creator of the original series Seventh Gear." />
   <meta property="og:site_name" content="Ashley Nicole Singleton" />
   <meta property="og:image" content="https://ashleynicolesingleton.com/img/hero.jpg" />
   <meta property="og:image:width" content="2000" />
@@ -25,8 +25,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About Ashley Nicole Singleton — Las Vegas TV Host &amp; Media Personality" />
-  <meta name="twitter:description" content="Las Vegas television host, emcee and on-camera media personality — red-carpet interviews, live events, and original unscripted programming." />
+  <meta name="twitter:title" content="About Ashley Nicole Singleton — Television Host, Media Personality, Producer &amp; Creator" />
+  <meta name="twitter:description" content="Rising television host, media personality, producer and emcee — celebrity interviews, red carpets and cinematic entertainment. Creator of Seventh Gear." />
   <meta name="twitter:image" content="https://ashleynicolesingleton.com/img/hero.jpg" />
 
   <!-- Monogram favicon -->
@@ -50,8 +50,8 @@
       "name": "Ashley Nicole Singleton",
       "url": "https://ashleynicolesingleton.com/",
       "image": "https://ashleynicolesingleton.com/img/hero.jpg",
-      "jobTitle": "Television Host & Media Personality",
-      "description": "Las Vegas television host, emcee and on-camera media personality. Red carpets, live broadcast, brand storytelling and events.",
+      "jobTitle": "Television Host, Media Personality, Producer & Creator",
+      "description": "Rising television host, media personality, producer, speaker and emcee. Co-host of Cedric the Entertainer's FanRoom Live, former host of Behind the Scenes Las Vegas (BTSLV), and creator, host and executive producer of the original unscripted series Seventh Gear.",
       "workLocation": {
         "@type": "Place",
         "name": "Las Vegas, Nevada",
@@ -70,6 +70,94 @@
     }
   }
   </script>
+
+  <style>
+    /* About / bio page — long-form layout. Scoped to this page so the global
+       (locked) stylesheet is untouched; reuses the site's design tokens. */
+    .bio-role {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: clamp(12px, 1.3vw, 15px);
+      color: var(--gold);
+      margin-top: var(--space-sm);
+    }
+
+    .bio-lead { padding: 0 var(--gutter); }
+    .bio-lead__grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(28px, 5vw, 80px);
+      align-items: start;
+      max-width: var(--maxw);
+      margin: 0 auto;
+    }
+    .bio-lead__portrait { position: relative; overflow: hidden; background: var(--paper-2); }
+    .bio-lead__portrait img {
+      display: block; width: 100%; height: auto;
+      filter: grayscale(1) contrast(1.03);
+    }
+    .bio-lead__intro p {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin-bottom: 1.1em;
+      max-width: 62ch;
+    }
+    .bio-lead__intro p:last-child { margin-bottom: 0; }
+
+    .bio-article {
+      max-width: 74ch;
+      margin: clamp(44px, 8vw, 104px) auto 0;
+      padding: 0 var(--gutter);
+    }
+    .bio-article h2 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.35rem, 3vw, 2.1rem);
+      line-height: 1.05;
+      color: var(--ink);
+      margin: 0 0 0.7em;
+      padding-top: clamp(22px, 3.2vw, 34px);
+      border-top: 1px solid rgba(11, 11, 11, 0.14);
+    }
+    .bio-article section { margin-top: clamp(34px, 5vw, 60px); }
+    .bio-article section:first-child { margin-top: 0; }
+    .bio-article p {
+      font-family: var(--font-body);
+      font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 1.15em;
+    }
+    .bio-article p:last-child { margin-bottom: 0; }
+    .bio-creed {
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: clamp(1.15rem, 2.3vw, 1.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      margin: 0.6em 0 1.1em;
+    }
+    .bio-creed span { display: block; }
+
+    .bio-cta { margin: clamp(40px, 6vw, 72px) auto 0; max-width: 74ch; padding: 0 var(--gutter); }
+
+    @media (max-width: 767px) {
+      .bio-lead__grid { grid-template-columns: 1fr; gap: 26px; }
+      .bio-lead__portrait { aspect-ratio: 2 / 3; }
+      .bio-lead__portrait img { height: 100%; object-fit: cover; }
+    }
+    @media (min-width: 768px) {
+      /* Cap the portrait so the compact source isn't upscaled too far. */
+      .bio-lead__portrait { max-width: 440px; }
+    }
+  </style>
 </head>
 <body class="credit">
 
@@ -88,32 +176,69 @@
   <main class="credit-main">
     <div class="section-head">
       <p class="overline"><span>( 04 )</span><span>About</span></p>
-      <h1 class="section-head__title">About Ashley<br />Nicole Singleton</h1>
+      <h1 class="section-head__title">Ashley Nicole<br />Singleton</h1>
+      <p class="bio-role">Television Host, Media Personality, Producer &amp; Creator</p>
     </div>
 
-    <section class="about" style="padding-top:0">
-      <div class="about__grid">
-        <div class="about__portrait">
-          <img src="img/chair.jpg" alt="Ashley Nicole Singleton seated in a director's chair bearing her name" loading="lazy" width="1269" height="1780" />
+    <!-- Lead: portrait + opening -->
+    <section class="bio-lead" aria-label="Introduction">
+      <div class="bio-lead__grid">
+        <div class="bio-lead__portrait">
+          <img src="img/about-portrait.jpg" width="359" height="538" loading="lazy"
+               alt="Ashley Nicole Singleton seated in a director's chair marked Ashley Singleton, looking over her shoulder" />
         </div>
-
-        <div class="about__body">
-          <p class="about__tagline" style="margin-bottom:var(--space-sm)">Las Vegas TV host · Emcee · On-camera media personality</p>
-          <h2 class="about__lead">Curiosity Fuels Ideas. Connection Elevates People.</h2>
-          <p class="about__tagline">Authenticity is the advantage.</p>
-          <div class="about__copy">
-            <p>Ashley Nicole Singleton is a media personality, creator, and producer dedicated to developing premium unscripted entertainment that captivates audiences and elevates meaningful storytelling. Recognized for her engaging interview style and confident on-camera presence, she has anchored celebrity red-carpet coverage, taken audiences behind the scenes of film productions, and interviewed the founders, athletes, entertainers, and industry leaders shaping culture today.</p>
-            <p>Before stepping into media, Ashley built a successful career producing high-profile experiences for some of the world’s most recognizable brands, including the NFL, MLB, AWS, GoPro, adidas, T-Mobile, and many others. That foundation sharpened her ability to lead under pressure, build meaningful relationships, and deliver exceptional experiences at the highest level.</p>
-            <p>Today, Ashley combines years of experience producing world-class events with a natural ability to connect with people, creating interviews and original programming that feel authentic, engaging, and memorable.</p>
-            <p>Curiosity has shaped every chapter of Ashley’s career, and professionalism continues to define every opportunity that follows.</p>
-          </div>
-          <a href="index.html#contact" class="link-btn" style="margin-top:var(--space-md)">
-            <span>Get in touch</span>
-            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+        <div class="bio-lead__intro">
+          <p>Ashley Singleton is a rising television host, media personality, producer, speaker, and emcee known for her polished on-camera presence, engaging interview style, and ability to connect with people. Her career spans television, film, entertainment, live events, and original programming, with a focus on celebrity interviews and cinematic entertainment.</p>
+          <p>Ashley currently serves as a co-host on Cedric the Entertainer’s FanRoom Live and previously served as the host and on-camera face of Behind the Scenes Las Vegas (BTSLV). Her entertainment reporting has taken her onto movie sets, red carpets, and major industry events, where she has interviewed actors, musicians, athletes, and entertainment leaders including Terrence Howard, Billy Zane, T-Pain, Ne-Yo, Flavor Flav, Brian Austin Green, O.T. Genasis, Dave Asprey, Malin Akerman, and Michael Jai White.</p>
         </div>
       </div>
     </section>
+
+    <!-- Long-form -->
+    <div class="bio-article">
+      <section>
+        <h2>Television &amp; Entertainment</h2>
+        <p>Ashley’s interview style is polished yet fun. She knows how to keep a conversation engaging while creating space for people to show their personality. Her work includes movie set interviews with cast and production teams, celebrity red carpets, and coverage of productions and events including Redemption, The Hook, Dustlands, WWE, Global Gaming League, Waltzing with Brando, Shaken &amp; Stirred, and Biohack Yourself.</p>
+        <p>Ashley is drawn to conversations that reveal the person behind the public image. She believes audiences want to know the real person behind the career, the success, and the headlines.</p>
+      </section>
+
+      <section>
+        <h2>From Event Production to Television</h2>
+        <p>Before entering television and media, Ashley spent 17 years building a career in professional event design, production, and planning. She has produced high-profile experiences for globally recognized brands and organizations including AWS, the NFL, GoPro, the Museum of the Bible, adidas, T-Mobile, and SeriesFest.</p>
+        <p>Her production background gave her the experience to lead under pressure, manage complex productions, work with major brands, and create experiences that leave an impression. It also gave her a deep understanding of what happens behind the camera and what it takes to bring a production to life.</p>
+        <p>That experience ultimately led Ashley toward television, where she could combine her production background with her natural ability to communicate and connect with people on camera.</p>
+      </section>
+
+      <section>
+        <h2>Creator of Seventh Gear</h2>
+        <p>Ashley is the creator, host, and executive producer of Seventh Gear, an original unscripted television series combining celebrity interviews, motorcycles, adventure, human exploration, and cinematic storytelling.</p>
+        <p>The idea came to Ashley while preparing for a red carpet interview with Keanu Reeves at the Chicano Hollywood Film Festival. As a fellow rider, Ashley began thinking about what it would be like to have a deeper conversation with someone she respected while riding together on a motorcycle.</p>
+        <p>That idea became Seventh Gear.</p>
+        <p>The series is designed like a feature film and road movie, following Ashley and notable personalities on motorcycles while exploring the experiences, challenges, and turning points that shaped their lives.</p>
+        <p>At the heart of Seventh Gear is a philosophy of resilience: sometimes life demands one more gear.</p>
+        <p>For Ashley, motorcycles represent freedom, peace, adventure, and joy. They create an environment where people can relax, open up, and have a real conversation. Seventh Gear brings that experience to television through a format that combines motorcycles, celebrity interviews, music, travel, and human stories.</p>
+        <p>The first episode is currently in production, with Ashley continuing to develop the series for television, studios, networks, and distribution partners.</p>
+      </section>
+
+      <section>
+        <h2>A Rising Television Host</h2>
+        <p>Ashley’s career is driven by three things:</p>
+        <p class="bio-creed">
+          <span>Curiosity fuels ideas.</span>
+          <span>Connection elevates people.</span>
+          <span>Authenticity is the advantage.</span>
+        </p>
+        <p>She brings preparation, personality, and professionalism to every project while staying true to her own voice. Her goal is to build a lasting career in television and create programs that audiences genuinely want to watch.</p>
+        <p>As she continues growing as a television host, producer, and creator, Ashley is pursuing opportunities that challenge her, expand her reach, and allow her to tell compelling stories in her own way.</p>
+      </section>
+    </div>
+
+    <div class="bio-cta">
+      <a href="index.html#contact" class="link-btn">
+        <span>Get in touch</span>
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
 
     <nav class="credit-foot" aria-label="Site navigation">
       <a href="index.html" class="credit-foot__all">
