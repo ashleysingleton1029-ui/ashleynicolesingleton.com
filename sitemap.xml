@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Only the homepage is eligible for indexing. Every other page is
+       marked noindex (work detail pages, galleries) or noindex,nofollow
+       (the confidential Seventh Gear pages), so they are excluded here. -->
+  <url>
+    <loc>https://ashleynicolesingleton.com/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
