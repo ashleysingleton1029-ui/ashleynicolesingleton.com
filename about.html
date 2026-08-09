@@ -86,10 +86,10 @@
     .bio-lead { padding: 0 var(--gutter); }
     .bio-lead__grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: clamp(28px, 5vw, 80px);
-      align-items: start;
-      max-width: var(--maxw);
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(32px, 5vw, 84px);
+      align-items: center;
+      max-width: 1280px;
       margin: 0 auto;
     }
     .bio-lead__portrait { position: relative; overflow: hidden; background: var(--paper-2); }
@@ -103,7 +103,7 @@
       line-height: 1.6;
       color: var(--ink-soft);
       margin-bottom: 1.1em;
-      max-width: 62ch;
+      max-width: 56ch;
     }
     .bio-lead__intro p:last-child { margin-bottom: 0; }
 
@@ -150,12 +150,6 @@
 
     @media (max-width: 767px) {
       .bio-lead__grid { grid-template-columns: 1fr; gap: 26px; }
-      .bio-lead__portrait { aspect-ratio: 2 / 3; }
-      .bio-lead__portrait img { height: 100%; object-fit: cover; }
-    }
-    @media (min-width: 768px) {
-      /* Cap the portrait so the compact source isn't upscaled too far. */
-      .bio-lead__portrait { max-width: 440px; }
     }
   </style>
 </head>
@@ -184,7 +178,7 @@
     <section class="bio-lead" aria-label="Introduction">
       <div class="bio-lead__grid">
         <div class="bio-lead__portrait">
-          <img src="img/about-portrait.jpg" width="359" height="538" loading="lazy"
+          <img src="img/about-portrait.jpg" width="1336" height="2000" loading="lazy"
                alt="Ashley Nicole Singleton seated in a director's chair marked Ashley Singleton, looking over her shoulder" />
         </div>
         <div class="bio-lead__intro">
