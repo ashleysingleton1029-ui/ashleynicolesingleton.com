@@ -25,6 +25,13 @@
         headers: { 'Accept': 'application/json' }
       }).then(function (res) {
         if (res.ok) {
+          // GA4 conversion: a Seventh Gear inquiry was submitted successfully.
+          try {
+            if (typeof gtag === 'function') {
+              var subjEl = form.querySelector('[name="_subject"]');
+              gtag('event', 'seventh_gear_inquiry', { form_name: (subjEl && subjEl.value) || 'Seventh Gear Inquiry' });
+            }
+          } catch (e) {}
           if (thanks) {
             form.hidden = true;
             thanks.hidden = false;

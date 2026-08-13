@@ -422,6 +422,8 @@
           form.reset();
           success.hidden = false;
           success.setAttribute("role", "status");
+          // GA4 conversion: a real contact-form submission succeeded.
+          try { if (typeof gtag === "function") gtag("event", "contact_submit", { form_name: "Main Contact" }); } catch (e) {}
         } else if (error) {
           error.hidden = false;
           error.setAttribute("role", "status");
