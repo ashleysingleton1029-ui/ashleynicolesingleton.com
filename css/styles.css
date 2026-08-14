@@ -353,9 +353,10 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper);
 }
-.hero__scroll i { width: 1px; height: 46px; background: var(--paper); position: relative; overflow: hidden; opacity: 0.4; }
-.hero__scroll i::after { content: ""; position: absolute; inset: 0; background: var(--gold); animation: scrollLine 2s var(--ease) infinite; }
-@keyframes scrollLine { 0% { transform: translateY(-100%); } 50% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+.hero__scroll i { width: 1px; height: 46px; background: rgba(244, 242, 236, 0.35); position: relative; overflow: hidden; }
+/* Soft gold light that keeps gliding down the line — matches the Seventh Gear scroll cue. */
+.hero__scroll i::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 14px; background: linear-gradient(var(--gold), transparent); animation: scrollLine 1.9s var(--ease) infinite; }
+@keyframes scrollLine { 0% { transform: translateY(-16px); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(46px); opacity: 0; } }
 @media (max-width: 600px) {
   .hero__scroll { display: none; }
   .hero__meta { grid-template-columns: 1fr 1fr; }
