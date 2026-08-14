@@ -29,7 +29,7 @@
           try {
             if (typeof gtag === 'function') {
               var subjEl = form.querySelector('[name="_subject"]');
-              gtag('event', 'seventh_gear_inquiry', { form_name: (subjEl && subjEl.value) || 'Seventh Gear Inquiry' });
+              gtag('event', 'seventh_gear_inquiry', { form_name: (subjEl && subjEl.value) || 'Seventh Gear Inquiry', value: 50, currency: 'USD' });
             }
           } catch (e) {}
           if (thanks) {

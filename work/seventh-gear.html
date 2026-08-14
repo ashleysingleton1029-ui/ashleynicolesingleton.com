@@ -662,7 +662,7 @@
           });
         }catch(err){ /* owner notification is best-effort; never block a valid viewer */ }
         // GA4 conversion: viewer agreed to terms and accessed the pitch deck.
-        try { if (typeof gtag === 'function') gtag('event', 'pitch_deck_access', { form_name: 'Pitch Deck Access' }); } catch(e){}
+        try { if (typeof gtag === 'function') gtag('event', 'pitch_deck_access', { form_name: 'Pitch Deck Access', value: 25, currency: 'USD' }); } catch(e){}
         agreeMsg.textContent = '';
         agreeBtn.disabled = false;
         gate.classList.add('sg-gate--done');   // reveal the reopen button for later
