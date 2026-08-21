@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3XZM5DL13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-F3XZM5DL13');
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <!-- Mark JS active before first paint so the hero title stays hidden until its
@@ -9,22 +18,70 @@
   <title>Ashley Nicole Singleton — TV Host &amp; Media Personality · Las Vegas</title>
   <meta name="description" content="Ashley Nicole Singleton — Las Vegas television host, emcee and on-camera media personality. Red carpets, live broadcast, brand storytelling and events." />
   <meta name="theme-color" content="#0B0B0B" />
+  <!-- Let Google show a large image preview (uses og:image / the Person image). -->
+  <meta name="robots" content="max-image-preview:large" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ashleynicolesingleton.com/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ashleynicolesingleton.com/" />
   <meta property="og:title" content="Ashley Nicole Singleton — TV Host &amp; Media Personality" />
   <meta property="og:description" content="Las Vegas television host, emcee and on-camera media personality." />
   <meta property="og:site_name" content="Ashley Nicole Singleton" />
+  <meta property="og:image" content="https://ashleynicolesingleton.com/img/hero.jpg" />
+  <meta property="og:image:width" content="2000" />
+  <meta property="og:image:height" content="1333" />
+  <meta property="og:image:alt" content="Ashley Nicole Singleton" />
 
-  <!-- Monogram favicon -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B0B0B'/%3E%3Ctext x='50%25' y='54%25' fill='%23C6A15B' font-family='Archivo,Arial,sans-serif' font-weight='900' font-size='34' text-anchor='middle' dominant-baseline='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ashley Nicole Singleton — TV Host &amp; Media Personality" />
+  <meta name="twitter:description" content="Las Vegas television host, emcee and on-camera media personality." />
+  <meta name="twitter:image" content="https://ashleynicolesingleton.com/img/hero.jpg" />
+
+  <!-- Monogram favicon (real files so Google Search can crawl and show it) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=VT323&display=swap" />
 
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=19" />
+
+  <!-- Structured data: tells search engines this site is about a specific
+       person, with her role, location and official social profile. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ashley Nicole Singleton",
+    "url": "https://ashleynicolesingleton.com/",
+    "image": "https://ashleynicolesingleton.com/img/hero.jpg",
+    "jobTitle": "Television Host & Media Personality",
+    "description": "Las Vegas television host, emcee and on-camera media personality. Red carpets, live broadcast, brand storytelling and events.",
+    "workLocation": {
+      "@type": "Place",
+      "name": "Las Vegas, Nevada",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV",
+        "addressCountry": "US"
+      }
+    },
+    "sameAs": [
+      "https://www.instagram.com/ashleysingletontv/",
+      "https://www.facebook.com/4ashleynicolesingleton/",
+      "https://imdb.me/ashleynicolesingleton"
+    ]
+  }
+  </script>
 </head>
 <body class="is-loading">
 
@@ -97,7 +154,9 @@
       </div>
 
       <div class="hero__overlay">
-        <h1 class="hero__title" data-split>
+        <!-- Name kept as the page's main heading for SEO + screen readers, but
+             hidden from view so it no longer sits over the showreel. -->
+        <h1 class="hero__title sr-only">
           Ashley Nicole
           Singleton
         </h1>
@@ -251,41 +310,51 @@
 
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
-      <div class="about__grid">
-        <div class="about__portrait" data-reveal>
+      <div class="about__grid" style="align-items:center">
+        <div class="about__portrait" data-reveal style="aspect-ratio:1269 / 1780; min-height:0">
           <img src="img/chair.jpg" alt="Ashley Nicole Singleton seated in a director's chair bearing her name" loading="lazy" width="1269" height="1780" />
         </div>
 
-        <div class="about__body">
+        <div class="about__body" style="align-self:center">
           <p class="overline"><span>( 04 )</span><span>About</span></p>
           <h2 class="about__lead" data-reveal>
             Curiosity Fuels Ideas. Connection Elevates People.
           </h2>
           <p class="about__tagline" data-reveal>Authenticity is the advantage.</p>
           <div class="about__copy" data-reveal>
-            <p>Ashley Nicole Singleton is a media personality, creator, and producer dedicated to developing premium unscripted entertainment that captivates audiences and elevates meaningful storytelling. Recognized for her engaging interview style and confident on-camera presence, she has anchored celebrity red-carpet coverage, taken audiences behind the scenes of film productions, and interviewed the founders, athletes, entertainers, and industry leaders shaping culture today.</p>
-            <p>Before stepping into media, Ashley built a successful career producing high-profile experiences for some of the world’s most recognizable brands, including the NFL, MLB, AWS, GoPro, adidas, T-Mobile, and many others. That foundation sharpened her ability to lead under pressure, build meaningful relationships, and deliver exceptional experiences at the highest level.</p>
-            <p>Today, Ashley combines years of experience producing world-class events with a natural ability to connect with people, creating interviews and original programming that feel authentic, engaging, and memorable.</p>
-            <p>Curiosity has shaped every chapter of Ashley’s career, and professionalism continues to define every opportunity that follows.</p>
+            <p>Ashley Singleton is a television host, media personality, producer, and creator who believes great conversations start with genuine connection. Known for her polished presence and engaging personality, she brings a natural ease to the camera and a genuine interest in the people sitting across from her.</p>
+            <p>Currently co-hosting FanRoom Live with Cedric the Entertainer, Ashley is also the creator, host, and executive producer of Seventh Gear, an original series that brings together motorcycles, celebrity conversations, adventure, and resilience. Her many years in professional event production have shaped the way she approaches every project: prepared, professional, and always looking for the next opportunity to create something meaningful.</p>
           </div>
+          <a href="about.html" class="link-btn" data-reveal data-cursor="hover" style="margin-top:var(--space-md)"><span>Read the full bio</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
 
       <!-- ============ IMAGE-FILLED GIANT TYPE ============ -->
       <section class="bigtype" id="bigtype" aria-label="Based in Las Vegas, working worldwide">
-        <video class="bigtype__video" id="bigtypeVideo" muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/8cd10c868ecd82f8b4e2c13923caacd9/downloads/default.mp4" type="video/mp4" />
-        </video>
-        <h2 class="bigtype__text">
-          <span class="bigtype__phrase bigtype__phrase--1">
-            <span class="line">Based&nbsp;in</span>
-            <span class="line">Las&nbsp;Vegas</span>
-          </span>
-          <span class="bigtype__phrase bigtype__phrase--2">
-            <span class="line">Working</span>
-            <span class="line">Worldwide</span>
-          </span>
-        </h2>
+        <div class="bigtype__type">
+          <video class="bigtype__video" id="bigtypeVideo" muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/8d00252ec05190c456ff0d99a145d676/downloads/default.mp4" type="video/mp4" />
+          </video>
+          <h2 class="bigtype__text">
+            <span class="bigtype__phrase bigtype__phrase--1">
+              <span class="line">Based&nbsp;in</span>
+              <span class="line">Las&nbsp;Vegas</span>
+            </span>
+            <span class="bigtype__phrase bigtype__phrase--2">
+              <span class="line">Working</span>
+              <span class="line">Worldwide</span>
+            </span>
+          </h2>
+        </div>
+        <div class="bigtype__portrait">
+          <picture>
+            <!-- Transparent background so the dark surround melts into the page
+                 black; JPEG fallback (opaque) for browsers without WebP alpha. -->
+            <source srcset="img/spotlight-portrait.webp" type="image/webp" />
+            <img src="img/gallery/lens/lens-11.jpg" width="1066" height="1600" loading="lazy"
+                 alt="Ashley Nicole Singleton photographed under a single spotlight" />
+          </picture>
+        </div>
       </section>
 
       <!-- Press strip -->
@@ -368,13 +437,15 @@
           </div>
           <div class="field field--full">
             <label for="cType">Inquiry</label>
-            <select id="cType" name="type">
-              <option>Hosting / Emcee</option>
-              <option>Broadcast segment</option>
-              <option>Brand / Sponsored</option>
-              <option>Red carpet coverage</option>
-              <option>Something else</option>
-            </select>
+            <div class="uiselect" data-uiselect>
+              <select id="cType" name="type" class="uiselect__native">
+                <option>Hosting / Emcee</option>
+                <option>Broadcast segment</option>
+                <option>Brand / Sponsored</option>
+                <option>Red carpet coverage</option>
+                <option>Something else</option>
+              </select>
+            </div>
           </div>
           <div class="field field--full">
             <label for="cMsg">Details</label>
@@ -396,7 +467,7 @@
           </div>
           <div class="contact__block">
             <span class="overline">Representation</span>
-            <p>Available worldwide<br />Based in Las Vegas, Nevada</p>
+            <p>Based in Las Vegas, Nevada<br />Working Worldwide</p>
           </div>
           <div class="contact__block">
             <span class="overline">Follow</span>
@@ -425,6 +496,6 @@
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>
