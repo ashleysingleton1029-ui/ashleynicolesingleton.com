@@ -793,6 +793,40 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 .field select { color: var(--paper); }
 .field select option { background: var(--ink); color: var(--paper); }
+
+/* Custom inquiry dropdown — modern dark listbox (progressive enhancement; the
+   native <select> stays in the DOM for submission and no-JS fallback). */
+.uiselect { position: relative; }
+.uiselect.is-enhanced .uiselect__native { display: none; }
+.uiselect__button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: transparent; border: none; border-bottom: 1px solid var(--line-dark);
+  color: var(--paper); font-family: var(--font-body); font-size: 1.05rem; text-align: left;
+  padding: 10px 0; cursor: pointer; transition: border-color 0.3s var(--ease);
+}
+.uiselect__button:focus-visible { outline: none; border-color: var(--gold); }
+.uiselect.is-open .uiselect__button { border-color: var(--gold); }
+.uiselect__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.uiselect__chev { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; color: var(--muted-dark); transition: transform 0.3s var(--ease), color 0.3s var(--ease); }
+.uiselect.is-open .uiselect__chev { transform: rotate(180deg); color: var(--gold); }
+.uiselect__list {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 30; margin: 0; padding: 6px;
+  list-style: none; background: #14130F; border: 1px solid rgba(244, 242, 236, 0.12); border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  display: none;
+}
+.uiselect.is-open .uiselect__list { display: block; animation: uiselectIn 0.2s var(--ease); }
+@keyframes uiselectIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.uiselect__opt {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 14px; border-radius: 8px; color: var(--paper); cursor: pointer;
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.2;
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.uiselect__opt.is-active { background: rgba(198, 161, 91, 0.14); }
+.uiselect__opt[aria-selected="true"] { color: var(--gold); }
+.uiselect__opt[aria-selected="true"]::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
+@media (prefers-reduced-motion: reduce) { .uiselect.is-open .uiselect__list { animation: none; } .uiselect__chev { transition: none; } }
 .field input::placeholder, .field textarea::placeholder { color: rgba(244,242,236,0.32); }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--gold); }
 .field textarea { resize: vertical; min-height: 64px; }

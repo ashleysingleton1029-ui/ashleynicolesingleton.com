@@ -52,7 +52,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&family=VT323&display=swap" />
 
-  <link rel="stylesheet" href="css/styles.css?v=18" />
+  <link rel="stylesheet" href="css/styles.css?v=19" />
 
   <!-- Structured data: tells search engines this site is about a specific
        person, with her role, location and official social profile. -->
@@ -437,13 +437,15 @@
           </div>
           <div class="field field--full">
             <label for="cType">Inquiry</label>
-            <select id="cType" name="type">
-              <option>Hosting / Emcee</option>
-              <option>Broadcast segment</option>
-              <option>Brand / Sponsored</option>
-              <option>Red carpet coverage</option>
-              <option>Something else</option>
-            </select>
+            <div class="uiselect" data-uiselect>
+              <select id="cType" name="type" class="uiselect__native">
+                <option>Hosting / Emcee</option>
+                <option>Broadcast segment</option>
+                <option>Brand / Sponsored</option>
+                <option>Red carpet coverage</option>
+                <option>Something else</option>
+              </select>
+            </div>
           </div>
           <div class="field field--full">
             <label for="cMsg">Details</label>
@@ -465,7 +467,7 @@
           </div>
           <div class="contact__block">
             <span class="overline">Representation</span>
-            <p>Available worldwide<br />Based in Las Vegas, Nevada</p>
+            <p>Based in Las Vegas, Nevada<br />Working Worldwide</p>
           </div>
           <div class="contact__block">
             <span class="overline">Follow</span>
@@ -494,6 +496,6 @@
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="js/main.js?v=13"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>
