@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" />
-  <link rel="stylesheet" href="../css/styles.css?v=19" />
+  <link rel="stylesheet" href="../css/styles.css?v=20" />
 
   <style>
     /* Moody, cinematic theme — scoped to this gallery page only. */
@@ -52,6 +52,9 @@
       font-size: clamp(2rem, 4vw, 3.4rem); line-height: 0.92; letter-spacing: -0.02em;
       margin: 0 0 clamp(14px, 2vh, 22px); text-shadow: 0 12px 60px rgba(0,0,0,0.55);
     }
+    /* "the Lens" reads larger than "In Front of" for a bit of wow. */
+    .lens-hero__title span { display: block; }
+    .lens-hero__l2 { font-size: 1.34em; }
     /* "Smoked glass" box so the description stays legible over the photo */
     .lens-hero__box {
       display: block; max-width: 66ch;
@@ -66,14 +69,15 @@
     .photo-gallery { padding-top: clamp(44px, 7vh, 92px); }
 
     @media (max-width: 640px) {
-      /* Keep the photo clean and move the caption below it, so the hero
-         isn't busy on small screens. */
+      /* Keep the photo clean and move the caption below it, centered, so it
+         reads as a balanced, impactful block rather than left-heavy. */
       .lens-hero__img { height: min(56vh, 108vw); object-position: center 42%; }
       .lens-hero__scrim { display: none; }
-      .lens-hero__cap { position: static; padding: clamp(22px, 5vh, 34px) var(--gutter) 0; }
-      .lens-hero__cap .overline { margin-bottom: 12px; }
-      .lens-hero__title { font-size: clamp(2.3rem, 11vw, 3.2rem); text-shadow: none; margin-bottom: 16px; }
-      .lens-hero__box { max-width: none; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+      .lens-hero__cap { position: static; max-width: none; text-align: center; padding: clamp(30px, 6vh, 44px) var(--gutter) 6px; }
+      .lens-hero__cap .overline { justify-content: center; margin-bottom: 16px; }
+      .lens-hero__title { font-size: clamp(1.8rem, 8vw, 2.7rem); line-height: 1; text-shadow: none; margin: 0 auto 20px; }
+      .lens-hero__box { max-width: 32ch; margin: 0 auto; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+      .lens-hero__text { font-size: clamp(1rem, 4.4vw, 1.18rem); }
     }
   </style>
 </head>
@@ -98,7 +102,7 @@
     <div class="lens-hero__scrim" aria-hidden="true"></div>
     <div class="lens-hero__cap">
       <p class="overline"><span>( 03 )</span><span>The Gallery</span></p>
-      <h1 class="lens-hero__title">In Front of<br />the Lens</h1>
+      <h1 class="lens-hero__title"><span class="lens-hero__l1">In Front of</span><span class="lens-hero__l2">the Lens</span></h1>
       <div class="lens-hero__box">
         <p class="lens-hero__text">A selection of professional photo shoots and portraits: the editorial, branded, and on-camera looks from Ashley’s work in front of the lens.</p>
       </div>
