@@ -45,19 +45,19 @@
       position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(to top, rgba(6,7,8,0.94) 0%, rgba(6,7,8,0.55) 24%, rgba(6,7,8,0.05) 55%, rgba(6,7,8,0) 80%);
     }
-    .lens-hero__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(26px, 6vh, 72px) clamp(20px, 5vw, 84px); }
-    .lens-hero__cap .overline { color: var(--gold); margin-bottom: 14px; }
+    .lens-hero__cap { position: absolute; left: 0; right: auto; bottom: 0; max-width: min(620px, 60vw); padding: clamp(26px, 6vh, 64px) clamp(20px, 5vw, 72px); }
+    .lens-hero__cap .overline { color: var(--gold); margin-bottom: 12px; }
     .lens-hero__title {
       font-family: var(--font-display); font-weight: 900; text-transform: uppercase; color: var(--paper);
-      font-size: clamp(2.6rem, 9vw, 8rem); line-height: 0.9; letter-spacing: -0.03em;
-      margin: 0 0 clamp(16px, 2.4vh, 28px); text-shadow: 0 12px 60px rgba(0,0,0,0.55);
+      font-size: clamp(2rem, 4vw, 3.4rem); line-height: 0.92; letter-spacing: -0.02em;
+      margin: 0 0 clamp(14px, 2vh, 22px); text-shadow: 0 12px 60px rgba(0,0,0,0.55);
     }
     /* "Smoked glass" box so the description stays legible over the photo */
     .lens-hero__box {
       display: block; max-width: 66ch;
       background: rgba(9,10,12,0.44);
       -webkit-backdrop-filter: blur(14px) saturate(0.85); backdrop-filter: blur(14px) saturate(0.85);
-      border: 1px solid rgba(244,242,236,0.14); border-radius: 12px;
+      border: 1px solid rgba(244,242,236,0.14); border-radius: 0;
       padding: clamp(15px, 2.1vw, 23px) clamp(18px, 2.6vw, 30px);
       box-shadow: 0 26px 64px rgba(0,0,0,0.5);
     }
