@@ -642,14 +642,17 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .pg-lb__frame { position: relative; margin: 0; max-width: min(92vw, 760px); text-align: center; }
 .pg-lb__frame img { max-width: 100%; max-height: 82vh; width: auto; height: auto; display: block; margin: 0 auto; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 .pg-lb__cap { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); }
-.pg-lb__close { position: fixed; top: 16px; right: 16px; width: 46px; height: 46px; display: grid; place-items: center; border: 0; cursor: pointer; background: var(--gold); color: var(--ink); }
+.pg-lb__close { position: fixed; top: 16px; right: 16px; z-index: 2; width: 46px; height: 46px; display: grid; place-items: center; border: 0; cursor: pointer; background: var(--gold); color: var(--ink); }
 .pg-lb__close svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.4; fill: none; }
-.pg-lb__nav { position: fixed; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; display: grid; place-items: center; border: 0; cursor: pointer; background: rgba(244,242,236,0.12); color: var(--paper); }
+.pg-lb__nav { position: fixed; top: 50%; transform: translateY(-50%); z-index: 2; width: 52px; height: 52px; display: grid; place-items: center; border: 0; cursor: pointer; background: rgba(244,242,236,0.12); color: var(--paper); }
 .pg-lb__nav svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
 .pg-lb__nav:hover { background: var(--gold); color: var(--ink); }
 .pg-lb__nav--prev { left: 14px; }
 .pg-lb__nav--next { right: 14px; }
 @media (max-width: 560px) { .pg-lb__nav { width: 42px; height: 42px; } }
+/* Touch devices have no hover, so keep the viewer controls gold and obvious
+   the moment the lightbox opens (not only after a tap). */
+@media (hover: none) { .pg-lb__nav { background: var(--gold); color: var(--ink); } }
 
 /* =========================================================================
    SHOWREEL
