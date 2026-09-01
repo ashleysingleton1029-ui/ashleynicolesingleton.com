@@ -41,11 +41,19 @@
       display: block; width: 100%; height: min(92vh, 66vw); min-height: 440px;
       object-fit: cover; object-position: center 30%;
     }
+    /* Video overlays the image with identical framing; fades out once it ends. */
+    .lens-hero__video {
+      position: absolute; top: 0; left: 0; width: 100%; height: min(92vh, 66vw); min-height: 440px;
+      object-fit: cover; object-position: center 30%; z-index: 1;
+      opacity: 1; transition: opacity 0.8s var(--ease);
+    }
+    .lens-hero.is-ended .lens-hero__video { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .lens-hero__video { display: none; } }
     .lens-hero__scrim {
-      position: absolute; inset: 0; pointer-events: none;
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: linear-gradient(to top, rgba(6,7,8,0.94) 0%, rgba(6,7,8,0.55) 24%, rgba(6,7,8,0.05) 55%, rgba(6,7,8,0) 80%);
     }
-    .lens-hero__cap { position: absolute; left: 0; right: auto; bottom: 0; max-width: min(620px, 60vw); padding: clamp(26px, 6vh, 64px) clamp(20px, 5vw, 72px); }
+    .lens-hero__cap { position: absolute; left: 0; right: auto; bottom: 0; z-index: 3; max-width: min(620px, 60vw); padding: clamp(26px, 6vh, 64px) clamp(20px, 5vw, 72px); }
     .lens-hero__cap .overline { color: var(--gold); margin-bottom: 12px; }
     .lens-hero__title {
       font-family: var(--font-display); font-weight: 900; text-transform: uppercase; color: var(--paper);
@@ -75,6 +83,7 @@
       /* Keep the photo clean and move the caption below it, centered, so it
          reads as a balanced, impactful block rather than left-heavy. */
       .lens-hero__img { height: min(56vh, 108vw); object-position: center 42%; }
+      .lens-hero__video { height: min(56vh, 108vw); object-position: center 42%; }
       .lens-hero__scrim { display: none; }
       /* Symmetric caption padding + no extra gallery top padding so the caption
          block sits balanced between the photo above and the grid below. */
@@ -101,10 +110,13 @@
     </a>
   </header>
 
-  <!-- Cinematic hero -->
+  <!-- Cinematic hero: the video plays once, then fades to reveal the static image. -->
   <section class="lens-hero" aria-label="In Front of the Lens">
     <img class="lens-hero__img" src="../img/gallery/lens-hero.jpg" width="2000" height="1333"
          alt="Ashley Nicole Singleton on a studio set under softbox lighting, a stylist adjusting her look between takes" />
+    <video class="lens-hero__video" id="lensHeroVideo" muted autoplay playsinline preload="auto" aria-hidden="true">
+      <source src="https://customer-awi3sybvxx4bbl65.cloudflarestream.com/7bb14cd561842dc39820ca248ed5e97f/downloads/default.mp4" type="video/mp4" />
+    </video>
     <div class="lens-hero__scrim" aria-hidden="true"></div>
     <div class="lens-hero__cap">
       <p class="overline"><span>( 03 )</span><span>The Gallery</span></p>
@@ -264,5 +276,19 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <script src="../js/gallery.js?v=2" defer></script>
+
+  <!-- Hero: play the intro video once, then fade to the static image. -->
+  <script>
+    (function () {
+      var v = document.getElementById('lensHeroVideo');
+      if (!v) return;
+      var hero = v.closest('.lens-hero');
+      var reveal = function () { if (hero) hero.classList.add('is-ended'); };
+      v.addEventListener('ended', reveal);
+      v.addEventListener('error', reveal);          // if it can't load, show the image
+      var p = v.play && v.play();                   // nudge autoplay (muted autoplay is allowed)
+      if (p && p.catch) p.catch(reveal);            // if autoplay is blocked, show the image
+    })();
+  </script>
 </body>
 </html>
