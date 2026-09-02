@@ -40,7 +40,11 @@
     .lens-hero__img {
       display: block; width: 100%; height: min(92vh, 66vw); min-height: 440px;
       object-fit: cover; object-position: center 30%;
+      /* Hidden until the video ends (or fails) so it never flashes before the
+         video paints; the hero's black background shows during buffering. */
+      opacity: 0; transition: opacity 0.8s var(--ease);
     }
+    .lens-hero.is-ended .lens-hero__img { opacity: 1; }
     /* Video overlays the image with identical framing; fades out once it ends. */
     .lens-hero__video {
       position: absolute; top: 0; left: 0; width: 100%; height: min(92vh, 66vw); min-height: 440px;
@@ -48,7 +52,8 @@
       opacity: 1; transition: opacity 0.8s var(--ease);
     }
     .lens-hero.is-ended .lens-hero__video { opacity: 0; }
-    @media (prefers-reduced-motion: reduce) { .lens-hero__video { display: none; } }
+    /* Reduced motion: skip the video, just show the static image. */
+    @media (prefers-reduced-motion: reduce) { .lens-hero__video { display: none; } .lens-hero__img { opacity: 1 !important; } }
     .lens-hero__scrim {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: linear-gradient(to top, rgba(6,7,8,0.94) 0%, rgba(6,7,8,0.55) 24%, rgba(6,7,8,0.05) 55%, rgba(6,7,8,0) 80%);
@@ -106,6 +111,8 @@
       .photo-gallery { padding-top: 0; }
     }
   </style>
+  <!-- No JS: skip the video and show the static image so the hero isn't blank. -->
+  <noscript><style>.lens-hero__img{opacity:1}.lens-hero__video{display:none}</style></noscript>
 </head>
 <body class="credit">
 
@@ -295,11 +302,18 @@
       var v = document.getElementById('lensHeroVideo');
       if (!v) return;
       var hero = v.closest('.lens-hero');
-      var reveal = function () { if (hero) hero.classList.add('is-ended'); };
+      if (!hero) return;
+      var done = false;
+      var reveal = function () { if (done) return; done = true; hero.classList.add('is-ended'); };
+      var started = false;
+      v.addEventListener('playing', function () { started = true; });
+      v.addEventListener('timeupdate', function () { if (v.currentTime > 0.1) started = true; });
       v.addEventListener('ended', reveal);
-      v.addEventListener('error', reveal);          // if it can't load, show the image
+      v.addEventListener('error', reveal);          // can't load -> show the image
       var p = v.play && v.play();                   // nudge autoplay (muted autoplay is allowed)
-      if (p && p.catch) p.catch(reveal);            // if autoplay is blocked, show the image
+      if (p && p.catch) p.catch(reveal);            // autoplay blocked -> show the image
+      // Safety: if the video never starts within a few seconds, show the image.
+      setTimeout(function () { if (!started) reveal(); }, 6000);
     })();
   </script>
 </body>
