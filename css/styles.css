@@ -268,9 +268,26 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 /* =========================================================================
    HERO
    ========================================================================= */
+/* Visually hidden, but still read by screen readers + search engines */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+
 .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--ink); }
 .hero__media { position: absolute; inset: 0; overflow: hidden; }
 .hero__video, .hero__img { width: 100%; height: 100%; object-fit: cover; object-position: center center; background: var(--ink); }
+/* Mobile: a landscape reel cover-cropped into a full-height phone frame reads
+   as a heavy zoom, while a fully contained frame leaves big dead bars. Instead
+   right-size the hero toward the reel's shape so it fills (cover) with only a
+   modest crop and little wasted space. */
+@media (max-width: 767px) {
+  .hero { height: min(100svh, 90vw); min-height: 0; }
+  .hero__video { object-fit: cover; }
+}
 .hero__img { transform: scale(1.06); animation: kenburns 24s ease-in-out infinite alternate; }
 @keyframes kenburns { from { transform: scale(1.06); } to { transform: scale(1.16) translateY(-1.5%); } }
 @media (prefers-reduced-motion: reduce) { .hero__img, .statement__img { animation: none; transform: scale(1.02); } }
@@ -310,6 +327,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .hero__play svg { width: 46px; height: 46px; padding: 13px; border: 1px solid var(--paper); border-radius: 50%; fill: var(--paper); transition: background 0.35s var(--ease), fill 0.35s var(--ease), transform 0.35s var(--ease); }
 .hero__play:hover svg { background: var(--gold); border-color: var(--gold); fill: var(--ink); transform: scale(1.06); }
 .hero__play:hover svg path[stroke] { stroke: var(--ink); }
+/* Phones: slightly smaller sound/replay circles */
+@media (max-width: 600px) { .hero__play svg { width: 40px; height: 40px; padding: 11px; } }
 /* Sound (left) + Replay (right) on one straight line above the meta bar */
 .hero__controls {
   position: absolute; left: var(--gutter); right: var(--gutter); bottom: 72px; z-index: 4;
@@ -334,9 +353,10 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   display: flex; flex-direction: column; align-items: center; gap: 10px;
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper);
 }
-.hero__scroll i { width: 1px; height: 46px; background: var(--paper); position: relative; overflow: hidden; opacity: 0.4; }
-.hero__scroll i::after { content: ""; position: absolute; inset: 0; background: var(--gold); animation: scrollLine 2s var(--ease) infinite; }
-@keyframes scrollLine { 0% { transform: translateY(-100%); } 50% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+.hero__scroll i { width: 1px; height: 46px; background: rgba(244, 242, 236, 0.35); position: relative; overflow: hidden; }
+/* Soft gold light that keeps gliding down the line — matches the Seventh Gear scroll cue. */
+.hero__scroll i::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 14px; background: linear-gradient(var(--gold), transparent); animation: scrollLine 1.9s var(--ease) infinite; }
+@keyframes scrollLine { 0% { transform: translateY(-16px); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(46px); opacity: 0; } }
 @media (max-width: 600px) {
   .hero__scroll { display: none; }
   .hero__meta { grid-template-columns: 1fr 1fr; }
@@ -438,7 +458,7 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .work__idx { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
 .work__title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.5rem, 4.6vw, 3.4rem); line-height: 1; letter-spacing: -0.02em; }
 .work__cat { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: right; }
-.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.05rem, 2.2vw, 1.9rem); color: var(--muted); }
+.work__more { max-width: var(--maxw); margin: var(--space-lg) auto 0; padding: 0 var(--gutter); text-align: right; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: -0.01em; font-size: clamp(1.05rem, 2.2vw, 1.9rem); color: var(--gold); }
 @media (max-width: 720px) { .work__more { text-align: left; } }
 @media (hover: hover) {
   .work__row:hover::before { transform: scaleY(1); transform-origin: top; }
@@ -464,8 +484,11 @@ body:not(.is-loading) .preloader { pointer-events: none; }
    BIG IMAGE-FILLED TYPE
    ========================================================================= */
 .bigtype { position: relative; isolation: isolate; overflow: hidden; background: #000000; padding: 0; }
+/* Left "type" column — its own stacking context so the showreel stays revealed
+   only through the letters here and never bleeds over the portrait. */
+.bigtype__type { position: relative; isolation: isolate; overflow: hidden; background: #000000; }
 /* Showreel plays behind, revealed only through the letters */
-.bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.5); transform-origin: center; z-index: 0; }
+.bigtype__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; z-index: 0; }
 .bigtype__text {
   position: relative; z-index: 1; margin: 0;
   padding: var(--space-xl) var(--gutter);
@@ -500,6 +523,45 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .bigtype__phrase--1, .bigtype__phrase--2 { animation: none; }
   .bigtype__phrase--2 { display: none; }
+}
+/* Phones: portrait stacks beneath the type, full-width whole body, flush bottom. */
+.bigtype__portrait {
+  position: relative; z-index: 1;
+  background: #000000;
+  padding: 0;
+}
+.bigtype__portrait picture { display: block; }
+.bigtype__portrait img {
+  display: block;
+  width: 100%; height: auto;         /* whole image, full width on phones */
+}
+/* Phones: trim the big type padding so there isn't a large black gap around the
+   "Based in Las Vegas" text above the portrait. */
+@media (max-width: 767px) {
+  /* Trim the big type's padding to cut the black gap — but keep the whole portrait
+     (spotlight glow + full body) intact below it. */
+  .bigtype__text { padding-top: clamp(22px, 5vh, 46px); padding-bottom: clamp(6px, 1.5vh, 14px); }
+}
+/* Desktop/tablet: two columns — the video-filled type on the LEFT, the spotlight
+   portrait (full body, smaller) flush against the RIGHT edge. The video is scoped
+   to the left column so it never covers the photo. */
+@media (min-width: 768px) {
+  .bigtype { display: flex; align-items: stretch; }
+  /* type column stretches full height; the black text block (below) fills it so
+     the video is masked everywhere except through the letters — no raw-video gaps */
+  .bigtype__type { flex: 1 1 0; min-width: 0; display: grid; }
+  .bigtype__text { min-height: 100%; align-content: center; }
+  .bigtype__phrase { font-size: clamp(1.85rem, 8.2vw, 7rem); }
+  .bigtype__portrait {
+    flex: 0 0 auto; display: flex; align-items: flex-end; justify-content: flex-end;
+  }
+  .bigtype__portrait img {
+    width: auto; height: auto;
+    max-width: 47vw; max-height: 112svh;   /* height-bound on desktop, so this only
+                                              trims the image on narrow/tall screens
+                                              to leave room for the type */
+    object-fit: contain;             /* whole body, no crop */
+  }
 }
 
 /* =========================================================================
@@ -580,14 +642,17 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 .pg-lb__frame { position: relative; margin: 0; max-width: min(92vw, 760px); text-align: center; }
 .pg-lb__frame img { max-width: 100%; max-height: 82vh; width: auto; height: auto; display: block; margin: 0 auto; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 .pg-lb__cap { margin-top: 14px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--paper); }
-.pg-lb__close { position: fixed; top: 16px; right: 16px; width: 46px; height: 46px; display: grid; place-items: center; border: 0; cursor: pointer; background: var(--gold); color: var(--ink); }
+.pg-lb__close { position: fixed; top: 16px; right: 16px; z-index: 2; width: 46px; height: 46px; display: grid; place-items: center; border: 0; cursor: pointer; background: var(--gold); color: var(--ink); }
 .pg-lb__close svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.4; fill: none; }
-.pg-lb__nav { position: fixed; top: 50%; transform: translateY(-50%); width: 52px; height: 52px; display: grid; place-items: center; border: 0; cursor: pointer; background: rgba(244,242,236,0.12); color: var(--paper); }
+.pg-lb__nav { position: fixed; top: 50%; transform: translateY(-50%); z-index: 2; width: 52px; height: 52px; display: grid; place-items: center; border: 0; cursor: pointer; background: rgba(244,242,236,0.12); color: var(--paper); }
 .pg-lb__nav svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
 .pg-lb__nav:hover { background: var(--gold); color: var(--ink); }
 .pg-lb__nav--prev { left: 14px; }
 .pg-lb__nav--next { right: 14px; }
 @media (max-width: 560px) { .pg-lb__nav { width: 42px; height: 42px; } }
+/* Touch devices have no hover, so keep the viewer controls gold and obvious
+   the moment the lightbox opens (not only after a tap). */
+@media (hover: none) { .pg-lb__nav { background: var(--gold); color: var(--ink); } }
 
 /* =========================================================================
    SHOWREEL
@@ -731,6 +796,40 @@ body:not(.is-loading) .preloader { pointer-events: none; }
 }
 .field select { color: var(--paper); }
 .field select option { background: var(--ink); color: var(--paper); }
+
+/* Custom inquiry dropdown — modern dark listbox (progressive enhancement; the
+   native <select> stays in the DOM for submission and no-JS fallback). */
+.uiselect { position: relative; }
+.uiselect.is-enhanced .uiselect__native { display: none; }
+.uiselect__button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: transparent; border: none; border-bottom: 1px solid var(--line-dark);
+  color: var(--paper); font-family: var(--font-body); font-size: 1.05rem; text-align: left;
+  padding: 10px 0; cursor: pointer; transition: border-color 0.3s var(--ease);
+}
+.uiselect__button:focus-visible { outline: none; border-color: var(--gold); }
+.uiselect.is-open .uiselect__button { border-color: var(--gold); }
+.uiselect__value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.uiselect__chev { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; color: var(--muted-dark); transition: transform 0.3s var(--ease), color 0.3s var(--ease); }
+.uiselect.is-open .uiselect__chev { transform: rotate(180deg); color: var(--gold); }
+.uiselect__list {
+  position: absolute; top: calc(100% + 8px); left: 0; right: 0; z-index: 30; margin: 0; padding: 6px;
+  list-style: none; background: #14130F; border: 1px solid rgba(244, 242, 236, 0.12); border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  display: none;
+}
+.uiselect.is-open .uiselect__list { display: block; animation: uiselectIn 0.2s var(--ease); }
+@keyframes uiselectIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.uiselect__opt {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 14px; border-radius: 8px; color: var(--paper); cursor: pointer;
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.2;
+  transition: background-color 0.18s var(--ease), color 0.18s var(--ease);
+}
+.uiselect__opt.is-active { background: rgba(198, 161, 91, 0.14); }
+.uiselect__opt[aria-selected="true"] { color: var(--gold); }
+.uiselect__opt[aria-selected="true"]::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex: none; }
+@media (prefers-reduced-motion: reduce) { .uiselect.is-open .uiselect__list { animation: none; } .uiselect__chev { transition: none; } }
 .field input::placeholder, .field textarea::placeholder { color: rgba(244,242,236,0.32); }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--gold); }
 .field textarea { resize: vertical; min-height: 64px; }
@@ -906,6 +1005,8 @@ body:not(.is-loading) .preloader { pointer-events: none; }
   box-shadow: 0 40px 120px rgba(0,0,0,0.55); will-change: width, height; background: var(--ink-2);
 }
 .expand__media img, .expand__media video { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0); }
+/* Mobile: show the whole clip rather than a zoomed cover-crop of the frame. */
+@media (max-width: 767px) { .expand__media video, .expand__media img { object-fit: contain; } }
 .expand__mscrim { position: absolute; inset: 0; background: rgba(11,11,11,0.32); will-change: opacity; }
 .expand__sound, .expand__replay {
   position: absolute; z-index: 3; left: 50%; bottom: 18px; transform: translateX(-50%);

@@ -25,6 +25,13 @@
         headers: { 'Accept': 'application/json' }
       }).then(function (res) {
         if (res.ok) {
+          // GA4 conversion: a Seventh Gear inquiry was submitted successfully.
+          try {
+            if (typeof gtag === 'function') {
+              var subjEl = form.querySelector('[name="_subject"]');
+              gtag('event', 'seventh_gear_inquiry', { form_name: (subjEl && subjEl.value) || 'Seventh Gear Inquiry', value: 50, currency: 'USD' });
+            }
+          } catch (e) {}
           if (thanks) {
             form.hidden = true;
             thanks.hidden = false;
@@ -45,4 +52,16 @@
       });
     });
   });
+})();
+
+/* Nav frosted bar: fade it in only while scrolling, out shortly after it stops. */
+(function () {
+  var nav = document.querySelector('.sgf-nav');
+  if (!nav) return;
+  var t;
+  window.addEventListener('scroll', function () {
+    nav.classList.add('is-scrolling');
+    clearTimeout(t);
+    t = setTimeout(function () { nav.classList.remove('is-scrolling'); }, 450);
+  }, { passive: true });
 })();

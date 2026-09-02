@@ -86,7 +86,7 @@
     window.addEventListener("keydown", onKey);
 
     gsap.to(obj, {
-      v: 100, duration: 2.5, ease: "power1.inOut",
+      v: 100, duration: 2, ease: "power1.inOut",
       onUpdate() {
         const n = Math.round(obj.v);
         countEl.textContent = String(n).padStart(2, "0");
@@ -422,6 +422,8 @@
           form.reset();
           success.hidden = false;
           success.setAttribute("role", "status");
+          // GA4 conversion: a real contact-form submission succeeded.
+          try { if (typeof gtag === "function") gtag("event", "contact_submit", { form_name: "Main Contact", value: 10, currency: "USD" }); } catch (e) {}
         } else if (error) {
           error.hidden = false;
           error.setAttribute("role", "status");
@@ -613,6 +615,105 @@
   }
 
   /* =====================================================================
+     CUSTOM SELECT — turn the native <select> into a modern dark listbox.
+     Progressive enhancement: the real <select> still submits and works with
+     no JS; we hide it and drive its value from a styled button + list.
+     ===================================================================== */
+  function initSelects() {
+    document.querySelectorAll("[data-uiselect]").forEach(wrap => {
+      const native = wrap.querySelector("select");
+      if (!native || wrap.classList.contains("is-enhanced")) return;
+      const opts = Array.from(native.options);
+      const listId = (native.id || "uiselect") + "-list";
+
+      const label = wrap.parentNode ? wrap.parentNode.querySelector("label") : null;
+      if (label && !label.id) label.id = (native.id || "uiselect") + "-label";
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "uiselect__button";
+      btn.setAttribute("aria-haspopup", "listbox");
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-controls", listId);
+      if (label) btn.setAttribute("aria-labelledby", label.id);
+
+      const val = document.createElement("span");
+      val.className = "uiselect__value";
+      val.textContent = (native.value || (opts[0] && opts[0].text) || "").trim();
+      btn.appendChild(val);
+      btn.insertAdjacentHTML("beforeend",
+        '<svg class="uiselect__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+
+      const list = document.createElement("ul");
+      list.className = "uiselect__list";
+      list.id = listId;
+      list.setAttribute("role", "listbox");
+      if (label) list.setAttribute("aria-labelledby", label.id);
+      list.tabIndex = -1;
+
+      let selected = Math.max(0, opts.findIndex(o => o.selected));
+      opts.forEach((o, i) => {
+        const li = document.createElement("li");
+        li.className = "uiselect__opt";
+        li.id = listId + "-" + i;
+        li.setAttribute("role", "option");
+        li.dataset.index = i;
+        li.textContent = o.text;
+        if (i === selected) li.setAttribute("aria-selected", "true");
+        list.appendChild(li);
+      });
+
+      wrap.appendChild(btn);
+      wrap.appendChild(list);
+      wrap.classList.add("is-enhanced");
+
+      const items = Array.from(list.children);
+      let active = selected;
+
+      const setActive = i => {
+        active = (i + items.length) % items.length;
+        items.forEach(el => el.classList.remove("is-active"));
+        const el = items[active];
+        el.classList.add("is-active");
+        el.scrollIntoView({ block: "nearest" });
+        list.setAttribute("aria-activedescendant", el.id);
+      };
+      const isOpen = () => wrap.classList.contains("is-open");
+      const open = () => { wrap.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); setActive(selected); };
+      const close = focusBtn => { wrap.classList.remove("is-open"); btn.setAttribute("aria-expanded", "false"); list.removeAttribute("aria-activedescendant"); if (focusBtn) btn.focus(); };
+      const choose = i => {
+        selected = i;
+        native.selectedIndex = i;
+        val.textContent = items[i].textContent;
+        items.forEach(el => el.removeAttribute("aria-selected"));
+        items[i].setAttribute("aria-selected", "true");
+        native.dispatchEvent(new Event("change", { bubbles: true }));
+      };
+
+      btn.addEventListener("click", () => { isOpen() ? close(true) : open(); });
+      btn.addEventListener("keydown", e => {
+        switch (e.key) {
+          case "ArrowDown": e.preventDefault(); isOpen() ? setActive(active + 1) : open(); break;
+          case "ArrowUp": e.preventDefault(); isOpen() ? setActive(active - 1) : open(); break;
+          case "Home": if (isOpen()) { e.preventDefault(); setActive(0); } break;
+          case "End": if (isOpen()) { e.preventDefault(); setActive(items.length - 1); } break;
+          case "Enter": case " ": e.preventDefault(); if (isOpen()) { choose(active); close(true); } else open(); break;
+          case "Escape": if (isOpen()) { e.preventDefault(); close(true); } break;
+          case "Tab": if (isOpen()) close(false); break;
+        }
+      });
+      list.addEventListener("click", e => {
+        const li = e.target.closest(".uiselect__opt"); if (!li) return;
+        choose(+li.dataset.index); close(true);
+      });
+      list.addEventListener("mousemove", e => {
+        const li = e.target.closest(".uiselect__opt"); if (li) setActive(+li.dataset.index);
+      });
+      document.addEventListener("click", e => { if (!wrap.contains(e.target)) close(false); });
+    });
+  }
+
+  /* =====================================================================
      BOOT
      ===================================================================== */
   initPreVideo();
@@ -627,6 +728,7 @@
     initReel();
     initHeroSound();
     initForm();
+    initSelects();
     initYear();
     initIntroCta();
     initRolodex();

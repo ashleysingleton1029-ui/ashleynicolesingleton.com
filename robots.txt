@@ -1,0 +1,14 @@
+# robots.txt — https://ashleynicolesingleton.com/
+#
+# Everything is crawlable. Pages that should stay out of search
+# (the galleries, the individual work pages, and the confidential
+# Seventh Gear pages) each carry their own
+# <meta name="robots" content="noindex"> tag. They are intentionally
+# NOT disallowed here: a page must remain crawlable for a search engine
+# to read and honor its noindex. Blocking them in robots.txt would do the
+# opposite — hide the noindex and risk a bare URL being indexed anyway.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ashleynicolesingleton.com/sitemap.xml

@@ -14,11 +14,23 @@ a{color:inherit;text-decoration:none}
 ::selection{background:var(--red);color:#fff}
 
 .sgf-nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px var(--gut);mix-blend-mode:difference}
+.sgf-nav__brand{display:inline-flex;align-items:center}
 .sgf-nav__brand b{font-family:var(--hn);font-weight:800;font-size:15px;letter-spacing:.02em}
+.sgf-nav__logo{height:16px;width:auto;display:block}
 .sgf-nav__brand span{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.7;margin-left:8px}
 .sgf-nav__back{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:9px}
 .sgf-nav__back svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
 .sgf-nav__back:hover{color:var(--steel)}
+/* Mobile: frosted bar (like the hero nav) that fades in only WHILE scrolling and
+   away when you stop, so the nav stays legible over moving content without
+   sitting on the hero when idle. Toggled by .is-scrolling from sg-form.js. */
+@media (max-width:767px){
+  .sgf-nav{border-bottom:1px solid transparent;
+    transition:background .35s var(--ease),backdrop-filter .35s var(--ease),-webkit-backdrop-filter .35s var(--ease),border-color .35s var(--ease)}
+  .sgf-nav.is-scrolling{mix-blend-mode:normal;background:rgba(10,11,13,.42);
+    backdrop-filter:blur(14px) saturate(1.15);-webkit-backdrop-filter:blur(14px) saturate(1.15);
+    border-bottom-color:rgba(255,255,255,.09)}
+}
 
 .sgf-wrap{flex:1;position:relative;display:flex;align-items:center;padding:clamp(104px,17vh,180px) var(--gut) clamp(48px,10vh,110px)}
 .sgf-bg{position:absolute;inset:0;z-index:-2;background:#06080a center/cover no-repeat}
