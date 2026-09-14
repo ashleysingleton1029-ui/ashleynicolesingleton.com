@@ -54,6 +54,86 @@
 
   <link rel="stylesheet" href="css/styles.css?v=20" />
 
+  <!-- Contact aside — editorial refinement (scoped to homepage) -->
+  <style>
+    .contact__aside { gap: 0; }
+    .contact__block {
+      position: relative;
+      gap: 14px;
+      padding: clamp(22px, 3vw, 32px) 0;
+      border-top: 1px solid var(--line-dark);
+    }
+    .contact__block:last-child { border-bottom: 1px solid var(--line-dark); }
+    /* gold accent segment riding the hairline, extends on hover */
+    .contact__block::before {
+      content: "";
+      position: absolute; top: -1px; left: 0;
+      width: 30px; height: 2px;
+      background: var(--gold);
+      transition: width 0.55s var(--ease);
+    }
+    .contact__block:hover::before { width: 66px; }
+    .contact__block .overline { color: var(--muted-dark); gap: 0; }
+    .contact__note {
+      color: var(--muted-dark) !important;
+      font-size: clamp(0.95rem, 1.3vw, 1.08rem) !important;
+      line-height: 1.55;
+    }
+    .cx-ico {
+      width: 18px; height: 18px; flex: none;
+      fill: none; stroke: var(--gold); stroke-width: 1.6;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    /* Call / Text CTA */
+    a.contact__cta {
+      display: inline-flex; align-items: center; gap: 13px;
+      color: var(--paper); text-decoration: none;
+      transition: color 0.3s var(--ease);
+    }
+    a.contact__cta .cx-txt { display: flex; flex-direction: column; gap: 3px; }
+    a.contact__cta .cx-label {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted-dark);
+      transition: color 0.3s var(--ease);
+    }
+    a.contact__cta .cx-num {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem); letter-spacing: 0.01em; line-height: 1;
+    }
+    a.contact__cta:hover { color: var(--gold-bright); }
+    a.contact__cta:hover .cx-label { color: var(--gold); }
+    /* Representation location */
+    .contact__loc {
+      display: inline-flex; align-items: flex-start; gap: 13px;
+      color: var(--paper); line-height: 1.5;
+    }
+    .contact__loc .cx-ico { margin-top: 3px; }
+    .contact__loc .cx-dim { color: var(--muted-dark); }
+    /* Social */
+    .contact__social { gap: 10px; }
+    a.contact__soc {
+      display: inline-flex; align-items: center; gap: 13px;
+      color: var(--paper); text-decoration: none;
+      transition: color 0.3s var(--ease);
+    }
+    a.contact__soc .cx-handle {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem); letter-spacing: 0.01em;
+    }
+    a.contact__soc .cx-arrow {
+      width: 15px; height: 15px; flex: none; fill: none;
+      stroke: currentColor; stroke-width: 1.6;
+      stroke-linecap: round; stroke-linejoin: round;
+      opacity: 0.45; transform: translate(-3px, 3px);
+      transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+    }
+    a.contact__soc:hover { color: var(--gold-bright); }
+    a.contact__soc:hover .cx-arrow { transform: translate(1px, -1px); opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .contact__block::before,
+      a.contact__soc .cx-arrow { transition: none; }
+    }
+  </style>
+
   <!-- Structured data: tells search engines this site is about a specific
        person, with her role, location and official social profile. -->
   <script type="application/ld+json">
@@ -463,17 +543,30 @@
         <aside class="contact__aside">
           <div class="contact__block">
             <span class="overline">Inquiries</span>
-            <p>Use the form · replies within two business days.</p>
-            <p><a href="tel:+17024445189" data-cursor="hover">Call/Text (702)&nbsp;444-5189</a></p>
+            <p class="contact__note">Use the form · replies within two business days.</p>
+            <a class="contact__cta" href="tel:+17024445189" data-cursor="hover">
+              <svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+              <span class="cx-txt">
+                <span class="cx-label">Call / Text</span>
+                <span class="cx-num">(702)&nbsp;444-5189</span>
+              </span>
+            </a>
           </div>
           <div class="contact__block">
             <span class="overline">Representation</span>
-            <p>Based in Las Vegas, Nevada<br />Working Worldwide</p>
+            <p class="contact__loc">
+              <svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Based in Las Vegas, Nevada<br /><span class="cx-dim">Working Worldwide</span></span>
+            </p>
           </div>
           <div class="contact__block">
             <span class="overline">Follow</span>
             <div class="contact__social">
-              <a href="https://www.instagram.com/ashleysingletontv/" target="_blank" rel="noopener" data-cursor="hover">Instagram</a>
+              <a class="contact__soc" href="https://www.instagram.com/ashleysingletontv/" target="_blank" rel="noopener" data-cursor="hover">
+                <svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span class="cx-handle">@ashleysingletontv</span>
+                <svg class="cx-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
             </div>
           </div>
         </aside>
